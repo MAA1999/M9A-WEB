@@ -1,0 +1,44 @@
+body {
+    margin: 0px;
+    padding-inline: 16px;
+}
+
+/* 定义滚动条样式 */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 8px;
+}
+
+/* 定义滚动条轨道样式 */
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* 定义滚动条滑块样式 */
+::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+/* 设置滚动条的边界 */
+:hover::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+a {
+    color: #5c6d91 !important;
+    text-decoration: none !important;
+}
+
+a:not(:has(img))::before {
+    content: "【" !important;
+    color: #5c6d91 !important;
+}
+
+a:not(:has(img))::after {
+    content: "】" !important;
+    color: #5c6d91 !important;
+}
+.markdown-body {
+    background-color: transparent !important;
+}

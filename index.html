@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M9A</title>
+    <style>
+        body {
+            height: 0px;
+            margin: 0px;
+            background-color: #191918;
+            background-image: url("./assets/image/bg.webp");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* 神秘学家容器 */
+        .char-container {
+            width: 48vw;
+            height: 90vh;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 5%);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .char-bg,
+        .char {
+            position: absolute;
+            max-height: 80%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .char-bg {
+            z-index: -1;
+            transform: translate(-40%, -65%);
+        }
+
+        .click .char-container {
+            transform: translate(-105%, 5%);
+        }
+
+
+        /* 内容容器 */
+        .container {
+            border-radius: 10px;
+            background-image: url("/assets/image/container_bg.webp");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            /* min-width: 600px; */
+            width: 48%;
+            height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* 隐藏元素 */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s 0s, transform 0.5s ease-in-out;
+            /* overflow-y: auto; */
+            z-index: -1;
+
+            /* padding-inline: 16px; */
+            box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 42%);
+        }
+
+        .click .container {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-2%, -50%);
+        }
+
+        /* 定义滚动条样式 */
+        .container::-webkit-scrollbar {
+            width: 4px;
+            height: 8px;
+        }
+
+        /* 定义滚动条轨道样式 */
+        .container::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        /* 定义滚动条滑块样式 */
+        .container::-webkit-scrollbar-thumb {
+            background-color: transparent;
+            border-radius: 10px;
+        }
+
+        /* 设置滚动条的边界 */
+        .container:hover::-webkit-scrollbar-thumb,
+        .container::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .tooltip {
+            background-color: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            text-align: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            max-width: 300px;
+        }
+
+
+        #bgCanvas {
+            position: absolute;
+            top: 0;
+            z-index: -999;
+        }
+
+        @media (max-width: 768px) {
+
+            .char-bg,
+            .char {
+                max-width: 100%;
+            }
+
+            .char-container {
+                width: 80vw;
+            }
+
+            .click .char-container {
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .container {
+                transform: translate(-50%, -50%);
+                width: 90%;
+            }
+
+            .click .container {
+                transform: translate(-50%, -50%);
+            }
+        }
+    </style>
+    <style>
+        iframe {
+            border: unset;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bgCanvas"></canvas>
+    <div class="char-container">
+        <img class="char" src="./assets/image/char.webp" alt="人物"></img>
+        <img class="char-bg" src="./assets/image/char_bg.webp" alt="人物背景"></img>
+    </div>
+    <div class="tooltip"></div>
+    <iframe class="container" src="./README.html"></iframe>
+</body>
+<script>
+    const MessageList = [
+        "这里的和别处的一切，最终都会回到纯粹的数式之中。只是我还没能算出这个指向未来的式子……唔，目前的假设是……",
+        "Everything in here and out there always leads to pure numbers and mathematics. It's only a matter of time until I work out the equation which foretells the future ... Hmm, the current assumption is ...",
+    ];
+    const tooltipEle = document.querySelector(".tooltip");
+    const charEle = document.querySelector(".char");
+    const charContainerEle = document.querySelector(".char-container");
+    const charBgEle = document.querySelector(".char-bg");
+    const containerEle = document.querySelector(".container")
+
+    function throttle(func, delay) {
+        let lastTime = 0;
+
+        return function (...args) {
+            const now = Date.now();
+            if (now - lastTime >= delay) {
+                lastTime = now;
+                func.apply(this, args);
+            }
+        };
+    }
+
+    const isTouchDevice = window.innerWidth < 768;
+
+    charContainerEle.addEventListener("click", onCharClick);
+    charContainerEle.addEventListener("mousemove", mousemove);
+    charContainerEle.addEventListener("mouseleave", mouseleave);
+    charEle.addEventListener("load", mousemove);
+
+    function onCharClick() {
+        document.body.classList.toggle("click");
+        if (isTouchDevice) {
+            // 关闭tooltip
+            mouseleave()
+        }
+    }
+
+    const throttledUpdateTooltip = throttle(() => {
+        tooltipEle.innerHTML =
+            MessageList[Math.floor(Math.random() * MessageList.length)];
+    }, 300);
+    function mousemove(event) {
+        throttledUpdateTooltip();
+        let tooltipX, tooltipY;
+        const tooltipWidth = tooltipEle.offsetWidth;
+        const tooltipHeight = tooltipEle.offsetHeight;
+
+        const rect = charContainerEle.getBoundingClientRect();
+        const charRect = charEle.getBoundingClientRect();
+
+        if (!isTouchDevice) {
+            const mouseX = event.pageX;
+            const mouseY = event.pageY;
+
+            tooltipX = mouseX + 20;
+            tooltipY = mouseY + 20;
+
+            // 超出左半边
+            if (event.pageX > rect.left + rect.width / 2) {
+                tooltipX = mouseX - tooltipWidth - 10;
+            }
+
+            // 鼠标超出上半边
+            if (event.pageY > rect.top + rect.height / 2) {
+                tooltipY = mouseY - tooltipHeight - 10;
+            }
+        } else {
+            tooltipX = rect.left + rect.width / 2 - tooltipWidth / 2;
+            tooltipY = charRect.bottom - tooltipHeight - 10;
+        }
+
+        if (!(event.type == "load" && !isTouchDevice)) {
+            // load 事件不处理PC端
+            tooltipEle.style.left = `${tooltipX}px`;
+            tooltipEle.style.top = `${tooltipY}px`;
+
+            tooltipEle.style.opacity = "1";
+        }
+    }
+    function mouseleave(e) {
+        tooltipEle.style.opacity = "0";
+    }
+
+
+    let canvas = document.getElementById("bgCanvas");
+    let ctx = canvas.getContext("2d");
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    ctx.strokeStyle = "#383838";
+    ctx.lineWidth = 2;
+
+    // 绘制回溯雨
+    function drawLine(startX, startY, angle) {
+        const radian = angle * Math.PI / 180;
+
+        const segmentLength1 = 20;
+        const segmentLength2 = 60;
+        const segmentLength3 = 30;
+        const spacing = 10;
+
+        const compareX = Math.cos(radian)
+        const compareY = Math.sin(radian)
+
+        const spacingX = spacing * compareX;
+        const spacingY = spacing * compareY;
+
+        const deltaX1 = segmentLength1 * compareX;
+        const deltaY1 = segmentLength1 * compareY;
+        const deltaX2 = segmentLength2 * compareX;
+        const deltaY2 = segmentLength2 * compareY;
+        const deltaX3 = segmentLength3 * compareX;
+        const deltaY3 = segmentLength3 * compareY;
+
+        ctx.beginPath();
+
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(startX + deltaX1, startY - deltaY1);
+
+
+        ctx.moveTo(startX + deltaX1 + spacingX, startY - deltaY1 - spacingY);
+        ctx.lineTo(startX + deltaX1 + spacingX + deltaX2, startY - deltaY1 - spacingY - deltaY2);
+
+
+        ctx.moveTo(startX + deltaX1 + spacingX + deltaX2 + spacingX, startY - deltaY1 - spacingY - deltaY2 - spacingY);
+        ctx.lineTo(startX + deltaX1 + spacingX + deltaX2 + spacingX + deltaX3, startY - deltaY1 - spacingY - deltaY2 - spacingY - deltaY3);
+
+        ctx.stroke();
+    }
+
+    // 绘制回溯雨动画
+    function startDraw(posList) {
+        let newPosList = []
+        const angle = 70
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        posList.forEach((pos) => {
+            let startX = pos.new[0]
+            let startY = pos.new[1]
+            const radian = angle * Math.PI / 180;
+
+            const compareX = Math.cos(radian)
+            const compareY = Math.sin(radian)
+
+            const spacingX = 2 * compareX;
+            const spacingY = 2 * compareY;
+            startX = startX + spacingX
+            startY = startY - spacingY
+            if (startX > width || startY < 0) {
+                pos.new = [pos.default[0], height]
+            } else {
+                pos.new[0] = startX
+                pos.new[1] = startY
+            }
+            drawLine(pos.new[0], pos.new[1], angle);
+            newPosList.push(pos)
+        })
+
+        setTimeout(() => {
+            startDraw(newPosList)
+        }, 30)
+    }
+
+    // 生成随机点
+    function randomPoints(length, spacing, num) {
+        let points = [];
+
+        // 按间距生成分割点
+        for (let i = 0; i < length / spacing; i++) {
+            points.push(i * spacing);
+        }
+
+        // 随机取点
+        let selectedPoints = [];
+        while (selectedPoints.length < num) {
+            const randomIndex = Math.floor(Math.random() * points.length);
+            const point = points[randomIndex];
+
+            if (!selectedPoints.includes(point)) {
+                selectedPoints.push(point);
+            }
+        }
+        return selectedPoints;
+    }
+
+
+    const selectedPoints = randomPoints(width, 100, width / 100 > 10 ? 10 : width / 100);
+    startDraw(selectedPoints.map((x) => {
+        return {
+            default: [x, height - Math.floor(Math.random() * 201)],
+            new: [x, height - Math.floor(Math.random() * 201)]
+        }
+    }))
+</script>
+
+</html>
