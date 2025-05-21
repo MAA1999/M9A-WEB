@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="project-refactoring" tabindex="-1">Project Refactoring</h1>
+<h2 id="image%2Fmodel" tabindex="-1">Image/Model</h2>
+<p>When modifying, ensure that no nodes using the Image/Model are overlooked.</p>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p></p>
+<p>Make good use of global search.</p>
+</div>
+<h2 id="pipeline" tabindex="-1">Pipeline</h2>
+<h3 id="sub-node" tabindex="-1">Sub Node</h3>
+<p>Here, nodes with the deprecated <code>is_sub</code> value set to <code>true</code> are referred to as <code>sub nodes</code>.</p>
+<p>Refactoring <code>sub nodes</code> involves the following steps:</p>
+<ol>
+<li>Determine whether the <code>sub node</code> is of the lowest priority in the <code>next</code> list of the current node (i.e., directly moving it to the <code>interrupt</code> list of the current node has no impact on the actual effect).</li>
+<li>If the <code>sub node</code> is not of the lowest priority, the refactoring method is to add the <code>next</code> and <code>interrupt</code> of the current node to the <code>sub node</code> (if the original <code>next</code> and <code>interrupt</code> are empty, this can be done directly; otherwise, consider potential conflicts). If the <code>sub node</code> is of the lowest priority, the refactoring method is to directly move it to the <code>interrupt</code> of the current node.</li>
+<li>If the <code>sub node</code> is not of the lowest priority and the changes in step 2 cause conflicts, reconsider the task logic.</li>
+<li>Remove the <code>is_sub</code> attribute from the <code>sub node</code>.</li>
+</ol>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p></p>
+<p>All the above changes must consider all nodes using the <code>sub node</code>. Do not overlook any!</p>
+</div>
+<h3 id="other-nodes" tabindex="-1">Other Nodes</h3>
+<p>Next, refactor other nodes based on their specific purposes.</p>
+<h4 id="standardizing-node-names" tabindex="-1">Standardizing Node Names</h4>
+<p>If the goal is merely to standardize node names, use VSCode’s global search and replace functionality.<br>
+However, ensure that replacements include double quotes to avoid modifying other nodes containing the node name.</p>
+<h4 id="simplifying-task-flows-and-reducing-coupling" tabindex="-1">Simplifying Task Flows and Reducing Coupling</h4>
+<p>First, read <a href="./Writing-Pipelines.html#node-connections">Node Connections</a> and refactor towards adhering to connection principles.</p>
+<p>Some nodes can be moved to the <code>interrupt</code> of the ancestor node of the current node.<br>
+After moving, remove unnecessary <code>next</code> nodes to avoid continuing the main task chain in the <code>interrupt</code>, which could cause errors in subsequent tasks and return to the ancestor node.</p>
+<h4 id="merging-nodes-with-similar-functions" tabindex="-1">Merging Nodes with Similar Functions</h4>
+<p>If multiple nodes perform the same function, consider merging them into a single node.</p>
+<p>Steps:</p>
+<ol>
+<li>Before merging, check whether there are unrelated nodes in the <code>next</code> of the node. If so, separate them first.</li>
+<li>During merging, all nodes should adopt the same standardized name.</li>
+<li>After merging, check whether the node’s position in all tasks is correct. For example, ensure nodes that should be in the <code>interrupt</code> are not in the main task chain’s <code>next</code> section.</li>
+</ol>
+
+    </article>
+</body>
+
+</html>

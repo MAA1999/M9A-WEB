@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98" tabindex="-1">常见问题</h1>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a>
+<ul>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E6%97%A0%E6%B3%95%E8%BF%90%E8%A1%8C%E9%97%AA%E9%80%80%E6%8A%A5%E9%94%99">软件无法运行/闪退/报错</a>
+<ul>
+<li><a href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98">下载/安装问题</a></li>
+<li><a href="#%E8%BF%90%E8%A1%8C%E4%B8%AD%E9%97%AA%E9%80%80">运行中闪退</a></li>
+<li><a href="#%E8%BF%90%E8%A1%8C%E5%BA%93%E9%97%AE%E9%A2%98windows">运行库问题（Windows）</a></li>
+<li><a href="#agent-%E9%95%BF%E6%97%B6%E9%97%B4%E5%90%AF%E5%8A%A8%E6%97%A0%E5%8F%8D%E5%BA%94windows">Agent 长时间启动无反应（Windows）</a></li>
+<li><a href="#%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98">资源加载问题</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98">连接问题</a>
+<ul>
+<li><a href="#1-%E7%A1%AE%E8%AE%A4-adb-%E5%8F%8A%E8%BF%9E%E6%8E%A5%E5%9C%B0%E5%9D%80%E6%AD%A3%E7%A1%AE">1. 确认 ADB 及连接地址正确</a></li>
+<li><a href="#2-%E5%85%B3%E9%97%AD%E7%8E%B0%E6%9C%89-adb-%E8%BF%9B%E7%A8%8B">2. 关闭现有 ADB 进程</a></li>
+<li><a href="#3-%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA-adb">3. 正确使用多个 ADB</a></li>
+<li><a href="#4-%E6%9B%B4%E6%8D%A2%E8%A7%A6%E6%8E%A7%E6%96%B9%E5%BC%8F">4. 更换触控方式</a></li>
+<li><a href="#5-%E6%94%B9%E7%94%A8-maapicli">5. 改用 MaaPiCli</a></li>
+<li><a href="#6-%E9%81%BF%E5%85%8D%E6%B8%B8%E6%88%8F%E5%8A%A0%E9%80%9F%E5%99%A8">6. 避免游戏加速器</a></li>
+<li><a href="#7-%E9%87%8D%E5%90%AF%E7%94%B5%E8%84%91">7. 重启电脑</a></li>
+<li><a href="#8-%E6%8D%A2%E6%A8%A1%E6%8B%9F%E5%99%A8">8. 换模拟器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6%E6%85%A2">文件下载速度慢</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98">其他问题</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="%E8%BD%AF%E4%BB%B6%E6%97%A0%E6%B3%95%E8%BF%90%E8%A1%8C%2F%E9%97%AA%E9%80%80%2F%E6%8A%A5%E9%94%99" tabindex="-1">软件无法运行/闪退/报错</h2>
+<p>大部分的问题都能在这个章节解决。<br>
+分成下载/安装问题、运行库问题、Agent 长时间启动无反应、资源加载问题以及连接问题五类。<br>
+其中大部分问题都属于<strong>运行库问题</strong>和<strong>连接问题</strong>。</p>
+<h3 id="%E4%B8%8B%E8%BD%BD%2F%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98" tabindex="-1">下载/安装问题</h3>
+<p>完整 M9A 软件压缩包命名格式为 “M9A-<code>平台</code>-<code>架构</code>-<code>版本</code>.zip”，其余均为无法单独使用的“零部件”，请仔细阅读。<br>
+<s>在大部分情况下，您需要使用 x64 架构的 M9A，即您需要下载 <code>M9A-win-x86_64-vXXX.zip</code>，而非<code>M9A-win-aarch64-vXXX.zip</code>。</s><br>
+M9A Windows 已不支持该架构</p>
+<h3 id="%E8%BF%90%E8%A1%8C%E4%B8%AD%E9%97%AA%E9%80%80" tabindex="-1">运行中闪退</h3>
+<p>当您有独立显卡且开启GPU加速时，可能会出现该问题。</p>
+<blockquote>
+<p>解决方案:</p>
+<p>使用 MaaPiCli： 将 <code>config/maa_pi_config.json</code> 里的 <code>gpu</code> 字段的值改成 -2，即禁用 GPU。</p>
+<p>使用 MFAWPF：在[设置]-[性能设置]里将[启用GPU加速]取消勾选</p>
+</blockquote>
+<h3 id="%E8%BF%90%E8%A1%8C%E5%BA%93%E9%97%AE%E9%A2%98%EF%BC%88windows%EF%BC%89" tabindex="-1">运行库问题（Windows）</h3>
+<p>打开软件有以下特征时，说明需要更新运行库：</p>
+<ol>
+<li>
+<p>使用 MFA 时，出现</p>
+<pre><code class="language-plaintext">MFA 遇到了问题
+“对类型“MFAWPF.Views.MainWindow”的构造函数执行符合指定的绑定约束的调用时引发了异常。”，行号为“14”，行位置为“24”。
+Unable to load DLL &#x27;MaaToolkit&#x27; or one of its dependencies: 动态链接库(DLL)初始化例程失败。 (0x8007045A)
+详细信息
+System.Windows.Markup.XamlParseException: “对类型“MFAWPF.Views.MainWindow”的构造函数执行符合指定的绑定约束的调用时引发了异常。”，行号为“14”，行位置为“24”。
+---&gt; System.DllNotFoundException: Unable to load DLL &#x27;MaaToolkit&#x27; or one of its dependencies: 动态链接库(DLL)初始化例程失败。 (0x8007045A)
+</code></pre>
+</li>
+<li>
+<p>在使用 MaaPiCli 时，出现 <code>应用程序错误：应用程序无法正常启动</code></p>
+</li>
+</ol>
+<p>以上一般便是运行库问题，需要<a href="./%E6%96%B0%E6%89%8B%E4%B8%8A%E8%B7%AF.html#2-%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C%E5%BA%93">更新运行库</a></p>
+<p>若更新运行库后仍然无法解决，以上两种启动方法均<strong>闪退</strong>，且在当前目录不生成任何日志文件，则是其它依赖相关问题。<br>
+请到<a href="https://github.com/MAA1999/M9A/issues" target="_top" rel="noopener noreferrer">项目Issues页面</a>反馈。</p>
+<h3 id="agent-%E9%95%BF%E6%97%B6%E9%97%B4%E5%90%AF%E5%8A%A8%E6%97%A0%E5%8F%8D%E5%BA%94%EF%BC%88windows%EF%BC%89" tabindex="-1">Agent 长时间启动无反应（Windows）</h3>
+<p>使用通用 UI（如 MFAAvalonia）时，长时间无反应，或提示 <code>...No such file or directory</code>，需要重新下载完整包。</p>
+<h3 id="%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98" tabindex="-1">资源加载问题</h3>
+<p>问题出现时提示<strong>资源加载失败</strong>。<br>
+解决方法是删除整个文件夹，然后<a href="https://github.com/MAA1999/M9A/releases" target="_top" rel="noopener noreferrer">重新下载</a>安装 M9A 。</p>
+<h3 id="%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98" tabindex="-1">连接问题</h3>
+<p>问题出现时提示<strong>连接模拟器时发生错误</strong>。<br>
+造成连接失败有很多原因，请按下面的步骤一步步尝试。</p>
+<h4 id="1.-%E7%A1%AE%E8%AE%A4-adb-%E5%8F%8A%E8%BF%9E%E6%8E%A5%E5%9C%B0%E5%9D%80%E6%AD%A3%E7%A1%AE" tabindex="-1">1. 确认 ADB 及连接地址正确</h4>
+<p>参阅 <a href="./%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE.html#%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE">连接设置</a></p>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p></p>
+<p>不要连到别的模拟器/设备去了！</p>
+</div>
+<h4 id="2.-%E5%85%B3%E9%97%AD%E7%8E%B0%E6%9C%89-adb-%E8%BF%9B%E7%A8%8B" tabindex="-1">2. 关闭现有 ADB 进程</h4>
+<p>关闭 M9A 后查找 <code>任务管理器</code> - <code>详细信息</code> 中有无名称包含 <code>adb</code> 的进程，如有，结束它后重试连接。</p>
+<h4 id="3.-%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA-adb" tabindex="-1">3. 正确使用多个 ADB</h4>
+<p>当 ADB 版本不同时，新启动的进程会关闭旧的进程。因此在需要同时运行多个 ADB，如 MAA、 Android Studio、Alas、手机助手时，请确认它们的版本相同。</p>
+<h4 id="4.-%E6%9B%B4%E6%8D%A2%E8%A7%A6%E6%8E%A7%E6%96%B9%E5%BC%8F" tabindex="-1">4. 更换触控方式</h4>
+<p>部分模拟器（如蓝叠中国、夜神等）可能 adb 版本较低，可以尝试更换 adb 或<strong>更换触控方式</strong>。</p>
+<h4 id="5.-%E6%94%B9%E7%94%A8-maapicli" tabindex="-1">5. 改用 MaaPiCli</h4>
+<p>若您使用 MFAWPF 连接失败，请尝试改用 MaaPiCli。<a href="MaaPiCli.html">使用说明</a></p>
+<h4 id="6.-%E9%81%BF%E5%85%8D%E6%B8%B8%E6%88%8F%E5%8A%A0%E9%80%9F%E5%99%A8" tabindex="-1">6. 避免游戏加速器</h4>
+<p>部分加速器在启动加速和停止加速之后，都需要重启 MAA、ADB 和模拟器再连接。</p>
+<p>同时使用 UU 加速器 和 MuMu 12 可以参考<a href="https://mumu.163.com/help/20240321/35047_1144608.html" target="_top" rel="noopener noreferrer">官方文档</a>。</p>
+<h4 id="7.-%E9%87%8D%E5%90%AF%E7%94%B5%E8%84%91" tabindex="-1">7. 重启电脑</h4>
+<p>重启能解决 97% 的问题。（确信</p>
+<h4 id="8.-%E6%8D%A2%E6%A8%A1%E6%8B%9F%E5%99%A8" tabindex="-1">8. 换模拟器</h4>
+<p>请参阅 <a href="https://maa.plus/docs/zh-cn/manual/device/" target="_top" rel="noopener noreferrer">模拟器和设备支持</a>。<br>
+通常来说，建议使用 MuMu12 或雷电9。</p>
+<h2 id="%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E9%80%9F%E5%BA%A6%E6%85%A2" tabindex="-1">文件下载速度慢</h2>
+<ol>
+<li>使用<a href="Mirror%E9%85%B1.html">Mirror酱</a>更新</li>
+<li>求助群友/到网上查询相关办法。</li>
+</ol>
+<h2 id="%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98" tabindex="-1">其他问题</h2>
+<p>当您<strong>确定已经阅读过以上常见问题</strong>并<strong>尝试自行解决无果</strong>后，您可以：</p>
+<ol>
+<li>到<a href="https://github.com/MAA1999/M9A/issues" target="_top" rel="noopener noreferrer">项目Issues页面</a> ，<strong>根据模板要求</strong>提交相关材料。</li>
+<li>M9A 交流群 QQ 群：175638678，在<strong>阅读完群公告</strong>后提问。</li>
+</ol>
+
+    </article>
+</body>
+
+</html>

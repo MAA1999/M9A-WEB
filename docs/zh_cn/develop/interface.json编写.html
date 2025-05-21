@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="interface.json-%E7%BC%96%E5%86%99" tabindex="-1">interface.json 编写</h1>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p></p>
+<p>参考资料：
+<a href="https://github.com/MaaXYZ/MaaFramework/blob/main/tools/interface.schema.json" target="_top" rel="noopener noreferrer">interface.schema.json</a>
+<a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.2-ProjectInterface%E5%8D%8F%E8%AE%AE.html" target="_top" rel="noopener noreferrer">ProjectInterface协议.html</a></p>
+</div>
+<p><code>interface.json</code> 旨在提供菜单配置。</p>
+<h2 id="controller" tabindex="-1">controller</h2>
+<p>对于 M9A 来说，固定选择 adb 方式，基本不需要改动。</p>
+<h2 id="agent" tabindex="-1">agent</h2>
+<pre><code class="language-json"><span class="hljs-attr">&quot;agent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;child_exec&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;python&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;child_args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;{PROJECT_DIR}/agent/main.py&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;-u&quot;</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="resource" tabindex="-1">resource</h2>
+<p>资源配置。每种资源需要资源名 <code>name</code> 以及 资源路径 <code>path</code>，均为必填。</p>
+<p>特别地，对于资源路径 ‘path’，M9A 按顺序加载资源，若是存在相同资源名，则后加载的资源会覆盖前面的资源。</p>
+<p>以 B 服为例，资源配置如下：</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;resources&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;B 服&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;{PROJECT_DIR}/resource/base&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;{PROJECT_DIR}/resource/bilibili&quot;</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>这里，<code>{PROJECT_DIR}</code> 是 M9A 项目根目录，<code>base</code> 文件夹是官服资源，<code>bilibili</code> 文件夹是 B 服覆盖官服的资源。</p>
+<h2 id="task" tabindex="-1">task</h2>
+<p>任务列表。任务列表包含多个任务，而每个任务又有任务名 <code>name</code>、任务入口 <code>entry</code>、任务参数 <code>pipeline_override</code>、以及任务选项 <code>option</code>，其中 <code>name</code> <code>entry</code> 必填。</p>
+<p><code>pipeline_override</code> 中应为 pipeline node，并带有覆写参数，例如：</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;轶事派遣（角色故事请自行阅读）&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;entry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Anecdote&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;pipeline_override&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;EnterTheActivityMain&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;template_doc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;修改为当期活动入口的template&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;template&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Combat/Activity/LondonDawningEnterTheShow.png&quot;</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>这里原 node 为：</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;EnterTheActivityMain&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;doc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;进入当期活动主界面&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;recognition&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;TemplateMatch&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;template_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;在interface.json中修改template&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;roi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-number">885</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">340</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">183</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Click&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;post_wait_freezes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">500</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;target&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">179</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">190</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">541</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>经过覆写，该 node 在执行“轶事派遣（角色故事请自行阅读）”任务时，实际执行效果等同于：</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;EnterTheActivityMain&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;recognition&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;TemplateMatch&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;template&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Combat/Activity/LondonDawningEnterTheShow.png&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;roi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-number">885</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">340</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">183</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Click&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;post_wait_freezes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">500</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;target&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">179</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">190</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">541</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>执行“轶事派遣（角色故事请自行阅读）”任务后，node 便会恢复原状。</p>
+<p><code>option</code> 则是根据你下面的具体设置来决定如何覆写 pipeline node。</p>
+<h2 id="option" tabindex="-1">option</h2>
+<p>选项定义。每种选项有可选项 <code>cases</code> 以及 默认选项 <code>default_case</code>, 其中<code>cases</code>必填。</p>
+<p>一般用 <code>cases</code>,举例：</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;task&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;常规作战&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;entry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Combat&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;option&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;作战关卡&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;复现次数&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;刷完全部体力&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;吃全部临期糖&quot;</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;option&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;刷完全部体力&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;cases&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-punctuation">{</span>
+                    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Yes&quot;</span><span class="hljs-punctuation">,</span>
+                    <span class="hljs-attr">&quot;pipeline_override&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                        <span class="hljs-attr">&quot;AllIn&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                            <span class="hljs-attr">&quot;enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+                        <span class="hljs-punctuation">}</span>
+                    <span class="hljs-punctuation">}</span>
+                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-punctuation">{</span>
+                    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;No&quot;</span><span class="hljs-punctuation">,</span>
+                    <span class="hljs-attr">&quot;pipeline_override&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                        <span class="hljs-attr">&quot;AllIn&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                            <span class="hljs-attr">&quot;enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
+                        <span class="hljs-punctuation">}</span>
+                    <span class="hljs-punctuation">}</span>
+                <span class="hljs-punctuation">}</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p><code>defaul_case</code> 为默认选项，从 <code>cases</code> 中选择一个。</p>
+<h2 id="version" tabindex="-1">version</h2>
+<p>版本。不必填写，ci install 时会自动生成。</p>
+<h2 id="message" tabindex="-1">message</h2>
+<p>信息。目前为 <code>MaaPiCli</code> 运行时第一行输出的文字。</p>
+
+    </article>
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="project-structure" tabindex="-1">Project Structure</h1>
+<ul>
+<li><a href="#project-structure">Project Structure</a>
+<ul>
+<li><a href="#github"><code>.github</code></a>
+<ul>
+<li><a href="#githubissue_template"><code>.github/ISSUE_TEMPLATE</code></a></li>
+<li><a href="#githubworkflows"><code>.github/workflows</code></a></li>
+<li><a href="#githubclifftoml"><code>.github/cliff.toml</code></a></li>
+</ul>
+</li>
+<li><a href="#vscode"><code>.vscode</code></a></li>
+<li><a href="#agent"><code>agent</code></a>
+<ul>
+<li><a href="#agentcustom"><code>agent/custom</code></a>
+<ul>
+<li><a href="#agentcustomaction"><code>agent/custom/action</code></a></li>
+<li><a href="#agentcustomreco"><code>agent/custom/reco</code></a></li>
+</ul>
+</li>
+<li><a href="#agentutils"><code>agent/utils</code></a></li>
+<li><a href="#agentmainpy"><code>agent/main.py</code></a></li>
+</ul>
+</li>
+<li><a href="#assets"><code>assets</code></a>
+<ul>
+<li><a href="#assetsmaacommonassets"><code>assets/MaaCommonAssets</code></a></li>
+<li><a href="#assetsresource"><code>assets/resource</code></a>
+<ul>
+<li><a href="#assetsresourcebase"><code>assets/resource/base</code></a>
+<ul>
+<li><a href="#assetsresourcebaseimage"><code>assets/resource/base/image</code></a></li>
+<li><a href="#assetsresourcebasemodel"><code>assets/resource/base/model</code></a></li>
+<li><a href="#assetsresourcebasepipeline"><code>assets/resource/base/pipeline</code></a></li>
+<li><a href="#assetsresourcebasedefault_pipelinejson"><code>assets/resource/base/default_pipeline.json</code></a></li>
+</ul>
+</li>
+<li><a href="#assetsresourcebilibili"><code>assets/resource/bilibili</code></a></li>
+<li><a href="#assetsresourceglobal_en"><code>assets/resource/global_en</code></a></li>
+<li><a href="#assetsresourceglobal_jp"><code>assets/resource/global_jp</code></a></li>
+<li><a href="#assetsresourcecnjson"><code>assets/resource/cn.json</code></a></li>
+<li><a href="#assetsresourceenjson"><code>assets/resource/en.json</code></a></li>
+<li><a href="#assetsresourcejpjson"><code>assets/resource/jp.json</code></a></li>
+</ul>
+</li>
+<li><a href="#assetsinterfacejson"><code>assets/interface.json</code></a></li>
+</ul>
+</li>
+<li><a href="#deps"><code>deps</code></a></li>
+<li><a href="#docs"><code>docs</code></a>
+<ul>
+<li><a href="#docszh_cn"><code>docs/zh_cn</code></a>
+<ul>
+<li><a href="#docszh_cndevelop"><code>docs/zh_cn/develop</code></a></li>
+<li><a href="#docszh_cnmanual"><code>docs/zh_cn/manual</code></a></li>
+</ul>
+</li>
+<li><a href="#docsen_us"><code>docs/en_us</code></a>
+<ul>
+<li><a href="#docsen_usdevelop"><code>docs/en_us/develop</code></a></li>
+<li><a href="#docsen_usmanual"><code>docs/en_us/manual</code></a></li>
+</ul>
+</li>
+<li><a href="#docsmarkdownlintyaml"><code>docs/.markdownlint.yaml</code></a></li>
+</ul>
+</li>
+<li><a href="#tools"><code>tools</code></a>
+<ul>
+<li><a href="#toolsci"><code>tools/ci</code></a></li>
+<li><a href="#toolsconfigurepy"><code>tools/configure.py</code></a></li>
+<li><a href="#toolsinstallpy"><code>tools/install.py</code></a></li>
+</ul>
+</li>
+<li><a href="#gitignore"><code>.gitignore</code></a></li>
+<li><a href="#gitmodules"><code>.gitmodules</code></a></li>
+<li><a href="#pre-commit-configyaml"><code>.pre-commit-config.yaml</code></a></li>
+<li><a href="#prettierrc"><code>.prettierrc</code></a></li>
+<li><a href="#license"><code>LICENSE</code></a></li>
+<li><a href="#package-lockjsonpackagejson"><code>package-lock.json&amp;package.json</code></a></li>
+<li><a href="#readmemd"><code>README.html</code></a></li>
+<li><a href="#requirementstxt"><code>requirements.txt</code></a></li>
+</ul>
+</li>
+</ul>
+<p>Below is the project structure and its description.</p>
+<h2 id=".github" tabindex="-1"><code>.github</code></h2>
+<p>GitHub configuration.</p>
+<h3 id=".github%2Fissue_template" tabindex="-1"><code>.github/ISSUE_TEMPLATE</code></h3>
+<p>GitHub issue templates.</p>
+<h3 id=".github%2Fworkflows" tabindex="-1"><code>.github/workflows</code></h3>
+<p>GitHub workflow configurations.</p>
+<h3 id=".github%2Fcliff.toml" tabindex="-1"><code>.github/cliff.toml</code></h3>
+<p>Cliff configuration (used for automatically generating release notes).</p>
+<h2 id=".vscode" tabindex="-1"><code>.vscode</code></h2>
+<p>VSCode configuration.</p>
+<h2 id="agent" tabindex="-1"><code>agent</code></h2>
+<p>Contains code related to the agent.</p>
+<h3 id="agent%2Fcustom" tabindex="-1"><code>agent/custom</code></h3>
+<p>Custom actions/recognition.</p>
+<h4 id="agent%2Fcustom%2Faction" tabindex="-1"><code>agent/custom/action</code></h4>
+<p>Custom actions.</p>
+<h4 id="agent%2Fcustom%2Freco" tabindex="-1"><code>agent/custom/reco</code></h4>
+<p>Custom recognition.</p>
+<h3 id="agent%2Futils" tabindex="-1"><code>agent/utils</code></h3>
+<p>Utility functions.</p>
+<h3 id="agent%2Fmain.py" tabindex="-1"><code>agent/main.py</code></h3>
+<p>Processes before starting the agent and starts the AgentServer.</p>
+<h2 id="assets" tabindex="-1"><code>assets</code></h2>
+<p>Contains project resource files.</p>
+<h3 id="assets%2Fmaacommonassets" tabindex="-1"><code>assets/MaaCommonAssets</code></h3>
+<p>Contains Maa common resources, such as OCR models.</p>
+<h3 id="assets%2Fresource" tabindex="-1"><code>assets/resource</code></h3>
+<p>Contains project resource files.</p>
+<h4 id="assets%2Fresource%2Fbase" tabindex="-1"><code>assets/resource/base</code></h4>
+<p>Contains official server resources, which serve as the base for other server resources.</p>
+<h5 id="assets%2Fresource%2Fbase%2Fimage" tabindex="-1"><code>assets/resource/base/image</code></h5>
+<p>Contains template images.</p>
+<h5 id="assets%2Fresource%2Fbase%2Fmodel" tabindex="-1"><code>assets/resource/base/model</code></h5>
+<p>Contains OCR models, neural network classification models, and neural network detection models. <a href="https://github.com/MaaXYZ/MaaNeuralNetworkCookbook" target="_top" rel="noopener noreferrer">Cooking Guide</a></p>
+<h5 id="assets%2Fresource%2Fbase%2Fpipeline" tabindex="-1"><code>assets/resource/base/pipeline</code></h5>
+<p>JSON files describing task pipelines, written according to the <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.1-%E4%BB%BB%E5%8A%A1%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE.html" target="_top" rel="noopener noreferrer">Task Pipeline Protocol</a>.</p>
+<h5 id="assets%2Fresource%2Fbase%2Fdefault_pipeline.json" tabindex="-1"><code>assets/resource/base/default_pipeline.json</code></h5>
+<p>Sets default properties in the pipeline, refer to <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/sample/resource/default_pipeline.json" target="_top" rel="noopener noreferrer">default_pipeline.json</a>.</p>
+<h4 id="assets%2Fresource%2Fbilibili" tabindex="-1"><code>assets/resource/bilibili</code></h4>
+<p>Contains resources for the Bilibili server, overriding official server resources.</p>
+<h4 id="assets%2Fresource%2Fglobal_en" tabindex="-1"><code>assets/resource/global_en</code></h4>
+<p>Contains resources for the global English server, overriding official and Japanese server resources.</p>
+<h4 id="assets%2Fresource%2Fglobal_jp" tabindex="-1"><code>assets/resource/global_jp</code></h4>
+<p>Contains resources for the Japanese server, overriding official server resources.</p>
+<h4 id="assets%2Fresource%2Fcn.json" tabindex="-1"><code>assets/resource/cn.json</code></h4>
+<p>Contains activity information for the CN server.</p>
+<h4 id="assets%2Fresource%2Fen.json" tabindex="-1"><code>assets/resource/en.json</code></h4>
+<p>Contains activity information for the EN server.</p>
+<h4 id="assets%2Fresource%2Fjp.json" tabindex="-1"><code>assets/resource/jp.json</code></h4>
+<p>Contains activity information for the JP server.</p>
+<h3 id="assets%2Finterface.json" tabindex="-1"><code>assets/interface.json</code></h3>
+<p>A standardized project structure declaration for MaaFramework, following the <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.2-ProjectInterface%E5%8D%8F%E8%AE%AE.html" target="_top" rel="noopener noreferrer">Project Interface Protocol</a>.</p>
+<h2 id="deps" tabindex="-1"><code>deps</code></h2>
+<p>Contains dependencies (extract the MaaFramework release package here).</p>
+<h2 id="docs" tabindex="-1"><code>docs</code></h2>
+<p>User manuals and development documentation.</p>
+<h3 id="docs%2Fzh_cn" tabindex="-1"><code>docs/zh_cn</code></h3>
+<p>Chinese documentation.</p>
+<h4 id="docs%2Fzh_cn%2Fdevelop" tabindex="-1"><code>docs/zh_cn/develop</code></h4>
+<p>Chinese Development documentation.</p>
+<h4 id="docs%2Fzh_cn%2Fmanual" tabindex="-1"><code>docs/zh_cn/manual</code></h4>
+<p>Chinese User manuals.</p>
+<h3 id="docs%2Fen_us" tabindex="-1"><code>docs/en_us</code></h3>
+<p>English documentation.</p>
+<h4 id="docs%2Fen_us%2Fdevelop" tabindex="-1"><code>docs/en_us/develop</code></h4>
+<p>English Development documentation.</p>
+<h4 id="docs%2Fen_us%2Fmanual" tabindex="-1"><code>docs/en_us/manual</code></h4>
+<p>English User manuals.</p>
+<h3 id="docs%2F.markdownlint.yaml" tabindex="-1"><code>docs/.markdownlint.yaml</code></h3>
+<p>Markdownlint configuration.</p>
+<h2 id="tools" tabindex="-1"><code>tools</code></h2>
+<p>Project tools.</p>
+<h3 id="tools%2Fci" tabindex="-1"><code>tools/ci</code></h3>
+<p>Tools used only in CI.</p>
+<h3 id="tools%2Fconfigure.py" tabindex="-1"><code>tools/configure.py</code></h3>
+<p>Configuration tool, copies MaaCommonAssets to the resource directory.</p>
+<h3 id="tools%2Finstall.py" tabindex="-1"><code>tools/install.py</code></h3>
+<p>Installation tool, assembles source code and dependencies into the <code>install</code> directory.</p>
+<h2 id=".gitignore" tabindex="-1"><code>.gitignore</code></h2>
+<p>Git ignore list.</p>
+<h2 id=".gitmodules" tabindex="-1"><code>.gitmodules</code></h2>
+<p>Git submodules.</p>
+<h2 id=".pre-commit-config.yaml" tabindex="-1"><code>.pre-commit-config.yaml</code></h2>
+<p>Pre-commit configuration.</p>
+<h2 id=".prettierrc" tabindex="-1"><code>.prettierrc</code></h2>
+<p>Prettier configuration file.</p>
+<h2 id="license" tabindex="-1"><code>LICENSE</code></h2>
+<p>Open source license.</p>
+<h2 id="package-lock.json%26package.json" tabindex="-1"><code>package-lock.json&amp;package.json</code></h2>
+<p>Prettier dependencies.</p>
+<h2 id="readme.html" tabindex="-1"><code>README.html</code></h2>
+<p>Project description.</p>
+<h2 id="requirements.txt" tabindex="-1"><code>requirements.txt</code></h2>
+<p>Dependencies required for the agent (Python).</p>
+
+    </article>
+</body>
+
+</html>

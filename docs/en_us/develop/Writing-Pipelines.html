@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="pipeline-writing" tabindex="-1">Pipeline Writing</h1>
+<h2 id="writing-standards" tabindex="-1">Writing Standards</h2>
+<h3 id="naming-conventions" tabindex="-1">Naming Conventions</h3>
+<p>To ensure the resources are aesthetically consistent, please try to follow the existing rules below.</p>
+<h4 id="resource-naming" tabindex="-1">Resource Naming</h4>
+<ul>
+<li>For files such as images, use PascalCase, where the first letter of each word is capitalized.</li>
+<li>For JSON files under the <code>pipeline</code> folder, use snake_case, where words are separated by underscores and all letters are lowercase.<br>
+Specifically, activity-related files use PascalCase and are generally located in the <code>activity</code> folder.</li>
+<li>For folders under <code>image</code>, each folder corresponds to a JSON file under the <code>pipeline</code> folder. Folder names use PascalCase.<br>
+Specifically, JSON files in the <code>activity</code> folder correspond to images placed in <code>Combat/Activity</code>.</li>
+</ul>
+<h4 id="node-naming" tabindex="-1">Node Naming</h4>
+<p>A node is defined as a complete <code>JsonObject</code> that conforms to the task pipeline protocol. Most nodes use PascalCase, but in some cases, <code>_</code> is used to connect prefixes and suffixes.</p>
+<p>Prefixes are generally <code>Sub</code> or abbreviations of the current activity (e.g., <code>SOD</code> for Sound of Dusk, <code>EITM</code> for Echoes in the Mountains). (Other cases are recommended to avoid prefixes.)</p>
+<p>Suffixes are generally <code>numbers</code> or <code>states</code>, indicating the specific stage or state of the node. (It is recommended not to add suffixes to newly written nodes.)</p>
+<h3 id="node-writing" tabindex="-1">Node Writing</h3>
+<p>For detailed content, refer to <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.1-%E4%BB%BB%E5%8A%A1%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE.html" target="_top" rel="noopener noreferrer">Pipeline Protocol Detailed Explanation</a></p>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<ul>
+<li><code>next</code> specifies the exit node of the current node, and <code>interrupt</code> specifies the interrupt node of the current node.</li>
+<li>Nodes with a flag-like nature are often set as exit nodes to mark the completion of the current node.</li>
+<li>Reduce coupling between nodes.<br>
+For example, <code>BackButton</code> is generally not set with <code>next</code> but is used as an “exception handler” placed in <code>interrupt</code> to ensure task flow clarity and facilitate the reuse of interrupt nodes in other tasks.</li>
+<li>In some cases, a node can be added to its own <code>next</code>. (This is for situations where actions are not correctly accepted by the game or have not yet taken effect in the game.)</li>
+<li>For nodes involving page switching, add <code>post_wait_freezes</code> and use an <code>object</code> as the value to set appropriate <code>time</code> and <code>target</code>.</li>
+<li>For operations involving swiping, add a click operation afterward to ensure screen stability.</li>
+</ul>
+</div>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p></p>
+<ul>
+<li>Use the <code>inverse</code> field cautiously, as it may lead to unpredictable tasks.<br>
+If it must be used, ensure it has a preceding node with <code>post_wait_freezes</code> to ensure the state matches the expected conditions when the node is matched.</li>
+<li>Use “unconditional match” nodes cautiously.<br>
+Nodes with the <code>recognition</code> field defaulting to <code>DirectHit</code> are considered “unconditional match” nodes.<br>
+Using “unconditional match” nodes may cause the program to loop on the node and freeze the task if it reaches an unexpected state without proper error handling.<br>
+Unless necessary, choose other logical implementations to complete the task.</li>
+</ul>
+</div>
+<h4 id="node-connections" tabindex="-1">Node Connections</h4>
+<p>Nodes are primarily connected through the <code>next</code> or <code>interrupt</code> fields.</p>
+<p><code>next</code> connects nodes sequentially, while <code>interrupt</code> initiates a new task chain with the current interrupt node as the entry point and returns to the current node after the task chain is completed.</p>
+<p>A simple representation is as follows:</p>
+<pre><code class="language-mermaid">graph LR
+    A(Task Entry&lt;br&gt;Node A) --&gt; |next| B(Node B)
+    A --&gt; |interrupt| C(Node C)
+    C --&gt; |return| A
+</code></pre>
+<p>Making the interrupt node more complex:</p>
+<pre><code class="language-mermaid">graph LR
+    A(Task Entry&lt;br&gt;Node A) --&gt; |next| B(Node B)
+    A --&gt; |interrupt| C(Node C)
+    C --&gt; |next| D(Node D)
+    C --&gt; |interrupt| E(Node E)
+    D --&gt; |return| A
+    E --&gt; |return| C
+</code></pre>
+<p>To ensure a good structure for the task chain, follow these principles for node connections:</p>
+<ol>
+<li>Nodes marking the completion of a phase task should be placed in <code>next</code>.</li>
+<li>Nodes handling other conditions to match the <code>next</code> node should be placed in <code>interrupt</code>.</li>
+</ol>
+<p>For example, the relationship between activity farming tasks, being on the activity main screen, and entering the activity main screen is as follows:</p>
+<pre><code class="language-mermaid">graph LR
+   A(Activity Farming Task) --&gt; |next| B(On Activity Main Screen)
+   A --&gt; |interrupt| C(Enter Activity Main Screen)
+   C --&gt; |return| A
+</code></pre>
+<p>Here, “Enter Activity Main Screen” is not placed in <code>next</code> but in <code>interrupt</code>.</p>
+<h4 id="next-%26-interrupt-node-ordering" tabindex="-1">Next &amp; Interrupt Node Ordering</h4>
+<p>Overall, the first node in <code>interrupt</code> has a lower priority than the last node in <code>next</code>.</p>
+<p>Within <code>next</code> or <code>interrupt</code>, nodes should be arranged in descending order of priority, and priority inversion should not occur. For example:</p>
+<pre><code class="language-plaintext">If there is a node B that checks for a small popup and a node A that checks for the interface before the popup appears, 
+and if the popup can still match A when it appears, then B should have a higher priority than A. 
+Otherwise, the task may freeze at A without handling B.
+</code></pre>
+<p>Nodes with the same priority can be arranged in descending order of matching frequency to improve node hit rates and reduce resource consumption.</p>
+<h4 id="comment-standards" tabindex="-1">Comment Standards</h4>
+<p>In <code>pipeline.json</code> files, there are two types of comment fields:</p>
+<ol>
+<li><code>.*_doc$|^doc$</code>: Strings ending with <code>_doc</code> or exactly <code>doc</code>.</li>
+<li><code>.*_code$|^code$</code>: Strings ending with <code>_code</code> or exactly <code>code</code>.</li>
+</ol>
+<p>The former provides explanations for the current node (or field), while the latter serves as placeholders for required fields. For example:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;EnterTheActivityMain&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;doc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Enter the main screen of the current activity&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;template_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Modify the template in interface.json&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;recognition&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;TemplateMatch&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;roi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-number">885</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">340</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">183</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Click&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;post_wait_freezes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">500</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;target&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">179</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">190</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">541</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p><code>doc</code> explains the current node.</p>
+<p><code>template_code</code> is a placeholder for required fields.<br>
+The reason is that when <code>recognition</code> is <code>TemplateMatch</code>, the “template” field is required, but we want to modify it in <code>interface.json</code> instead of this JSON file. Hence, <code>template_code</code> is used as a placeholder.</p>
+
+    </article>
+</body>
+
+</html>

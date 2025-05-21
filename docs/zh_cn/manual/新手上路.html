@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="%E6%96%B0%E6%89%8B%E4%B8%8A%E8%B7%AF" tabindex="-1">新手上路</h1>
+<ul>
+<li><a href="#%E6%96%B0%E6%89%8B%E4%B8%8A%E8%B7%AF">新手上路</a>
+<ul>
+<li><a href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87">前置准备</a>
+<ul>
+<li><a href="#1-%E7%A1%AE%E8%AE%A4%E7%89%88%E6%9C%AC%E7%B3%BB%E7%BB%9F">1. 确认版本系统</a></li>
+<li><a href="#2-%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83">2. 安装运行环境</a>
+<ul>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96%E7%B3%BB%E7%BB%9F">其他系统</a>
+<ul>
+<li><a href="#%E7%8E%AF%E5%A2%83%E4%BE%9D%E8%B5%96">环境依赖</a></li>
+<li><a href="#%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86">依赖管理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-%E4%B8%8B%E8%BD%BD%E6%AD%A3%E7%A1%AE%E7%9A%84%E7%89%88%E6%9C%AC">3. 下载正确的版本</a>
+<ul>
+<li><a href="#windows-1">Windows</a></li>
+<li><a href="#macos">macOS</a></li>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#android">Android</a></li>
+</ul>
+</li>
+<li><a href="#4-%E6%AD%A3%E7%A1%AE%E8%A7%A3%E5%8E%8B">4. 正确解压</a></li>
+<li><a href="#5-%E7%A1%AE%E8%AE%A4%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%94%AF%E6%8C%81">5. 确认模拟器支持</a></li>
+<li><a href="#6-%E6%AD%A3%E7%A1%AE%E8%AE%BE%E7%BD%AE%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%88%86%E8%BE%A8%E7%8E%87">6. 正确设置模拟器分辨率</a></li>
+<li><a href="#7-pip-%E8%AE%BE%E7%BD%AEwindows">7. pip 设置（Windows）</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3">相关文档</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87" tabindex="-1">前置准备</h2>
+<h3 id="1.-%E7%A1%AE%E8%AE%A4%E7%89%88%E6%9C%AC%E7%B3%BB%E7%BB%9F" tabindex="-1">1. 确认版本系统</h3>
+<p>M9A 在 Windows 下仅支持 10 和 11，旧版 Windows 请参阅<a href="https://maa.plus/docs/zh-cn/manual/faq.html#%E7%B3%BB%E7%BB%9F%E9%97%AE%E9%A2%98" target="_top" rel="noopener noreferrer">常见问题</a>中的系统问题部分。</p>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p></p>
+<p>以下内容源自 MAA，与 M9A 有差异，故仅供参考
+<a href="https://github.com/MaaXYZ/MaaFramework/issues/405" target="_top" rel="noopener noreferrer">暂不支持 PlayCover</a>。</p>
+</div>
+<p>若您正在使用 Apple Silicon MacBook，请前往<a href="https://maa.plus/docs/zh-cn/manual/device/macos.html#apple-silicon-%E8%8A%AF%E7%89%87" target="_top" rel="noopener noreferrer">此页面</a>
+M9A 同样支持搭载 <a href="https://maa.plus/docs/zh-cn/manual/device/macos.html#intel-%E8%8A%AF%E7%89%87" target="_top" rel="noopener noreferrer">Intel 芯片</a>的 MacBook，但更推荐使用 Mac 自带的多系统安装 Windows，并使用 Windows 版 M9A。</p>
+<p>若您希望使用 Android 实体设备，请前往<a href="https://maa.plus/docs/zh-cn/manual/device/android.html" target="_top" rel="noopener noreferrer">此页面</a>。
+由于此方法涉及 adb 调试且仍需与电脑连接，不推荐入门玩家使用此方法。</p>
+<h3 id="2.-%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83" tabindex="-1">2. 安装运行环境</h3>
+<h4 id="windows" tabindex="-1">Windows</h4>
+<p>对于Windows需要在运行前安装运行库。</p>
+<p>M9A 需要 VCRedist x64 (cli与gui都需要) 和 .NET 8 (仅使用gui时需要)。
+点击 <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_top" rel="noopener noreferrer">vc_redist.x64</a> 下载安装 VCRedist x64，点击 <a href="https://download.visualstudio.microsoft.com/download/pr/ba3a1364-27d8-472e-a33b-5ce0937728aa/6f9495e5a587406c85af6f93b1c89295/dotnet-sdk-8.0.404-win-x64.exe" target="_top" rel="noopener noreferrer">dotnet-sdk-8.0.5-win-x64.exe</a> <a href="http://xn--ghqu24aum9asvf.NET" target="_top" rel="noopener noreferrer">下载安装.NET</a> 8。
+也可以右键开始按钮打开终端，在终端内粘贴以下命令回车以进行安装。</p>
+<pre><code class="language-sh">winget install Microsoft.VCRedist.2017.x64 Microsoft.DotNet.DesktopRuntime.8
+</code></pre>
+<h4 id="%E5%85%B6%E4%BB%96%E7%B3%BB%E7%BB%9F" tabindex="-1">其他系统</h4>
+<h5 id="%E7%8E%AF%E5%A2%83%E4%BE%9D%E8%B5%96" tabindex="-1">环境依赖</h5>
+<p>Python: 版本 ≥ 3.10</p>
+<h5 id="%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86" tabindex="-1">依赖管理</h5>
+<p>运行环境必须满足 <code>requirements.txt</code> 文件中所有必要的依赖包及其版本。</p>
+<h3 id="3.-%E4%B8%8B%E8%BD%BD%E6%AD%A3%E7%A1%AE%E7%9A%84%E7%89%88%E6%9C%AC" tabindex="-1">3. 下载正确的版本</h3>
+<p>M9A 下载（更新）地址：<a href="https://github.com/MAA1999/M9A/releases" target="_top" rel="noopener noreferrer">https://github.com/MAA1999/M9A/releases</a></p>
+<p>国内用户也可通过 <a href="https://mirrorchyan.com/zh/download?rid=M9A" target="_top" rel="noopener noreferrer">Mirror酱</a> 高速下载。</p>
+<h4 id="windows-1" tabindex="-1">Windows</h4>
+<ul>
+<li>对于<strong>绝大部分</strong>用户，请下载 <code>M9A-win-x86_64-vXXX.zip</code></li>
+<li><s>若确定自己的电脑是 arm 架构，请下载 <code>M9A-win-aarch64-vXXX.zip</code></s></li>
+<li>arm 架构目前已不支持</li>
+</ul>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p>请注意！Windows 的电脑几乎全都是 x86_64 的，可能占 99.999%，除非你非常确定自己是 arm，否则别下这个！</p>
+</div>
+<ul>
+<li>解压后运行 <code>MaaPiCli.exe</code>（命令行）或 <code>MFAWPF.exe</code>（图形化界面）即可</li>
+</ul>
+<h4 id="macos" tabindex="-1">macOS</h4>
+<ul>
+<li>
+<p>查看处理器类型（重要：一定要选择正确版本才能正确运行）：</p>
+<ol>
+<li>点击屏幕左上角的苹果标志。</li>
+<li>选择“关于本机”。</li>
+<li>在弹出的窗口中，你可以看到处理器的信息。</li>
+</ol>
+</li>
+<li>
+<p>若使用 Intel X86 处理器，请下载 <code>M9A-macos-x86_64-vXXX.zip</code></p>
+</li>
+<li>
+<p>若使用 Apple Silicon 系列如： M1, M2 等 ARM 架构处理器，请下载 <code>M9A-macos-aarch64-vXXX.zip</code></p>
+</li>
+<li>
+<p>使用方式：</p>
+<ol>
+<li>
+<p>打开终端，解压分发的压缩包，推荐解压到 <code>usr/local/bin</code> 中，不建议存放于 <code>/opt</code> 中避免权限问题。</p>
+<pre><code class="language-shell">sudo unzip -o &lt;下载的M9A压缩包路径&gt; -d usr/local/bin/M9A
+</code></pre>
+</li>
+<li>
+<p>继续在终端中赋予UNIX可执行文件的执行权限：</p>
+<pre><code class="language-shell">cd usr/local/bin/M9A
+<span class="hljs-meta prompt_"># </span><span class="language-bash">如果手动在解压好的软件根目录打开终端，可以免除执行上面这一行</span>
+sudo chmod 777 MaaPiCli
+sudo ./MaaPiCli
+</code></pre>
+</li>
+<li>
+<p>若想使用图形操作页面请按第二步操作，执行 <code>MFAAvalonia</code> 程序。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="linux" tabindex="-1">Linux</h4>
+<p>同macOS，下载对应版本的压缩包，添加权限后运行 <code>MaaPiCli</code> 即可。</p>
+<h4 id="android" tabindex="-1">Android</h4>
+<p><s>对于一般用户我们并不推荐该版本，故已在发行版删除</s>
+如您非常了解手机操作，可参考<a href="https://github.com/MaaXYZ/MaaFramework/issues/475" target="_top" rel="noopener noreferrer">使用方法</a>，以及<a href="../develop/%E5%BC%80%E5%8F%91%E5%89%8D%E9%A1%BB%E7%9F%A5.html">开发文档</a>自行安装。</p>
+<h3 id="4.-%E6%AD%A3%E7%A1%AE%E8%A7%A3%E5%8E%8B" tabindex="-1">4. 正确解压</h3>
+<p>确认解压完整，并确保将 M9A 解压到一个独立的文件夹中。除关闭内建管理员批准的Administrator账号外，请勿将 MAA 解压到如 <code>C:\</code>、<code>C:\Program Files\</code> 等需要 UAC 权限的路径。</p>
+<div class="markdown-alert markdown-alert-caution"><p class="markdown-alert-title"><svg class="octicon octicon-stop mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Caution</p><p>不要在压缩软件直接打开程序！</p>
+</div>
+<h3 id="5.-%E7%A1%AE%E8%AE%A4%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%94%AF%E6%8C%81" tabindex="-1">5. 确认模拟器支持</h3>
+<p>查阅<a href="https://maa.plus/docs/zh-cn/manual/device/" target="_top" rel="noopener noreferrer">模拟器和设备支持</a>，确认正在使用的模拟器支持情况。</p>
+<h3 id="6.-%E6%AD%A3%E7%A1%AE%E8%AE%BE%E7%BD%AE%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%88%86%E8%BE%A8%E7%8E%87" tabindex="-1">6. 正确设置模拟器分辨率</h3>
+<p>模拟器分辨率应为 <code>16:9</code> 比例，推荐（以及最低）分辨率为 <code>1280x720</code>，不符合要求造成的运行报错将不会被解决。</p>
+<h3 id="7.-pip-%E8%AE%BE%E7%BD%AE%EF%BC%88windows%EF%BC%89" tabindex="-1">7. pip 设置（Windows）</h3>
+<p>对于 Windows，为了大多数用户使用方便，我们专门附带了 Python 环境，但同时考虑到尽可能减小安装包大小，选择让程序在本地首次运行或资源版本更新时使用 pip 安装所有依赖，相关配置文件存储在 <code>config/pip_config.json</code> 中（不存在则自动创建）。内容如下：</p>
+<pre><code class="language-jsonc"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;enable_pip_update&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>  # 是否更新 pip 本体，默认 <span class="hljs-literal"><span class="hljs-keyword">true</span></span>，推荐开启
+    <span class="hljs-attr">&quot;enable_pip_install&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>  # 是否启用 pip 安装，默认 <span class="hljs-literal"><span class="hljs-keyword">true</span></span>，推荐开启
+    <span class="hljs-attr">&quot;last_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;v3.2.0&quot;</span><span class="hljs-punctuation">,</span>  # 完成 pip 安装时读取 interface.json 的 version ，启动时和 version 对比，不同则尝试安装
+    <span class="hljs-attr">&quot;mirror&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://mirrors.ustc.edu.cn/pypi/simple&quot;</span> # 镜像源。pip install -i 后参数，可根据个人需求填写。注意非大陆地区用户请修改值为 <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3" tabindex="-1">相关文档</h2>
+<ul>
+<li><a href="./%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE.html#%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE">连接设置</a>——介绍了adb连接以及模拟器设置</li>
+<li><a href="./MaaPiCli.html">MaaPiCli操作说明</a>——介绍了 MaaPiCli 使用方法<s>翻译文档</s></li>
+<li><a href="./%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html">功能介绍</a>——介绍了部分功能的注意事项</li>
+<li><a href="./%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html">常见问题</a>——介绍了常见问题及解决策略</li>
+<li><a href="./Mirror%E9%85%B1.html">Mirror酱使用说明</a>——介绍了Mirror酱使用方法</li>
+</ul>
+
+    </article>
+</body>
+
+</html>

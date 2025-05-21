@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="%E9%A1%B9%E7%9B%AE%E9%87%8D%E6%9E%84" tabindex="-1">项目重构</h1>
+<h2 id="image%2Fmodel" tabindex="-1">Image/Model</h2>
+<p>注意对其修改时不要落下任何用到该Image/Model的 node。</p>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p></p>
+<p>善用全局搜索</p>
+</div>
+<h2 id="pipeline" tabindex="-1">Pipeline</h2>
+<h3 id="sub-node" tabindex="-1">Sub Node</h3>
+<p>这里将 <code>is_sub</code> (已废弃) 值为 <code>true</code> 的 node 称为 <code>sub node</code> 。</p>
+<p>重构 <code>sub node</code> ，有以下几个步骤：</p>
+<ol>
+<li>判断该 <code>sub node</code> 在 当前node <code>next</code> 列表中是否处于最低优先级（即直接放到 当前node <code>interrupt</code> 列表中对实际效果有无影响）</li>
+<li>若该 <code>sub node</code> 不处于最低优先级，重构方法是将 当前node 的 <code>next</code> 和 <code>interrupt</code> 加入  <code>sub node</code> (原 <code>next</code> 和 <code>interrupt</code> 为空可直接进行，不为空则需考虑是否冲突)；若该 <code>sub node</code> 处于最低优先级，重构方法为直接放到 当前node 的 <code>interrupt</code> 中</li>
+<li>若该 <code>sub node</code> 不处于最低优先级，且步骤2的改动会引起冲突，则需要重新考虑任务逻辑</li>
+<li>将 <code>sub node</code> 的 <code>is_sub</code> 属性删除</li>
+</ol>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p></p>
+<p>以上全部改动均需考虑所有使用该 <code>sub node</code> 的 node，不要落下！</p>
+</div>
+<h3 id="%E5%85%B6%E5%AE%83-node" tabindex="-1">其它 node</h3>
+<p>接下来按照其它 node 的重构目的来分别说明如何重构。</p>
+<h4 id="%E8%A7%84%E8%8C%83-node-%E5%90%8D%E7%A7%B0" tabindex="-1">规范 node 名称</h4>
+<p>如果只是想规范 node 名称，则只需通过 vscode 的全局搜索、替换功能完成即可。<br>
+不过需要注意替换时带着双引号替换，以免出现包含该 node 名的其它 node 也被修改。</p>
+<h4 id="%E7%AE%80%E5%8C%96%E4%BB%BB%E5%8A%A1%E6%B5%81%E7%A8%8B%E3%80%81%E5%87%8F%E5%B0%91%E8%80%A6%E5%90%88" tabindex="-1">简化任务流程、减少耦合</h4>
+<p>先行阅读 <a href="./Pipeline%20%E7%BC%96%E5%86%99.html#node-%E8%BF%9E%E6%8E%A5">Node 连接</a>，向贴合连接原则的方向进行重构。</p>
+<p>部分node 可放在 当前node 的 祖先node 的 <code>interrupt</code> 中。<br>
+注意移动后将不必要的 next node 删除，避免在 <code>interrupt</code> 中继续执行主任务链，导致后续任务报错后跳回 祖先node。</p>
+<h4 id="%E5%90%88%E5%B9%B6%E7%9B%B8%E5%90%8C%E5%8A%9F%E8%83%BD-node" tabindex="-1">合并相同功能 node</h4>
+<p>如果有多个 node 都实现了相同的功能，则可以考虑合并为一个 node。</p>
+<p>步骤为：</p>
+<ol>
+<li>合并前检查该 node <code>next</code> 中是否不相关的 node，如有则先将其拆分出来。</li>
+<li>合并时所有 node 改用相同规范名称。</li>
+<li>合并后检查该 node 在所有任务中的位置是否正确。如本该在 <code>interrupt</code> 中的 node 是否位于任务链主干的 <code>next</code> 部分。</li>
+</ol>
+
+    </article>
+</body>
+
+</html>

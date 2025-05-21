@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="getting-started" tabindex="-1">Getting Started</h1>
+<ul>
+<li><a href="#getting-started">Getting Started</a>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a>
+<ul>
+<li><a href="#1-confirm-system-version">1. Confirm System Version</a></li>
+<li><a href="#2-install-runtime-environment">2. Install Runtime Environment</a>
+<ul>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#other-systems">Other Systems</a>
+<ul>
+<li><a href="#environment-dependencies">Environment Dependencies</a></li>
+<li><a href="#dependency-management">Dependency Management</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-download-the-correct-version">3. Download the Correct Version</a>
+<ul>
+<li><a href="#windows-1">Windows</a></li>
+<li><a href="#macos">macOS</a></li>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#android">Android</a></li>
+</ul>
+</li>
+<li><a href="#4-extract-correctly">4. Extract Correctly</a></li>
+<li><a href="#5-confirm-emulator-support">5. Confirm Emulator Support</a></li>
+<li><a href="#6-set-emulator-resolution-correctly">6. Set Emulator Resolution Correctly</a></li>
+<li><a href="#7-pip-settings-windows">7. Pip settings (Windows)</a></li>
+</ul>
+</li>
+<li><a href="#related-documentation">Related Documentation</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="prerequisites" tabindex="-1">Prerequisites</h2>
+<h3 id="1.-confirm-system-version" tabindex="-1">1. Confirm System Version</h3>
+<p>M9A on Windows only supports Windows 10 and 11. For older Windows versions, please refer to the system issues section in the <a href="FAQ.html#runtime-library-issues">FAQ</a> (Note: Original link points to MAA docs, adapt if needed).</p>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p></p>
+<p>The following content originates from MAA and differs from M9A, so it’s for reference only.
+<a href="https://github.com/MaaXYZ/MaaFramework/issues/405" target="_top" rel="noopener noreferrer">PlayCover is temporarily not supported</a>.</p>
+</div>
+<p>If you are using MacBook with Apple Silicon, please go to <a href="https://maa.plus/docs/zh-cn/manual/device/macos.html#apple-silicon-%E8%8A%AF%E7%89%87" target="_top" rel="noopener noreferrer">this page</a> (Note: Original link points to MAA docs).
+M9A also supports Macs with <a href="https://maa.plus/docs/zh-cn/manual/device/macos.html#intel-%E8%8A%AF%E7%89%87" target="_top" rel="noopener noreferrer">Intel chips</a> (Note: Original link points to MAA docs), but we would rather recommend you to install Windows on your Mac and use the Windows version of M9A.</p>
+<p>If you wish to use M9A on Android devices, please go to <a href="https://maa.plus/docs/zh-cn/manual/device/android.html" target="_top" rel="noopener noreferrer">this page</a> (Note: Original link points to MAA docs).</p>
+<h3 id="2.-install-runtime-environment" tabindex="-1">2. Install Runtime Environment</h3>
+<h4 id="windows" tabindex="-1">Windows</h4>
+<p>M9A requires the <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_top" rel="noopener noreferrer">VCRedist x64</a> and the <a href="https://download.visualstudio.microsoft.com/download/pr/ba3a1364-27d8-472e-a33b-5ce0937728aa/6f9495e5a587406c85af6f93b1c89295/dotnet-sdk-8.0.404-win-x64.exe" target="_top" rel="noopener noreferrer">dotnet-sdk-8.0.5-win-x64.exe</a> if you are running Windows x64. Try installing runtime environment manually if you are running other versions of Windows…</p>
+<h4 id="other-systems" tabindex="-1">Other Systems</h4>
+<p>Refer to the MAA documentation for dependencies on other systems as M9A primarily targets Windows, but the core framework might have cross-platform capabilities. Check M9A’s specific documentation or repository for Linux/macOS support details if available.</p>
+<h5 id="environment-dependencies" tabindex="-1">Environment Dependencies</h5>
+<p>Python: version ≥ 3.10</p>
+<h5 id="dependency-management" tabindex="-1">Dependency Management</h5>
+<p>Make sure your environment satisfy all necessary dependencies and their versions listed in the requirements.txt file.</p>
+<h3 id="3.-download-the-correct-version" tabindex="-1">3. Download the Correct Version</h3>
+<p>Download from the <a href="https://github.com/MAA1999/M9A/releases" target="_top" rel="noopener noreferrer">M9A Releases page</a>.</p>
+<p>Chinese Mainland users can also download it at high speed through <a href="https://mirrorchyan.com/en/download?rid=M9A" target="_top" rel="noopener noreferrer">MirrorChyan</a>.</p>
+<h4 id="windows-1" tabindex="-1">Windows</h4>
+<p>Usually, download the <code>M9A-win-x64-&lt;version&gt;.zip</code> file.</p>
+<ul>
+<li>Unzip the package and run <code>MaaPiCli.exe</code>（command line）or <code>MFAWPF.exe</code> (GUI), both are OK.</li>
+</ul>
+<h4 id="macos" tabindex="-1">macOS</h4>
+<ul>
+<li>
+<p>Checking Processor Type (Important: You must select the correct version for proper operation):</p>
+<ol>
+<li>Click the Apple logo in the top-left corner of the screen.</li>
+<li>Select “About This Mac”.</li>
+<li>In the window that appears, you can see the processor information.</li>
+</ol>
+</li>
+<li>
+<p>If you are using an Intel X86 processor, please download <code>M9A-macos-x86_64-vXXX.zip</code></p>
+</li>
+<li>
+<p>If you are using an Apple Silicon series processor such as M1, M2, etc. with ARM architecture, please download <code>M9A-macos-aarch64-vXXX.zip</code></p>
+</li>
+<li>
+<p>Usage:</p>
+<ol>
+<li>
+<p>Open the terminal, decompress the distributed compressed package. It is recommended to decompress it to <code>usr/local/bin</code>. It is not recommended to store it in <code>/opt</code> to avoid permission issues.</p>
+<pre><code class="language-shell">sudo unzip -o &lt;path to the downloaded M9A compressed package&gt; -d usr/local/bin/M9A
+</code></pre>
+</li>
+<li>
+<p>Continue in the terminal to grant execute permissions to the UNIX executable file:</p>
+<pre><code class="language-shell">cd usr/local/bin/M9A
+<span class="hljs-meta prompt_"># </span><span class="language-bash">If you manually open the terminal <span class="hljs-keyword">in</span> the root directory of the decompressed software, you can skip the above line.</span>
+sudo chmod 777 MaaPiCli
+sudo ./MaaPiCli
+</code></pre>
+</li>
+<li>
+<p>If you want to use the graphical operation interface, please follow step 2 and execute the <code>MFAAvalonia</code> program.</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="linux" tabindex="-1">Linux</h4>
+<p>Same as MacOS. Download and grant execute permissions to use MaaPiCli.</p>
+<h4 id="android" tabindex="-1">Android</h4>
+<p><s>This version is not recommended for general users and has been removed from the release version.</s>
+If you are very familiar with mobile phone operation, you can refer to the <a href="https://github.com/MaaXYZ/MaaFramework/issues/475" target="_top" rel="noopener noreferrer">Usage Method</a> and the <a href="../develop/%E5%BC%80%E5%8F%91%E5%89%8D%E9%A1%BB%E7%9F%A5.html">Development Documentation</a> to install it yourself.</p>
+<h3 id="4.-extract-correctly" tabindex="-1">4. Extract Correctly</h3>
+<p>Extract the entire contents of the downloaded <code>.zip</code> file to a folder path that <strong>does not contain any non-English characters or spaces</strong>. For example, <code>D:\M9A</code> is good, but <code>D:\游戏 工具\M9A</code> is bad.</p>
+<h3 id="5.-confirm-emulator-support" tabindex="-1">5. Confirm Emulator Support</h3>
+<p>M9A relies on emulators. Supported emulators are generally listed in the <a href="https://maa.plus/docs/zh-cn/manual/device/" target="_top" rel="noopener noreferrer">List of Supported Emulators and Devices</a> documentation. Common choices include MuMu Player 12, LDPlayer 9, BlueStacks 5, NoxPlayer. Ensure your emulator is supported and properly configured.</p>
+<h3 id="6.-set-emulator-resolution-correctly" tabindex="-1">6. Set Emulator Resolution Correctly</h3>
+<p>The game must run at <strong>1280x720 resolution</strong> inside the emulator. Configure this in the emulator’s display settings. Incorrect resolution is a common cause of recognition failures.</p>
+<h3 id="7.-pip-settings-(windows)" tabindex="-1">7. Pip settings (Windows)</h3>
+<p>For Windows, we provide a Python environment for the convenience of most users. However, considering the minimum size of the installation package, we choose to use pip to install all dependencies when the program is first run locally or when the resource version is updated. The relevant configuration file is stored in <code>config/pip_config.json</code> (if it does not exist, it will be automatically created). The content is as follows:</p>
+<pre><code class="language-jsonc"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;enable_pip_update&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> # Whether to enable update pip<span class="hljs-punctuation">,</span> default <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> recommended to enable
+    <span class="hljs-attr">&quot;enable_pip_install&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> # Whether to enable pip installation<span class="hljs-punctuation">,</span> default <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> recommended to enable
+    <span class="hljs-attr">&quot;last_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;v3.2.0&quot;</span><span class="hljs-punctuation">,</span> # Read the version of interface.json when pip is installed<span class="hljs-punctuation">,</span> compare it with the version when it is started<span class="hljs-punctuation">,</span> and try to install it if it is different
+    <span class="hljs-attr">&quot;mirror&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://mirrors.ustc.edu.cn/pypi/simple&quot;</span> # Mirror source. The parameters after pip install -i can be filled in according to personal needs. Note that users outside the mainland should modify the value to <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="related-documentation" tabindex="-1">Related Documentation</h2>
+<ul>
+<li><a href="./connection.html">Connection Settings</a>: How to configure ADB and connect to the emulator.</li>
+<li><a href="./MaaPiCli.html">MaaPiCli Usage Instructions</a>——Introduces the usage of MaaPiCli<s>Translation Documentation</s></li>
+<li><a href="./feature.html">Feature Introduction</a>——Introduces the precautions for some features</li>
+<li><a href="./faq.html">FAQ</a>: Solutions to common problems.</li>
+<li><a href="./MirrorChyan.html">MirrorChyan Usage Instructions</a>——Introduces the usage of MirrorChyan</li>
+</ul>
+
+    </article>
+</body>
+
+</html>

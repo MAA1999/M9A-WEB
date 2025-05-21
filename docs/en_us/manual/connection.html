@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="connection-settings" tabindex="-1">Connection Settings</h1>
+<ul>
+<li><a href="#connection-settings">Connection Settings</a>
+<ul>
+<li><a href="#auto-detect">Auto Detect</a></li>
+<li><a href="#adb-path">ADB Path</a>
+<ul>
+<li><a href="#using-adb-provided-by-emulator">Using ADB Provided by Emulator</a></li>
+<li><a href="#using-adb-provided-by-google">Using ADB Provided by Google</a></li>
+</ul>
+</li>
+<li><a href="#connection-address">Connection Address</a>
+<ul>
+<li><a href="#emulator-documentation-and-reference-addresses">Emulator Documentation and Reference Addresses</a></li>
+<li><a href="#getting-multi-instance-ports">Getting Multi-Instance Ports</a></li>
+</ul>
+</li>
+<li><a href="#touch-control-mode">Touch Control Mode</a></li>
+<li><a href="#m9a-and-emulator-multi-instance">M9A and Emulator Multi-Instance</a></li>
+<li><a href="#mfawpfmfaavalonia-specific-settings">MFAWPF/MFAAvalonia Specific Settings</a>
+<ul>
+<li><a href="#adb-extra-parameters">ADB Extra Parameters</a></li>
+<li><a href="#emulator-additional-commands-optional">Emulator Additional Commands (Optional)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="auto-detect" tabindex="-1">Auto Detect</h2>
+<p>M9A can automatically detect and fill in the ADB path, connection address, and connection configuration based on the <strong>single currently running emulator</strong>.</p>
+<p>As of M9A v2.5.7, supported emulators and their connection addresses for auto-detection are:</p>
+<ul>
+<li>MuMu Player 12: <code>127.0.0.1:16384/16416/16448/16480/16512/16544/16576</code></li>
+<li>LDPlayer 9: <code>emulator-5554/5556/5558/5560</code>, <code>127.0.0.1:5555/5557/5559/5561</code></li>
+<li>BlueStacks 5: <code>127.0.0.1:5555/5556/5565/5575/5585/5595/5554</code></li>
+<li>NoxPlayer: <code>127.0.0.1:62001/59865</code></li>
+<li>MEmu Player (逍遥模拟器): <code>127.0.0.1:21503</code></li>
+</ul>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>The ‘/’ above means “or”. Please choose based on your actual situation, don’t write them all!</p>
+</div>
+<p>If detection fails, try launching M9A with UAC administrator privileges and detect again. If it still fails, please refer to the manual setup instructions below and confirm if your emulator and connection address are in the list above.</p>
+<h2 id="adb-path" tabindex="-1">ADB Path</h2>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>Auto-detection uses the emulator’s ADB, but sometimes it fails. Manual setup is then required.
+<code>Force Replace ADB</code> downloads Google’s ADB and replaces the existing one. Setting up Google’s ADB yourself provides a permanent solution.</p>
+</div>
+<h3 id="using-adb-provided-by-emulator" tabindex="-1">Using ADB Provided by Emulator</h3>
+<p>Navigate to the emulator’s installation path. On Windows, you can right-click the emulator process in Task Manager while it’s running and select <code>Open file location</code>.</p>
+<p>There should be an <code>.exe</code> file with <code>adb</code> in its name in the top-level or a sub-directory. You can use the search function, then select it.</p>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>Some examples:
+<code>adb.exe</code> <code>HD-adb.exe</code> <code>adb_server.exe</code> <code>nox_adb.exe</code></p>
+</div>
+<h3 id="using-adb-provided-by-google" tabindex="-1">Using ADB Provided by Google</h3>
+<p><a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip" target="_top" rel="noopener noreferrer">Click to download</a>, extract the archive, and then select <code>adb.exe</code> from within.</p>
+<p>It’s recommended to extract it directly into the M9A folder. This allows you to simply enter <code>.\platform-tools\adb.exe</code> as the ADB path, and it can be moved together with the M9A folder.</p>
+<h2 id="connection-address" tabindex="-1">Connection Address</h2>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p></p>
+<p>The connection address for an emulator running on the local machine should be <code>127.0.0.1:&lt;PortNumber&gt;</code> or <code>emulator-&lt;FourDigitNumber&gt;</code>.</p>
+</div>
+<h3 id="emulator-documentation-and-reference-addresses" tabindex="-1">Emulator Documentation and Reference Addresses</h3>
+<ul>
+<li><a href="https://support.bluestacks.com/hc/en-us/articles/360059480631-How-to-connect-to-BlueStacks-5-using-Android-Debug-Bridge-ADB-" target="_top" rel="noopener noreferrer">Bluestacks 5</a> <code>127.0.0.1:5555</code> (or check settings)</li>
+<li><a href="https://mumu.163.com/mac/function/20240126/40028_1134600.html" target="_top" rel="noopener noreferrer">MuMu Player Pro (Mac)</a> <code>127.0.0.1:16384</code></li>
+<li><a href="https://mumu.163.com/help/20230214/35047_1073151.html" target="_top" rel="noopener noreferrer">MuMu Player 12 (Windows)</a> <code>127.0.0.1:16384</code></li>
+<li><a href="https://www.ldplayer.net/blog/how-to-connect-ldplayer-with-adb.html" target="_top" rel="noopener noreferrer">LDPlayer 9</a> <code>emulator-5554</code> (or check multi-instance manager)</li>
+<li><a href="https://support.bignox.com/en/qt/ml" target="_top" rel="noopener noreferrer">NoxPlayer</a> <code>127.0.0.1:62001</code></li>
+<li><a href="https://bbs.xyaz.cn/forum.php?mod=viewthread&amp;tid=365537" target="_top" rel="noopener noreferrer">MEmu Player (逍遥模拟器)</a> <code>127.0.0.1:21503</code></li>
+</ul>
+<p>For other emulators, you can refer to <a href="https://www.cnblogs.com/zhaoqingqing/p/15238464.html" target="_top" rel="noopener noreferrer">Zhao Qingqing’s blog post</a> (Chinese).</p>
+<h3 id="getting-multi-instance-ports" tabindex="-1">Getting Multi-Instance Ports</h3>
+<ul>
+<li>MuMu 12 Multi-instance manager shows the ports of running instances in the top right corner.</li>
+<li>Bluestacks 5 emulator settings allow viewing the current instance’s port.</li>
+<li>LDPlayer 9 Multi-instance manager shows the ADB address/port.</li>
+<li><em>To be supplemented</em></li>
+</ul>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>Alternative Methods</p>
+<ul>
+<li>
+<p>Method 1: Use ADB command to view emulator ports</p>
+<ol>
+<li>Start <strong>one</strong> emulator and ensure no other Android devices are connected to the computer.</li>
+<li>Open a terminal in the folder containing the ADB executable.</li>
+<li>Execute the following command.</li>
+</ol>
+<pre><code class="language-sh"><span class="hljs-comment"># Windows Command Prompt</span>
+adb devices
+<span class="hljs-comment"># Windows PowerShell</span>
+.\adb devices
+</code></pre>
+<p>Example output:</p>
+<pre><code class="language-text">List of devices attached
+127.0.0.1:&lt;PortNumber&gt;   device
+emulator-&lt;FourDigitNumber&gt;  device
+</code></pre>
+<p>Use <code>127.0.0.1:&lt;PortNumber&gt;</code> or <code>emulator-&lt;FourDigitNumber&gt;</code> as the connection address.</p>
+</li>
+<li>
+<p>Method 2: Find established ADB connections (Windows)</p>
+<ol>
+<li>Perform Method 1.</li>
+<li>Press <code>Win+S</code>, type <code>Resource Monitor</code>, and open it.</li>
+<li>Switch to the <code>Network</code> tab. In the <code>Listening Ports</code> section, find the emulator process name (e.g., <code>HD-Player.exe</code>) in the Image column.</li>
+<li>Note down all listening ports for the emulator process.</li>
+<li>In the <code>TCP Connections</code> section, find <code>adb.exe</code> in the Image column. The port listed in the <code>Remote Port</code> column that matches one of the emulator’s listening ports is the emulator’s debug port.</li>
+</ol>
+</li>
+</ul>
+</div>
+<h2 id="touch-control-mode" tabindex="-1">Touch Control Mode</h2>
+<ol>
+<li><a href="https://github.com/DeviceFarmer/minitouch" target="_top" rel="noopener noreferrer">Minitouch</a>: An Android touch event injector written in C. It operates <code>evdev</code> devices and provides a socket interface for external programs to trigger touch events and gestures. Starting from Android 10, Minitouch is no longer available when SELinux is in <code>Enforcing</code> mode.<sup><a href="https://github.com/DeviceFarmer/minitouch?tab=readme-ov-file#for-android-10-and-up" target="_top" rel="noopener noreferrer">Source</a></sup></li>
+<li><a href="https://github.com/MaaAssistantArknights/MaaTouch" target="_top" rel="noopener noreferrer">MaaTouch</a>: A reimplementation of Minitouch in Java by MAA, using the native Android <code>InputDevice</code> and adding extra features. Usability on higher Android versions is yet to be tested. <s>Help us test it</s></li>
+<li>Adb Input: Directly calls ADB to use Android’s <code>input</code> command for touch operations. It offers the highest compatibility but is the slowest.</li>
+</ol>
+<h2 id="m9a-and-emulator-multi-instance" tabindex="-1">M9A and Emulator Multi-Instance</h2>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>If you need to run multiple emulator instances simultaneously, you can copy the M9A folder multiple times. Use <strong>different M9A instances</strong>, the <strong>same adb.exe</strong>, and <strong>different connection addresses</strong> to connect to each emulator instance.</p>
+</div>
+<h2 id="mfawpf%2Fmfaavalonia-specific-settings" tabindex="-1">MFAWPF/MFAAvalonia Specific Settings</h2>
+<h3 id="adb-extra-parameters" tabindex="-1">ADB Extra Parameters</h3>
+<p><strong>Generally, you don’t need to modify this; keep it as <code>{}</code>.</strong></p>
+<p>This corresponds to the <code>&quot;AdbDevice&quot;</code> <code>&quot;Config&quot;</code> field value in <code>debug/config.json</code>,
+e.g., <code>{&quot;extras&quot;:{&quot;mumu&quot;:{&quot;enable&quot;:true,&quot;index&quot;:0,&quot;path&quot;:&quot;D:/Program Files/Netease/MuMu Player 12&quot;}}}</code> or <code>{&quot;extras&quot;:{&quot;ld&quot;:{&quot;enable&quot;:true,&quot;index&quot;:1,&quot;path&quot;:&quot;C:/leidian/LDPlayer9&quot;,&quot;pid&quot;:7524}}}</code>.</p>
+<h3 id="emulator-additional-commands-(optional)" tabindex="-1">Emulator Additional Commands (Optional)</h3>
+<p>This parameter is used for automatically starting/stopping the emulator. You can find it in Settings -&gt; Startup Settings. Configure it according to your needs.</p>
+<table>
+<thead>
+<tr>
+<th>Brand</th>
+<th>Launch Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MuMu</td>
+<td><code>-v &lt;instance_index&gt;</code></td>
+</tr>
+<tr>
+<td>LDPlayer</td>
+<td><code>index=&lt;instance_index&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p><code>&lt;instance_index&gt;</code> should be replaced entirely when filling it in (index starts from 0). Pay attention to spaces.</p>
+</div>
+
+    </article>
+</body>
+
+</html>

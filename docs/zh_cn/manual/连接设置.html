@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE" tabindex="-1">连接设置</h1>
+<ul>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE">连接设置</a>
+<ul>
+<li><a href="#%E8%87%AA%E5%8A%A8%E6%A3%80%E6%B5%8B">自动检测</a></li>
+<li><a href="#adb-%E8%B7%AF%E5%BE%84">ADB 路径</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8F%90%E4%BE%9B%E7%9A%84-adb">使用模拟器提供的 ADB</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%B0%B7%E6%AD%8C%E6%8F%90%E4%BE%9B%E7%9A%84-adb">使用谷歌提供的 ADB</a></li>
+</ul>
+</li>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E5%9C%B0%E5%9D%80">连接地址</a>
+<ul>
+<li><a href="#%E6%A8%A1%E6%8B%9F%E5%99%A8%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3%E5%8F%8A%E5%8F%82%E8%80%83%E5%9C%B0%E5%9D%80">模拟器相关文档及参考地址</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%A4%9A%E5%BC%80%E7%AB%AF%E5%8F%A3">获取多开端口</a></li>
+</ul>
+</li>
+<li><a href="#%E8%A7%A6%E6%8E%A7%E6%A8%A1%E5%BC%8F">触控模式</a></li>
+<li><a href="#m9a-%E5%92%8C%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%A4%9A%E5%BC%80">M9A 和模拟器多开</a></li>
+<li><a href="#mfawpfmfaavalonia-%E7%89%B9%E6%AE%8A%E8%AE%BE%E7%BD%AE">MFAWPF/MFAAvalonia 特殊设置</a>
+<ul>
+<li><a href="#adb-%E9%A2%9D%E5%A4%96%E5%8F%82%E6%95%B0">adb 额外参数</a></li>
+<li><a href="#%E6%A8%A1%E6%8B%9F%E5%99%A8%E9%99%84%E5%8A%A0%E5%91%BD%E4%BB%A4%E5%8F%AF%E9%80%89">模拟器附加命令（可选）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="%E8%87%AA%E5%8A%A8%E6%A3%80%E6%B5%8B" tabindex="-1">自动检测</h2>
+<p>M9A 可以通过当前<strong>正在运行的单个模拟器</strong>自动检测并填充 ADB 路径、连接地址和连接配置。</p>
+<p>截止至 M9A v2.5.7 支持检测的模拟器及连接地址如下：</p>
+<ul>
+<li>MuMu 模拟器 12：<code>127.0.0.1:16384/16416/16448/16480/16512/16544/16576</code></li>
+<li>雷电模拟器 9：<code>emulator-5554/5556/5558/5560</code>, <code>127.0.0.1:5555/5557/5559/5561</code></li>
+<li>BlueStacks 5：<code>127.0.0.1:5555/5556/5565/5575/5585/5595/5554</code></li>
+<li>夜神模拟器：<code>127.0.0.1:62001/59865</code></li>
+<li>逍遥模拟器：<code>127.0.0.1:21503</code></li>
+</ul>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>上面的 ‘/’ 是“或者”的意思，请根据自己实际情况挑选，不要全写上去了！</p>
+</div>
+<p>若检测失败，请尝试使用 UAC 管理员权限启动 M9A 并再次检测。若仍失败，则请参考下文手动设置，并确认模拟器和连接地址是否包含在上述列表中。</p>
+<h2 id="adb-%E8%B7%AF%E5%BE%84" tabindex="-1">ADB 路径</h2>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>自动检测使用的是模拟器的 ADB，但有时自动检测会出现问题，此时就需要手动设置。<br>
+<code>强制替换 ADB</code> 是下载谷歌提供的 ADB 后再进行替换，如果自己设置谷歌的 ADB 即可一劳永逸。</p>
+</div>
+<h3 id="%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8F%90%E4%BE%9B%E7%9A%84-adb" tabindex="-1">使用模拟器提供的 ADB</h3>
+<p>前往模拟器安装路径，Windows 可在模拟器运行时在任务管理器中右键进程点击 <code>打开文件所在的位置</code>。</p>
+<p>顶层或下层目录中应该会有一个名字中带有 <code>adb</code> 的 exe 文件，可以使用搜索功能，然后选择。</p>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>一些例子<br>
+<code>adb.exe</code> <code>HD-adb.exe</code> <code>adb_server.exe</code> <code>nox_adb.exe</code></p>
+</div>
+<h3 id="%E4%BD%BF%E7%94%A8%E8%B0%B7%E6%AD%8C%E6%8F%90%E4%BE%9B%E7%9A%84-adb" tabindex="-1">使用谷歌提供的 ADB</h3>
+<p><a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip" target="_top" rel="noopener noreferrer">点击下载</a>后解压，然后选择其中的 <code>adb.exe</code>。</p>
+<p>推荐直接解压到 M9A 文件夹下，这样可以直接在 ADB 路径中填写 <code>.\platform-tools\adb.exe</code>，也可以随着 M9A 文件夹一起移动。</p>
+<h2 id="%E8%BF%9E%E6%8E%A5%E5%9C%B0%E5%9D%80" tabindex="-1">连接地址</h2>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p></p>
+<p>运行在本机的模拟器连接地址应该是 <code>127.0.0.1:&lt;端口号&gt;</code> 或 <code>emulator-&lt;四位数字&gt;</code>。</p>
+</div>
+<h3 id="%E6%A8%A1%E6%8B%9F%E5%99%A8%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3%E5%8F%8A%E5%8F%82%E8%80%83%E5%9C%B0%E5%9D%80" tabindex="-1">模拟器相关文档及参考地址</h3>
+<ul>
+<li><a href="https://support.bluestacks.com/hc/zh-tw/articles/360061342631-%E5%A6%82%E4%BD%95%E5%B0%87%E6%82%A8%E7%9A%84%E6%87%89%E7%94%A8%E5%BE%9EBlueStacks-4%E8%BD%89%E7%A7%BB%E5%88%B0BlueStacks-5#%E2%80%9C2%E2%80%9D" target="_top" rel="noopener noreferrer">Bluestacks 5</a> <code>127.0.0.1:5555</code></li>
+<li><a href="https://mumu.163.com/mac/function/20240126/40028_1134600.html" target="_top" rel="noopener noreferrer">MuMu 模拟器 Pro</a> <code>127.0.0.1:16384</code></li>
+<li><a href="https://mumu.163.com/help/20230214/35047_1073151.html" target="_top" rel="noopener noreferrer">MuMu 模拟器 12</a> <code>127.0.0.1:16384</code></li>
+<li><a href="https://help.ldmnq.com/docs/LD9adbserver" target="_top" rel="noopener noreferrer">雷电模拟器 9</a> <code>emulator-5554</code></li>
+<li><a href="https://support.yeshen.com/zh-CN/qt/ml" target="_top" rel="noopener noreferrer">夜神模拟器</a> <code>127.0.0.1:62001</code></li>
+<li><a href="https://bbs.xyaz.cn/forum.php?mod=viewthread&amp;tid=365537" target="_top" rel="noopener noreferrer">逍遥模拟器</a> <code>127.0.0.1:21503</code></li>
+</ul>
+<p>其他模拟器可参考 <a href="https://www.cnblogs.com/zhaoqingqing/p/15238464.html" target="_top" rel="noopener noreferrer">赵青青的博客</a>。</p>
+<h3 id="%E8%8E%B7%E5%8F%96%E5%A4%9A%E5%BC%80%E7%AB%AF%E5%8F%A3" tabindex="-1">获取多开端口</h3>
+<ul>
+<li>MuMu 12 多开器右上角可查看正在运行的多开端口。</li>
+<li>Bluestacks 5 模拟器设置内可查看当前的多开端口。</li>
+<li><em>待补充</em></li>
+</ul>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>备选方案</p>
+<ul>
+<li>
+<p>方案 1 : 使用 ADB 命令查看模拟器端口</p>
+<ol>
+<li>启动<strong>一个</strong>模拟器，并确保没有其他安卓设备连接在此计算机上。</li>
+<li>在存放有 ADB 可执行文件的文件夹中启动终端。</li>
+<li>执行以下命令。</li>
+</ol>
+<pre><code class="language-sh"><span class="hljs-comment"># Windows 命令提示符  </span>
+adb devices  
+<span class="hljs-comment"># Windows PowerShell  </span>
+.\adb devices  
+</code></pre>
+<p>以下为输出内容的例子：</p>
+<pre><code class="language-text">List of devices attached  
+127.0.0.1:&lt;端口号&gt;   device  
+emulator-&lt;四位数字&gt;  device  
+</code></pre>
+<p>使用 <code>127.0.0.1:&lt;端口&gt;</code> 或 <code>emulator-&lt;四位数字&gt;</code> 作为连接地址。</p>
+</li>
+<li>
+<p>方案 2 : 查找已建立的 ADB 连接</p>
+<ol>
+<li>执行方案 1。</li>
+<li>按 <code>徽标键+S</code> 打开搜索栏，输入 <code>资源监视器</code> 并打开。</li>
+<li>切换到 <code>网络</code> 选项卡，在 <code>侦听端口</code> 的名称列中查找模拟器进程名，如 <code>HD-Player.exe</code>。</li>
+<li>记录模拟器进程的所有侦听端口。</li>
+<li>在 <code>TCP 连接</code> 的名称列中查找 <code>adb.exe</code>，在远程端口列中与模拟器侦听端口一致的端口即为模拟器调试端口。</li>
+</ol>
+</li>
+</ul>
+</div>
+<h2 id="%E8%A7%A6%E6%8E%A7%E6%A8%A1%E5%BC%8F" tabindex="-1">触控模式</h2>
+<ol>
+<li><a href="https://github.com/DeviceFarmer/minitouch" target="_top" rel="noopener noreferrer">Minitouch</a>：使用 C 编写的 Android 触控事件器，操作 <code>evdev</code> 设备，提供 Socket 接口供外部程序触发触控事件和手势。从 Android 10 开始，Minitouch 在 SELinux 为 <code>Enforcing</code> 模式时不再可用。<sup><a href="https://github.com/DeviceFarmer/minitouch?tab=readme-ov-file#for-android-10-and-up" target="_top" rel="noopener noreferrer">源</a></sup></li>
+<li><a href="https://github.com/MaaAssistantArknights/MaaTouch" target="_top" rel="noopener noreferrer">MaaTouch</a>：由 MAA 基于 Java 对 Minitouch 的重新实现，使用安卓原生的 <code>InputDevice</code>，并添加了额外特性。高版本 Android 可用性尚待测试。<s>帮我们做做测试</s></li>
+<li>Adb Input：直接调用 ADB 使用安卓的 <code>input</code> 命令进行触控操作，兼容性最强，速度最慢。</li>
+</ol>
+<h2 id="m9a-%E5%92%8C%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%A4%9A%E5%BC%80" tabindex="-1">M9A 和模拟器多开</h2>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>若需要多开模拟器同时操作，可将 M9A 文件夹复制多份，使用 <strong>不同的 M9A</strong>、<strong>同一个 adb.exe</strong>、<strong>不同的连接地址</strong> 来进行连接。</p>
+</div>
+<h2 id="mfawpf%2Fmfaavalonia-%E7%89%B9%E6%AE%8A%E8%AE%BE%E7%BD%AE" tabindex="-1">MFAWPF/MFAAvalonia 特殊设置</h2>
+<h3 id="adb-%E9%A2%9D%E5%A4%96%E5%8F%82%E6%95%B0" tabindex="-1">adb 额外参数</h3>
+<p><strong>一般来说你不需要修改，保持 <code>{}</code> 即可</strong>。</p>
+<p>对应 <code>debug/config.json</code> 中 <code>&quot;AdbDevice&quot;</code> <code>&quot;Config&quot;</code> 字段的值,<br>
+形如 <code>{&quot;extras&quot;:{&quot;mumu&quot;:{&quot;enable&quot;:true,&quot;index&quot;:0,&quot;path&quot;:&quot;D:/Program Files/Netease/MuMu Player 12&quot;}}}</code> 以及 <code>{&quot;extras&quot;:{&quot;ld&quot;:{&quot;enable&quot;:true,&quot;index&quot;:1,&quot;path&quot;:&quot;C:/leidian/LDPlayer9&quot;,&quot;pid&quot;:7524}}}</code>。</p>
+<h3 id="%E6%A8%A1%E6%8B%9F%E5%99%A8%E9%99%84%E5%8A%A0%E5%91%BD%E4%BB%A4%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89" tabindex="-1">模拟器附加命令（可选）</h3>
+<p>这个参数是自动启动/关闭模拟器时需要用到的，点击设置——启动设置中可以看到，依据个人需求设置。</p>
+<table>
+<thead>
+<tr>
+<th>品牌</th>
+<th>启动参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MuMu</td>
+<td>-v &lt;多开号(从0开始)&gt;</td>
+</tr>
+<tr>
+<td>雷电</td>
+<td>index=&lt;多开号(从0开始)&gt;</td>
+</tr>
+</tbody>
+</table>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p><code>&lt;多开号&gt;</code> 在填写时需要被整体替换，注意空格。</p>
+</div>
+
+    </article>
+</body>
+
+</html>

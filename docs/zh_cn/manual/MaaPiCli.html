@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="maapicli-%E6%93%8D%E4%BD%9C%E8%AF%B4%E6%98%8E~~%EF%BC%88%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3%EF%BC%89~~" tabindex="-1">MaaPiCli 操作说明~~（翻译文档）~~</h1>
+<ul>
+<li><a href="#maapicli-%E6%93%8D%E4%BD%9C%E8%AF%B4%E6%98%8E%E7%BF%BB%E8%AF%91%E6%96%87%E6%A1%A3">MaaPiCli 操作说明~~（翻译文档）~~</a>
+<ul>
+<li><a href="#%E9%80%89%E6%8B%A9adb">选择ADB</a></li>
+<li><a href="#%E9%80%89%E6%8B%A9%E8%AE%BE%E5%A4%87">选择设备</a></li>
+<li><a href="#%E9%80%89%E6%8B%A9%E8%B5%84%E6%BA%90">选择资源</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E4%BB%BB%E5%8A%A1">添加任务</a></li>
+<li><a href="#%E5%8A%9F%E8%83%BD%E8%8F%9C%E5%8D%95">功能菜单</a></li>
+<li><a href="#%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8">进阶使用</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="%E9%80%89%E6%8B%A9adb" tabindex="-1">选择ADB</h2>
+<p>当您初次下载，没有配置时会出现下面界面：</p>
+<pre><code class="language-plaintext">Welcome to use Maa Project Interface CLI!
+MaaFramework: v4.0.0
+
+Version: v0.0.1
+
+### Select ADB ###
+
+        1. Auto detect
+        2. Manual input
+
+Please input [1-2]:
+</code></pre>
+<p>这里 Version 后跟着的是当前资源版本。<br>
+<code>### Select ADB ###</code> 翻译过来是当前操作为 <code>选择 ADB（Android Debug Bridge，这里一般用来操作模拟器）</code>。<br>
+后面列出选项：</p>
+<ol>
+<li>自动检测（推荐，在目标模拟器启动时选择）</li>
+<li>手动输入（参考<a href="%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE.html#adb-%E8%B7%AF%E5%BE%84">ADB 路径</a>和<a href="%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE.html#%E8%BF%9E%E6%8E%A5%E5%9C%B0%E5%9D%80">ADB 连接地址</a>填写）</li>
+</ol>
+<p>后面 <code>Please input [1-2]:</code> 翻译过来是 <code>请输入 [选项范围]</code>，请根据需要选择。</p>
+<p>这里我们输入 1 后回车，进入下一步。</p>
+<h2 id="%E9%80%89%E6%8B%A9%E8%AE%BE%E5%A4%87" tabindex="-1">选择设备</h2>
+<p>紧跟上一步，选择自动检测可到此步骤，显示为：</p>
+<pre><code class="language-plaintext">Finding device...
+
+## Select Device ##
+
+        1. MuMuPlayer12
+                D:/Program Files/Netease/MuMu Player 12/shell/adb.exe
+                127.0.0.1:16384
+
+Please input [1-1]:
+</code></pre>
+<p>这里因为只开了一个模拟器，只显示一条选项，直接输入 1 后回车，完成此步骤</p>
+<h2 id="%E9%80%89%E6%8B%A9%E8%B5%84%E6%BA%90" tabindex="-1">选择资源</h2>
+<pre><code class="language-plaintext">### Select resource ###
+
+        1. 官服
+        2. B 服
+        3. 国际服（EN）
+        4. 国际服（JP）
+
+Please input [1-4]:
+</code></pre>
+<p>这里根据需要的资源进行选择，主要和 <code>启动游戏</code>、<code>银行购买</code> 和 <code>活动刷取</code> 等各个服务器有所区别的功能有关。</p>
+<h2 id="%E6%B7%BB%E5%8A%A0%E4%BB%BB%E5%8A%A1" tabindex="-1">添加任务</h2>
+<p>这里是添加任务，显示如下：</p>
+<pre><code class="language-plaintext">### Add task ###
+
+        1. 启动游戏
+        2. 收取荒原
+        3. 每日心相（意志解析）
+        4. 常规作战
+        5. 活动刷取
+        6. 自动深眠
+        7. 自动醒梦
+        8. 银行购物
+        9. 领取奖励
+        10. 轶事派遣
+        11. 雨中悬想：迷思海
+        12. 切换账号
+        13. 关闭游戏
+        14. 局外演绎：黄昏的音序
+        15. (测试中)推图模式
+
+Please input multiple [1-15]:
+</code></pre>
+<p>首先显示的总菜单，根据需求选择，这里可以同时选多个功能，像：</p>
+<pre><code class="language-plaintext">Please input multiple [1-15]: 1 2 3 4 5 6 7 8 9 10
+</code></pre>
+<p>后面便会显示每个任务的选项供于选择。</p>
+<p>下面以单选常规作战为例，选择后显示：</p>
+<pre><code class="language-plaintext">## Input option of &quot;作战关卡&quot; for &quot;常规作战&quot; ##
+
+        1. ---按关卡综合效率排序，刷取推荐来源：必要的记录https://www.kdocs.cn/l/cd5MWeCl5bKw ---
+        2. 啮咬盒(床下怪物)：7-26 厄险（效率1）
+        3. 啮咬盒(银光子弹)：5-19 厄险（效率2）
+        4. 啮咬盒：9-3 厄险（效率3）
+        5. 盐封曼德拉(狂人絮语)：3-13 厄险（效率1）
+        6. 盐封曼德拉(不腐猴爪)：8-17 厄险（效率2）
+        7. 盐封曼德拉：9-16 厄险（效率3）
+        8. 双头形骨架：4-20 厄险（效率1）
+        9. 双头形骨架：9-13 厄险（效率2）
+        ...
+
+Please input [1-42]:
+</code></pre>
+<p><code>## Input option of &quot;作战关卡&quot; for &quot;常规作战&quot; ##</code> 翻译过来指 <code>输入“常规作战”的“作战关卡”的选项</code>，根据需要选择即可。</p>
+<h2 id="%E5%8A%9F%E8%83%BD%E8%8F%9C%E5%8D%95" tabindex="-1">功能菜单</h2>
+<p>初次启动配置完，或者之前配置过的，便会到当前界面，内容如下：</p>
+<pre><code class="language-plaintext">Controller:
+
+        ADB 默认方式
+                D:/Program Files/Netease/MuMu Player 12/shell/adb.exe
+                127.0.0.1:16384
+
+Resource:
+
+        官服
+
+Tasks:
+
+        - 常规作战
+                - 作战关卡: 啮咬盒(床下怪物)：7-26 厄险（效率1）
+                - 复现次数: x4
+                - 刷完全部体力: Yes
+                - 吃全部临期糖: Yes
+
+### Select action ###
+
+        1. Switch controller
+        2. Switch resource
+        3. Add task
+        4. Move task
+        5. Delete task
+        6. Run tasks
+        7. Exit
+
+Please input [1-7]:
+</code></pre>
+<p>展示了 Controller（当前控制器，于选择设备设置）、Resource（当前资源）、Tasks（当前待执行任务列表）。<br>
+并给出功能菜单（Select action），依次为：</p>
+<ol>
+<li>更换控制器</li>
+<li>更换资源</li>
+<li>添加任务</li>
+<li>移动任务</li>
+<li>删除任务</li>
+<li>运行任务</li>
+<li>退出</li>
+</ol>
+<p>确定 Tasks 部分配置完成便可在输入 6 并回车后运行任务。</p>
+<h2 id="%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8" tabindex="-1">进阶使用</h2>
+<ul>
+<li>在命令行中添加 <code>-d</code> 参数运行即可跳过交互直接运行任务，如 <code>./MaaPiCli.exe -d</code></li>
+<li>2.0 版本已支持 mumu 后台保活，会在 run task 时获取 mumu 最前台的 tab，并始终使用这个 tab（即使之后被切到后台了）</li>
+</ul>
+
+    </article>
+</body>
+
+</html>

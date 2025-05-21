@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84" tabindex="-1">项目结构</h1>
+<ul>
+<li><a href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">项目结构</a>
+<ul>
+<li><a href="#github"><code>.github</code></a>
+<ul>
+<li><a href="#githubissue_template"><code>.github/ISSUE_TEMPLATE</code></a></li>
+<li><a href="#githubworkflows"><code>.github/workflows</code></a></li>
+<li><a href="#githubclifftoml"><code>.github/cliff.toml</code></a></li>
+</ul>
+</li>
+<li><a href="#vscode"><code>.vscode</code></a></li>
+<li><a href="#agent"><code>agent</code></a>
+<ul>
+<li><a href="#agentcustom"><code>agent/custom</code></a>
+<ul>
+<li><a href="#agentcustomaction"><code>agent/custom/action</code></a></li>
+<li><a href="#agentcustomreco"><code>agent/custom/reco</code></a></li>
+</ul>
+</li>
+<li><a href="#agentutils"><code>agent/utils</code></a></li>
+<li><a href="#agentmainpy"><code>agent/main.py</code></a></li>
+</ul>
+</li>
+<li><a href="#assets"><code>assets</code></a>
+<ul>
+<li><a href="#assetsmaacommonassets"><code>assets/MaaCommonAssets</code></a></li>
+<li><a href="#assetsresource"><code>assets/resource</code></a>
+<ul>
+<li><a href="#assetsresourcebase"><code>assets/resource/base</code></a>
+<ul>
+<li><a href="#assetsresourcebaseimage"><code>assets/resource/base/image</code></a></li>
+<li><a href="#assetsresourcebasemodel"><code>assets/resource/base/model</code></a></li>
+<li><a href="#assetsresourcebasepipeline"><code>assets/resource/base/pipeline</code></a></li>
+<li><a href="#assetsresourcebasedefault_pipelinejson"><code>assets/resource/base/default_pipeline.json</code></a></li>
+</ul>
+</li>
+<li><a href="#assetsresourcebilibili"><code>assets/resource/bilibili</code></a></li>
+<li><a href="#assetsresourceglobal_en"><code>assets/resource/global_en</code></a></li>
+<li><a href="#assetsresourceglobal_jp"><code>assets/resource/global_jp</code></a></li>
+<li><a href="#assetsresourcecnjson"><code>assets/resource/cn.json</code></a></li>
+<li><a href="#assetsresourceenjson"><code>assets/resource/en.json</code></a></li>
+<li><a href="#assetsresourcejpjson"><code>assets/resource/jp.json</code></a></li>
+</ul>
+</li>
+<li><a href="#assetsinterfacejson"><code>assets/interface.json</code></a></li>
+</ul>
+</li>
+<li><a href="#deps"><code>deps</code></a></li>
+<li><a href="#docs"><code>docs</code></a>
+<ul>
+<li><a href="#docszh_cn"><code>docs/zh_cn</code></a>
+<ul>
+<li><a href="#docszh_cndevelop"><code>docs/zh_cn/develop</code></a></li>
+<li><a href="#docszh_cnmanual"><code>docs/zh_cn/manual</code></a></li>
+</ul>
+</li>
+<li><a href="#docsen_us"><code>docs/en_us</code></a>
+<ul>
+<li><a href="#docsen_usdevelop"><code>docs/en_us/develop</code></a></li>
+<li><a href="#docsen_usmanual"><code>docs/en_us/manual</code></a></li>
+</ul>
+</li>
+<li><a href="#docsmarkdownlintyaml"><code>docs/.markdownlint.yaml</code></a></li>
+</ul>
+</li>
+<li><a href="#tools"><code>tools</code></a>
+<ul>
+<li><a href="#toolsci"><code>tools/ci</code></a></li>
+<li><a href="#toolsconfigurepy"><code>tools/configure.py</code></a></li>
+<li><a href="#toolsinstallpy"><code>tools/install.py</code></a></li>
+</ul>
+</li>
+<li><a href="#gitignore"><code>.gitignore</code></a></li>
+<li><a href="#gitmodules"><code>.gitmodules</code></a></li>
+<li><a href="#pre-commit-configyaml"><code>.pre-commit-config.yaml</code></a></li>
+<li><a href="#prettierrc"><code>.prettierrc</code></a></li>
+<li><a href="#license"><code>LICENSE</code></a></li>
+<li><a href="#package-lockjsonpackagejson"><code>package-lock.json&amp;package.json</code></a></li>
+<li><a href="#readmemd"><code>README.html</code></a></li>
+<li><a href="#requirementstxt"><code>requirements.txt</code></a></li>
+</ul>
+</li>
+</ul>
+<p>以下为本项目项目结构及说明。</p>
+<h2 id=".github" tabindex="-1"><code>.github</code></h2>
+<p>github 配置。</p>
+<h3 id=".github%2Fissue_template" tabindex="-1"><code>.github/ISSUE_TEMPLATE</code></h3>
+<p>github issue 模板。</p>
+<h3 id=".github%2Fworkflows" tabindex="-1"><code>.github/workflows</code></h3>
+<p>github 工作流配置。</p>
+<h3 id=".github%2Fcliff.toml" tabindex="-1"><code>.github/cliff.toml</code></h3>
+<p>cliff 配置。（用于自动生成 release note）</p>
+<h2 id=".vscode" tabindex="-1"><code>.vscode</code></h2>
+<p>vscode 配置。</p>
+<h2 id="agent" tabindex="-1"><code>agent</code></h2>
+<p>存放 agent 相关代码。</p>
+<h3 id="agent%2Fcustom" tabindex="-1"><code>agent/custom</code></h3>
+<p>自定义动作/识别。</p>
+<h4 id="agent%2Fcustom%2Faction" tabindex="-1"><code>agent/custom/action</code></h4>
+<p>自定义动作。</p>
+<h4 id="agent%2Fcustom%2Freco" tabindex="-1"><code>agent/custom/reco</code></h4>
+<p>自定义识别。</p>
+<h3 id="agent%2Futils" tabindex="-1"><code>agent/utils</code></h3>
+<p>工具函数。</p>
+<h3 id="agent%2Fmain.py" tabindex="-1"><code>agent/main.py</code></h3>
+<p>agent 启动前流程以及启动 AgentServer 。</p>
+<h2 id="assets" tabindex="-1"><code>assets</code></h2>
+<p>存放项目资源文件。</p>
+<h3 id="assets%2Fmaacommonassets" tabindex="-1"><code>assets/MaaCommonAssets</code></h3>
+<p>存放 Maa 通用资源，如 OCR 模型。</p>
+<h3 id="assets%2Fresource" tabindex="-1"><code>assets/resource</code></h3>
+<p>存放项目资源文件。</p>
+<h4 id="assets%2Fresource%2Fbase" tabindex="-1"><code>assets/resource/base</code></h4>
+<p>存放官服资源，且为其他服务器资源的覆盖基础。</p>
+<h5 id="assets%2Fresource%2Fbase%2Fimage" tabindex="-1"><code>assets/resource/base/image</code></h5>
+<p>存放模板图片。</p>
+<h5 id="assets%2Fresource%2Fbase%2Fmodel" tabindex="-1"><code>assets/resource/base/model</code></h5>
+<p>存放 OCR 模型、神经网络分类模型、神经网络检测模型。<a href="https://github.com/MaaXYZ/MaaNeuralNetworkCookbook" target="_top" rel="noopener noreferrer">烹饪指南</a></p>
+<h5 id="assets%2Fresource%2Fbase%2Fpipeline" tabindex="-1"><code>assets/resource/base/pipeline</code></h5>
+<p>json 文件，用于描述任务流水线，参考 <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.1-%E4%BB%BB%E5%8A%A1%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE.html" target="_top" rel="noopener noreferrer">任务流水线协议</a> 编写。</p>
+<h5 id="assets%2Fresource%2Fbase%2Fdefault_pipeline.json" tabindex="-1"><code>assets/resource/base/default_pipeline.json</code></h5>
+<p>设置 pipeline 中默认属性，参考 <a href="https://github.com/MaaXYZ/MaaFramework/blob/main/sample/resource/default_pipeline.json" target="_top" rel="noopener noreferrer">default_pipeline.json</a>。</p>
+<h4 id="assets%2Fresource%2Fbilibili" tabindex="-1"><code>assets/resource/bilibili</code></h4>
+<p>存放B服资源，覆盖官服资源。</p>
+<h4 id="assets%2Fresource%2Fglobal_en" tabindex="-1"><code>assets/resource/global_en</code></h4>
+<p>存放欧美服资源，依次覆盖官服、日服资源。</p>
+<h4 id="assets%2Fresource%2Fglobal_jp" tabindex="-1"><code>assets/resource/global_jp</code></h4>
+<p>存放日服资源，覆盖官方资源。</p>
+<h4 id="assets%2Fresource%2Fcn.json" tabindex="-1"><code>assets/resource/cn.json</code></h4>
+<p>存放 cn 服活动信息。</p>
+<h4 id="assets%2Fresource%2Fen.json" tabindex="-1"><code>assets/resource/en.json</code></h4>
+<p>存放 en 服活动信息。</p>
+<h4 id="assets%2Fresource%2Fjp.json" tabindex="-1"><code>assets/resource/jp.json</code></h4>
+<p>存放 jp 服活动信息。</p>
+<h3 id="assets%2Finterface.json" tabindex="-1"><code>assets/interface.json</code></h3>
+<p>MaaFramework 的一个标准化的项目结构声明，遵循<a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.2-ProjectInterface%E5%8D%8F%E8%AE%AE.html" target="_top" rel="noopener noreferrer">Project Interface 协议</a>。</p>
+<h2 id="deps" tabindex="-1"><code>deps</code></h2>
+<p>存放依赖。（将 MaaFramework Release 包下载后解压于此）</p>
+<h2 id="docs" tabindex="-1"><code>docs</code></h2>
+<p>用户手册、开发文档。</p>
+<h3 id="docs%2Fzh_cn" tabindex="-1"><code>docs/zh_cn</code></h3>
+<p>中文文档。</p>
+<h4 id="docs%2Fzh_cn%2Fdevelop" tabindex="-1"><code>docs/zh_cn/develop</code></h4>
+<p>开发文档。</p>
+<h4 id="docs%2Fzh_cn%2Fmanual" tabindex="-1"><code>docs/zh_cn/manual</code></h4>
+<p>用户手册。</p>
+<h3 id="docs%2Fen_us" tabindex="-1"><code>docs/en_us</code></h3>
+<p>英文文档。</p>
+<h4 id="docs%2Fen_us%2Fdevelop" tabindex="-1"><code>docs/en_us/develop</code></h4>
+<p>英文开发文档。</p>
+<h4 id="docs%2Fen_us%2Fmanual" tabindex="-1"><code>docs/en_us/manual</code></h4>
+<p>英文用户手册。</p>
+<h3 id="docs%2F.markdownlint.yaml" tabindex="-1"><code>docs/.markdownlint.yaml</code></h3>
+<p>markdownlint 配置。</p>
+<h2 id="tools" tabindex="-1"><code>tools</code></h2>
+<p>项目工具。</p>
+<h3 id="tools%2Fci" tabindex="-1"><code>tools/ci</code></h3>
+<p>仅在 ci 中会用到的工具。</p>
+<h3 id="tools%2Fconfigure.py" tabindex="-1"><code>tools/configure.py</code></h3>
+<p>配置工具，将 MaaCommonAssets 复制到 resource 中。</p>
+<h3 id="tools%2Finstall.py" tabindex="-1"><code>tools/install.py</code></h3>
+<p>安装工具，将源码和依赖组装后放入 <code>install</code> 目录。</p>
+<h2 id=".gitignore" tabindex="-1"><code>.gitignore</code></h2>
+<p>git 忽略清单。</p>
+<h2 id=".gitmodules" tabindex="-1"><code>.gitmodules</code></h2>
+<p>git 子模块。</p>
+<h2 id=".pre-commit-config.yaml" tabindex="-1"><code>.pre-commit-config.yaml</code></h2>
+<p>pre-commit 配置。</p>
+<h2 id=".prettierrc" tabindex="-1"><code>.prettierrc</code></h2>
+<p>prettier 配置文件。</p>
+<h2 id="license" tabindex="-1"><code>LICENSE</code></h2>
+<p>开源许可证。</p>
+<h2 id="package-lock.json%26package.json" tabindex="-1"><code>package-lock.json&amp;package.json</code></h2>
+<p>prettier 依赖。</p>
+<h2 id="readme.html" tabindex="-1"><code>README.html</code></h2>
+<p>项目说明。</p>
+<h2 id="requirements.txt" tabindex="-1"><code>requirements.txt</code></h2>
+<p>agent(python) 所需依赖。</p>
+
+    </article>
+</body>
+
+</html>

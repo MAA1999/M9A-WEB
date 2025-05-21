@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="writing-interface.json" tabindex="-1">Writing interface.json</h1>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p></p>
+<p>Reference materials:
+<a href="https://github.com/MaaXYZ/MaaFramework/blob/main/tools/interface.schema.json" target="_top" rel="noopener noreferrer">interface.schema.json</a>
+<a href="https://github.com/MaaXYZ/MaaFramework/blob/main/docs/zh_cn/3.2-ProjectInterface%E5%8D%8F%E8%AE%AE.html" target="_top" rel="noopener noreferrer">ProjectInterface Protocol.html</a></p>
+</div>
+<p><code>interface.json</code> is designed to provide menu configuration.</p>
+<h2 id="controller" tabindex="-1">controller</h2>
+<p>For M9A, the adb method is fixed and generally does not require modification.</p>
+<h2 id="agent" tabindex="-1">agent</h2>
+<pre><code class="language-json"><span class="hljs-attr">&quot;agent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;child_exec&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;python&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;child_args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;{PROJECT_DIR}/agent/main.py&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;-u&quot;</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="resource" tabindex="-1">resource</h2>
+<p>Resource configuration. Each resource requires a resource name <code>name</code> and a resource path <code>path</code>, both of which are mandatory.</p>
+<p>Specifically, for the resource path ‘path’, M9A loads resources sequentially. If there are resources with the same name, the later-loaded resource will overwrite the earlier one.</p>
+<p>For example, for bilibili Server, the resource configuration is as follows:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;resources&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;bilibili Server&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;{PROJECT_DIR}/resource/base&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;{PROJECT_DIR}/resource/bilibili&quot;</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>Here, <code>{PROJECT_DIR}</code> is the root directory of the M9A project. The <code>base</code> folder contains official server resources, and the <code>bilibili</code> folder contains resources for Server B that overwrite the official server resources.</p>
+<h2 id="task" tabindex="-1">task</h2>
+<p>Task list. The task list contains multiple tasks, and each task has a task name <code>name</code>, task entry <code>entry</code>, task parameters <code>pipeline_override</code>, and task options <code>option</code>, where <code>name</code> and <code>entry</code> are mandatory.</p>
+<p>In <code>pipeline_override</code>, it should be a pipeline node with override parameters, for example:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Anecdote Dispatch (Please read character stories yourself)&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;entry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Anecdote&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;pipeline_override&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;EnterTheActivityMain&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;template_doc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Modify to the current event entry template&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;template&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Combat/Activity/LondonDawningEnterTheShow.png&quot;</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>The original node is:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;EnterTheActivityMain&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;doc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Enter the main interface of the current event&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;recognition&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;TemplateMatch&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;template_code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Modify the template in interface.json&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;roi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-number">885</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">340</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">183</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Click&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;post_wait_freezes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">500</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;target&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">179</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">190</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">541</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>After overriding, this node will behave as follows when executing the “Anecdote Dispatch (Please read character stories yourself)” task:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;EnterTheActivityMain&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;recognition&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;TemplateMatch&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;template&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Combat/Activity/LondonDawningEnterTheShow.png&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;roi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-number">885</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">340</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-number">183</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Click&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;post_wait_freezes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">500</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;target&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">179</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">190</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-number">541</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>After executing the “Anecdote Dispatch (Please read character stories yourself)” task, the node will revert to its original state.</p>
+<p><code>option</code> determines how to override the pipeline node based on your specific settings below.</p>
+<h2 id="option" tabindex="-1">option</h2>
+<p>Option definitions. Each option has selectable <code>cases</code> and a default option <code>default_case</code>, where <code>cases</code> is mandatory.</p>
+<p>Typically, use <code>cases</code>. For example:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;task&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Regular Combat&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;entry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Combat&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;option&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;Combat Stages&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;Repetition Count&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;Use All Stamina&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;Consume All Temporary Sugar&quot;</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;option&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Use All Stamina&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;cases&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-punctuation">{</span>
+                    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Yes&quot;</span><span class="hljs-punctuation">,</span>
+                    <span class="hljs-attr">&quot;pipeline_override&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                        <span class="hljs-attr">&quot;AllIn&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                            <span class="hljs-attr">&quot;enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+                        <span class="hljs-punctuation">}</span>
+                    <span class="hljs-punctuation">}</span>
+                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-punctuation">{</span>
+                    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;No&quot;</span><span class="hljs-punctuation">,</span>
+                    <span class="hljs-attr">&quot;pipeline_override&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                        <span class="hljs-attr">&quot;AllIn&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                            <span class="hljs-attr">&quot;enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
+                        <span class="hljs-punctuation">}</span>
+                    <span class="hljs-punctuation">}</span>
+                <span class="hljs-punctuation">}</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p><code>default_case</code> is the default option, selected from <code>cases</code>.</p>
+<h2 id="version" tabindex="-1">version</h2>
+<p>Version. No need to fill in; it will be automatically generated during CI installation.</p>
+<h2 id="message" tabindex="-1">message</h2>
+<p>Message. Currently, it is the first line of output when <code>MaaPiCli</code> runs.</p>
+
+    </article>
+</body>
+
+</html>
