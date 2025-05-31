@@ -18,10 +18,11 @@
 <li><a href="#2-install-runtime-environment">2. Install Runtime Environment</a>
 <ul>
 <li><a href="#windows">Windows</a></li>
-<li><a href="#other-systems">Other Systems</a>
+<li><a href="#other-systems-linux-macos">Other Systems (Linux, macOS)</a>
 <ul>
-<li><a href="#environment-dependencies">Environment Dependencies</a></li>
-<li><a href="#dependency-management">Dependency Management</a></li>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#macos">macOS</a></li>
+<li><a href="#additional-dependencies-for-the-graphical-user-interface-mfaavalonia-applicable-to-linux-and-macos">Additional dependencies for the graphical user interface (MFAAvalonia) (applicable to Linux and macOS)</a></li>
 </ul>
 </li>
 </ul>
@@ -29,8 +30,8 @@
 <li><a href="#3-download-the-correct-version">3. Download the Correct Version</a>
 <ul>
 <li><a href="#windows-1">Windows</a></li>
-<li><a href="#macos">macOS</a></li>
-<li><a href="#linux">Linux</a></li>
+<li><a href="#macos-1">macOS</a></li>
+<li><a href="#linux-1">Linux</a></li>
 <li><a href="#android">Android</a></li>
 </ul>
 </li>
@@ -56,13 +57,40 @@ M9A also supports Macs with <a href="https://maa.plus/docs/zh-cn/manual/device/m
 <p>If you wish to use M9A on Android devices, please go to <a href="https://maa.plus/docs/zh-cn/manual/device/android.html" target="_top" rel="noopener noreferrer">this page</a> (Note: Original link points to MAA docs).</p>
 <h3 id="2.-install-runtime-environment" tabindex="-1">2. Install Runtime Environment</h3>
 <h4 id="windows" tabindex="-1">Windows</h4>
-<p>M9A requires the <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_top" rel="noopener noreferrer">VCRedist x64</a> and the <a href="https://download.visualstudio.microsoft.com/download/pr/ba3a1364-27d8-472e-a33b-5ce0937728aa/6f9495e5a587406c85af6f93b1c89295/dotnet-sdk-8.0.404-win-x64.exe" target="_top" rel="noopener noreferrer">dotnet-sdk-8.0.5-win-x64.exe</a> if you are running Windows x64. Try installing runtime environment manually if you are running other versions of Windows…</p>
-<h4 id="other-systems" tabindex="-1">Other Systems</h4>
-<p>Refer to the MAA documentation for dependencies on other systems as M9A primarily targets Windows, but the core framework might have cross-platform capabilities. Check M9A’s specific documentation or repository for Linux/macOS support details if available.</p>
-<h5 id="environment-dependencies" tabindex="-1">Environment Dependencies</h5>
-<p>Python: version ≥ 3.10</p>
-<h5 id="dependency-management" tabindex="-1">Dependency Management</h5>
-<p>Make sure your environment satisfy all necessary dependencies and their versions listed in the requirements.txt file.</p>
+<p>For Windows users:</p>
+<ol>
+<li>
+<p><strong>VCRedist x64 must be installed</strong>: This is the basic requirement for running M9A (whether it is the command line version or the graphical interface version MFAAvalonia).</p>
+<ul>
+<li>Click <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_top" rel="noopener noreferrer">vc_redist.x64</a> to download and install.</li>
+</ul>
+</li>
+<li>
+<p><strong>If you use the graphical interface (MFAAvalonia), you need to install .NET 8</strong>:</p>
+<ul>
+<li>It is recommended to visit the <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_top" rel="noopener noreferrer">.NET official download page</a> and download and install the <strong>.NET Desktop Runtime 8</strong> that is suitable for your system (usually the x64 version).</li>
+</ul>
+</li>
+</ol>
+<p><strong>Installation via <code>winget</code> (recommended)</strong>:
+You can also right-click the Windows Start button, select “Command Prompt” or “PowerShell (Administrator)”, and then paste the following command in the terminal and press Enter to conveniently install VCRedist x64 and .NET 8 Desktop Runtime at the same time:</p>
+<pre><code class="language-sh">winget install Microsoft.VCRedist.2017.x64 Microsoft.DotNet.DesktopRuntime.8
+</code></pre>
+<h4 id="other-systems-(linux%2C-macos)" tabindex="-1">Other Systems (Linux, macOS)</h4>
+<h5 id="linux" tabindex="-1">Linux</h5>
+<p><strong>Python Version Dependency</strong>:</p>
+<ul>
+<li>Your system needs to have <strong>Python version ≥ 3.10</strong> installed. This is required for M9A to start and manage its internal environment.</li>
+<li>M9A will automatically create and use an independent virtual environment and install the required Python dependency packages (from <code>requirements.txt</code>) when it is run for the first time. You <strong>do not</strong> need to manually create a virtual environment or install these dependencies.</li>
+</ul>
+<h5 id="macos" tabindex="-1">macOS</h5>
+<p><strong>Python environment</strong>: The macOS version of M9A has a built-in embedded Python environment, so you <strong>do not</strong> need to install or configure Python separately. The program will automatically use this embedded environment and manage its dependencies.</p>
+<h5 id="additional-dependencies-for-the-graphical-user-interface-(mfaavalonia)-(applicable-to-linux-and-macos)" tabindex="-1">Additional dependencies for the graphical user interface (MFAAvalonia) (applicable to Linux and macOS)</h5>
+<p>If you plan to use the graphical user interface (MFAAvalonia) on Linux or macOS, <strong>you also need to install the .NET 8 runtime</strong>.</p>
+<ul>
+<li>Please visit the <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_top" rel="noopener noreferrer">.NET official download page</a>.</li>
+<li>Select and download and install the appropriate <strong>.NET Runtime</strong> according to your operating system (Linux/macOS) and CPU architecture (e.g. x64, Arm64).</li>
+</ul>
 <h3 id="3.-download-the-correct-version" tabindex="-1">3. Download the Correct Version</h3>
 <p>Download from the <a href="https://github.com/MAA1999/M9A/releases" target="_top" rel="noopener noreferrer">M9A Releases page</a>.</p>
 <p>Chinese Mainland users can also download it at high speed through <a href="https://mirrorchyan.com/en/download?rid=M9A" target="_top" rel="noopener noreferrer">MirrorChyan</a>.</p>
@@ -71,7 +99,7 @@ M9A also supports Macs with <a href="https://maa.plus/docs/zh-cn/manual/device/m
 <ul>
 <li>Unzip the package and run <code>MaaPiCli.exe</code>（command line）or <code>MFAWPF.exe</code> (GUI), both are OK.</li>
 </ul>
-<h4 id="macos" tabindex="-1">macOS</h4>
+<h4 id="macos-1" tabindex="-1">macOS</h4>
 <ul>
 <li>
 <p>Checking Processor Type (Important: You must select the correct version for proper operation):</p>
@@ -99,7 +127,6 @@ M9A also supports Macs with <a href="https://maa.plus/docs/zh-cn/manual/device/m
 <p>Continue in the terminal to grant execute permissions to the UNIX executable file:</p>
 <pre><code class="language-shell">cd usr/local/bin/M9A
 <span class="hljs-meta prompt_"># </span><span class="language-bash">If you manually open the terminal <span class="hljs-keyword">in</span> the root directory of the decompressed software, you can skip the above line.</span>
-sudo chmod 777 MaaPiCli
 sudo ./MaaPiCli
 </code></pre>
 </li>
@@ -109,24 +136,32 @@ sudo ./MaaPiCli
 </ol>
 </li>
 </ul>
-<h4 id="linux" tabindex="-1">Linux</h4>
-<p>Same as MacOS. Download and grant execute permissions to use MaaPiCli.</p>
+<h4 id="linux-1" tabindex="-1">Linux</h4>
+<p>Same as MacOS. Download and grant execute permissions to use <code>MaaPiCli</code> or <code>MFAAvalonia</code>.</p>
 <h4 id="android" tabindex="-1">Android</h4>
 <p><s>This version is not recommended for general users and has been removed from the release version.</s>
-If you are very familiar with mobile phone operation, you can refer to the <a href="https://github.com/MaaXYZ/MaaFramework/issues/475" target="_top" rel="noopener noreferrer">Usage Method</a> and the <a href="../develop/%E5%BC%80%E5%8F%91%E5%89%8D%E9%A1%BB%E7%9F%A5.html">Development Documentation</a> to install it yourself.</p>
+If you are very familiar with mobile phone operation, you can refer to the <a href="https://github.com/MaaXYZ/MaaFramework/issues/475" target="_top" rel="noopener noreferrer">Usage Method</a> and the <a href="../develop/Notes-Before-Development.html">Development Documentation</a> to install it yourself.</p>
 <h3 id="4.-extract-correctly" tabindex="-1">4. Extract Correctly</h3>
 <p>Extract the entire contents of the downloaded <code>.zip</code> file to a folder path that <strong>does not contain any non-English characters or spaces</strong>. For example, <code>D:\M9A</code> is good, but <code>D:\游戏 工具\M9A</code> is bad.</p>
 <h3 id="5.-confirm-emulator-support" tabindex="-1">5. Confirm Emulator Support</h3>
 <p>M9A relies on emulators. Supported emulators are generally listed in the <a href="https://maa.plus/docs/zh-cn/manual/device/" target="_top" rel="noopener noreferrer">List of Supported Emulators and Devices</a> documentation. Common choices include MuMu Player 12, LDPlayer 9, BlueStacks 5, NoxPlayer. Ensure your emulator is supported and properly configured.</p>
 <h3 id="6.-set-emulator-resolution-correctly" tabindex="-1">6. Set Emulator Resolution Correctly</h3>
 <p>The game must run at <strong>1280x720 resolution</strong> inside the emulator. Configure this in the emulator’s display settings. Incorrect resolution is a common cause of recognition failures.</p>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p></p>
+<p>Note that after changing the resolution, the simulator homepage should be horizontal (tablet version), do not select vertical (mobile version)!</p>
+</div>
 <h3 id="7.-pip-settings-(windows)" tabindex="-1">7. Pip settings (Windows)</h3>
-<p>For Windows, we provide a Python environment for the convenience of most users. However, considering the minimum size of the installation package, we choose to use pip to install all dependencies when the program is first run locally or when the resource version is updated. The relevant configuration file is stored in <code>config/pip_config.json</code> (if it does not exist, it will be automatically created). The content is as follows:</p>
+<p>Content in <code>config/pip_config.json</code> :</p>
 <pre><code class="language-jsonc"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;enable_pip_update&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> # Whether to enable update pip<span class="hljs-punctuation">,</span> default <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> recommended to enable
     <span class="hljs-attr">&quot;enable_pip_install&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> # Whether to enable pip installation<span class="hljs-punctuation">,</span> default <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> recommended to enable
     <span class="hljs-attr">&quot;last_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;v3.2.0&quot;</span><span class="hljs-punctuation">,</span> # Read the version of interface.json when pip is installed<span class="hljs-punctuation">,</span> compare it with the version when it is started<span class="hljs-punctuation">,</span> and try to install it if it is different
-    <span class="hljs-attr">&quot;mirror&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://mirrors.ustc.edu.cn/pypi/simple&quot;</span> # Mirror source. The parameters after pip install -i can be filled in according to personal needs. Note that users outside the mainland should modify the value to <span class="hljs-string">&quot;&quot;</span>
+    <span class="hljs-attr">&quot;mirror&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://mirrors.ustc.edu.cn/pypi/simple&quot;</span><span class="hljs-punctuation">,</span> # Mirror source. The parameters after pip install -i can be filled in according to personal needs. Note that users outside the mainland should modify the value to <span class="hljs-string">&quot;&quot;</span>
+    <span class="hljs-attr">&quot;backup_mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+     <span class="hljs-string">&quot;https://pypi.tuna.tsinghua.edu.cn/simple&quot;</span><span class="hljs-punctuation">,</span>
+     <span class="hljs-string">&quot;https://mirrors.cloud.tencent.com/pypi/simple/&quot;</span><span class="hljs-punctuation">,</span>
+     <span class="hljs-string">&quot;https://pypi.org/simple&quot;</span>
+    <span class="hljs-punctuation">]</span>  ## Backup mirror source
 <span class="hljs-punctuation">}</span>
 </code></pre>
 <h2 id="related-documentation" tabindex="-1">Related Documentation</h2>

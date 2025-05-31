@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/assets/css/markdown.css">
+    <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
+</head>
+
+<body>
+    <article class="markdown-body">
+<h1 id="bug-%E6%8E%92%E6%9F%A5" tabindex="-1">Bug 排查</h1>
+<p>修 bug 也是开发中重要的一环。<br>
+如何快速准确地定位、分析、解决 bug 是有技巧的。<br>
+本文将简单介绍排查 bug 的一般流程。</p>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>以下内容仅供参考，注意时效性。</p>
+</div>
+<h2 id="%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87" tabindex="-1">前置准备</h2>
+<p>与 bug 提出者沟通，尽可能的获取 bug 相关的信息，如：</p>
+<ul>
+<li>问题的细节描述（发生的时间、场景等）</li>
+<li>配置文件、日志、截图等必要信息</li>
+</ul>
+<h2 id="%E5%AE%9A%E4%BD%8D%E5%85%B3%E9%94%AE-log" tabindex="-1">定位关键 log</h2>
+<ol>
+<li>
+<p>确认资源版本以及运行方式</p>
+<p>对于 M9A 来说，有两种运行方式：1. MaaPiCli 2. MFA</p>
+<p>log 一般在以下位置：</p>
+<ul>
+<li>logs 文件夹下 MFA 的 log</li>
+<li>debug 文件夹下的 maa.log</li>
+<li>debug/custom 文件夹下 custom 生成的 log</li>
+</ul>
+<p>下面简单说下 maa.log 中的版本如何找。<br>
+根据观察，MaaPiCli 运行时有行log为</p>
+<pre><code class="language-plaintext">[2024-11-28 19:46:32.571][INF][Px14600][Tx16498][Parser.cpp][L56][MaaNS::ProjectInterfaceNS::Parser::parse_interface] Interface Version: [data.version=v2.4.11]
+</code></pre>
+<p>而 MFAWPF 运行时有log为</p>
+<pre><code class="language-plaintext">MFAWPF Version: [mfa.version=v1.2.2.0] Interface Version: [data.version=v2.5.5] 
+</code></pre>
+<p>由 data.version 可以确定资源版本。以此判断当前问题发生的版本是否已修复当前 bug。<br>
+同时确认运行方式。因为不同运行方式，可能影响问题的复刻。</p>
+</li>
+<li>
+<p>定位问题所在的 log 位置</p>
+<p>分两种情况：</p>
+<ul>
+<li>任务提前结束</li>
+<li>任务陷入无限循环</li>
+</ul>
+<p>前者全局搜素 <strong>[ERR]</strong> ，查看报错是与什么有关。<br>
+后者全局搜索 <strong>Node Hit</strong> ，查找不正常的匹配情况（如持续匹配一个本不该一直匹配的 node）。</p>
+</li>
+</ol>
+<h2 id="%E5%88%86%E6%9E%90%E9%97%AE%E9%A2%98" tabindex="-1">分析问题</h2>
+<p>在这里我将问题大致分为三类：资源加载问题、连接问题以及 pipeline 问题。</p>
+<h3 id="%E8%B5%84%E6%BA%90%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98" tabindex="-1">资源加载问题</h3>
+<p>资源改名时覆盖安装导致的资源加载失败：</p>
+<pre><code class="language-log">[2024-11-17 22:29:04.185][ERR][Px10564][Tx9380][PipelineResMgr.cpp][L211][MaaNS::ResourceNS::PipelineResMgr::parse_config] key already exists [key=OutsideDeduction] 
+</code></pre>
+<h3 id="%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98" tabindex="-1">连接问题</h3>
+<p>模拟器连接失败：</p>
+<pre><code class="language-log">[2024-11-24 23:44:05.539][ERR][Px26056][Tx55883][ControlUnitMgr.cpp][L55][MaaNS::CtrlUnitNs::ControlUnitMgr::connect] failed to connect [adb_path_=D:/MuMu Player 12/shell/adb.exe] [adb_serial_=127.0.0.1:16384]
+</code></pre>
+<h3 id="pipeline-%E9%97%AE%E9%A2%98" tabindex="-1">Pipeline 问题</h3>
+<p>这类是 M9A 主要需要关注的问题，需要了解原 pipeline 流程以及 log 展示的执行情况，加以分析。</p>
+<ol>
+<li>
+<p>非 pipeline 流程类问题</p>
+<p>这种问题本身 pipeline 流程逻辑上没有问题。</p>
+<p>根据出问题的 node 分为两种：</p>
+<p>第一种是 非 无条件匹配/inverse node。<br>
+常见原因是截图截太快了，匹配到 <code>next</code> 中 node，但当前画面尚未未稳定。<br>
+解决方案是为当前 node 添加合适的 <code>post_wait_freezes</code>，等待画面稳定再做判断。</p>
+<p>第二种是 无条件匹配/inverse node。<br>
+这种可能是进到非预期界面，导致判断失误。<br>
+解决方案是按需修改。</p>
+</li>
+<li>
+<p>pipeline 流程类问题</p>
+<p>这种是任务流程本身完备性不足，需在分析后修改。</p>
+</li>
+</ol>
+<h2 id="%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98" tabindex="-1">解决问题</h2>
+<p>前两种参考<a href="../manual/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html">常见问题</a>解决，pipeline 问题根据分析结果修改。</p>
+<h2 id="%E9%AA%8C%E8%AF%81%E4%BF%AE%E5%A4%8D" tabindex="-1">验证修复</h2>
+<p>修复后发布测试版，经测试无误后解决问题。</p>
+
+    </article>
+</body>
+
+</html>
