@@ -45,6 +45,28 @@
             transform: translate(-105%, 5%);
         }
 
+        @media (max-width: 768px) {
+
+            .char-bg,
+            .char {
+                max-width: 100%;
+            }
+
+            .char {
+                position: unset;
+                transform: unset;
+            }
+
+            .char-container {
+                width: 80vw;
+                height: max-content;
+                transform: translate(-50%, 25%);
+            }
+
+            .click .char-container {
+                display: none;
+            }
+        }
 
         /* 内容容器 */
         .container {
@@ -130,21 +152,6 @@
         }
 
         @media (max-width: 768px) {
-
-            .char-bg,
-            .char {
-                max-width: 100%;
-            }
-
-            .char-container {
-                width: 80vw;
-            }
-
-            .click .char-container {
-                opacity: 0;
-                visibility: hidden;
-            }
-
             .container {
                 transform: translate(-50%, -50%);
                 width: 90%;
@@ -152,6 +159,13 @@
 
             .click .container {
                 transform: translate(-50%, -50%);
+            }
+
+            .tooltip {
+                top: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                width: max-content;
             }
         }
     </style>
@@ -194,12 +208,12 @@
         };
     }
 
-    const isTouchDevice = window.innerWidth < 768;
+    let isTouchDevice = window.outerWidth < 768;
 
     charContainerEle.addEventListener("click", onCharClick);
     charContainerEle.addEventListener("mousemove", mousemove);
     charContainerEle.addEventListener("mouseleave", mouseleave);
-    charEle.addEventListener("load", mousemove);
+    charEle.addEventListener("load", onloadToolTip);
 
     function onCharClick() {
         document.body.classList.toggle("click");
@@ -213,7 +227,20 @@
         tooltipEle.innerHTML =
             MessageList[Math.floor(Math.random() * MessageList.length)];
     }, 300);
+    function onloadToolTip() {
+        if (isTouchDevice) {
+            throttledUpdateTooltip();
+            tooltipEle.removeAttribute('style');
+            tooltipEle.style.opacity = "1";
+            return
+        } else {
+            tooltipEle.style.display = "none";
+            tooltipEle.style.opacity = "0";
+        }
+    }
+
     function mousemove(event) {
+        tooltipEle.style.removeProperty("display");
         throttledUpdateTooltip();
         let tooltipX, tooltipY;
         const tooltipWidth = tooltipEle.offsetWidth;
@@ -222,51 +249,33 @@
         const rect = charContainerEle.getBoundingClientRect();
         const charRect = charEle.getBoundingClientRect();
 
-        if (!isTouchDevice) {
-            const mouseX = event.pageX;
-            const mouseY = event.pageY;
+        const mouseX = event.pageX;
+        const mouseY = event.pageY;
 
-            tooltipX = mouseX + 20;
-            tooltipY = mouseY + 20;
+        tooltipX = mouseX + 20;
+        tooltipY = mouseY + 20;
 
-            // 超出左半边
-            if (event.pageX > rect.left + rect.width / 2) {
-                tooltipX = mouseX - tooltipWidth - 10;
-            }
-
-            // 鼠标超出上半边
-            if (event.pageY > rect.top + rect.height / 2) {
-                tooltipY = mouseY - tooltipHeight - 10;
-            }
-        } else {
-            tooltipX = rect.left + rect.width / 2 - tooltipWidth / 2;
-            tooltipY = charRect.bottom - tooltipHeight - 10;
+        // 超出左半边
+        if (event.pageX > rect.left + rect.width / 2) {
+            tooltipX = mouseX - tooltipWidth - 10;
         }
 
-        if (!(event.type == "load" && !isTouchDevice)) {
-            // load 事件不处理PC端
-            tooltipEle.style.left = `${tooltipX}px`;
-            tooltipEle.style.top = `${tooltipY}px`;
-
-            tooltipEle.style.opacity = "1";
+        // 鼠标超出上半边
+        if (event.pageY > rect.top + rect.height / 2) {
+            tooltipY = mouseY - tooltipHeight - 10;
         }
+
+        // load 事件不处理PC端
+        tooltipEle.style.left = `${tooltipX}px`;
+        tooltipEle.style.top = `${tooltipY}px`;
+
+        tooltipEle.style.opacity = "1";
     }
     function mouseleave(e) {
         tooltipEle.style.opacity = "0";
     }
 
-
-    let canvas = document.getElementById("bgCanvas");
-    let ctx = canvas.getContext("2d");
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-    ctx.strokeStyle = "#383838";
-    ctx.lineWidth = 2;
-
-    // 绘制回溯雨
-    function drawLine(startX, startY, angle) {
+    function calcLinePos(angle) {
         const radian = angle * Math.PI / 180;
 
         const segmentLength1 = 20;
@@ -286,62 +295,115 @@
         const deltaY2 = segmentLength2 * compareY;
         const deltaX3 = segmentLength3 * compareX;
         const deltaY3 = segmentLength3 * compareY;
+        return {
+            spacingX,
+            spacingY,
+            deltaX1,
+            deltaY1,
+            deltaX2,
+            deltaY2,
+            deltaX3,
+            deltaY3,
+            x: deltaX1 + deltaX2 + deltaX3,
+            y: deltaY1 + deltaY2 + deltaY3
+        }
+    }
 
-        ctx.beginPath();
+    // 绘制回溯雨
+    function drawLine(startX, startY, linePos) {
+        Ctx.beginPath();
 
-        ctx.moveTo(startX, startY);
-        ctx.lineTo(startX + deltaX1, startY - deltaY1);
+        startX -= linePos.x
+        startY += linePos.y
+        Ctx.moveTo(startX, startY);
+        startX += linePos.deltaX1
+        startY -= linePos.deltaY1
+        Ctx.lineTo(startX, startY);
+
+        startX += linePos.spacingX
+        startY -= linePos.spacingY
+        Ctx.moveTo(startX, startY);
+        startX += linePos.deltaX2
+        startY -= linePos.deltaY2
+        Ctx.lineTo(startX, startY);
 
 
-        ctx.moveTo(startX + deltaX1 + spacingX, startY - deltaY1 - spacingY);
-        ctx.lineTo(startX + deltaX1 + spacingX + deltaX2, startY - deltaY1 - spacingY - deltaY2);
+        startX += linePos.spacingX
+        startY -= linePos.spacingY
+        Ctx.moveTo(startX, startY);
+        startX += linePos.deltaX3
+        startY -= linePos.deltaY3
+        Ctx.lineTo(startX, startY);
 
+        Ctx.stroke();
+    }
 
-        ctx.moveTo(startX + deltaX1 + spacingX + deltaX2 + spacingX, startY - deltaY1 - spacingY - deltaY2 - spacingY);
-        ctx.lineTo(startX + deltaX1 + spacingX + deltaX2 + spacingX + deltaX3, startY - deltaY1 - spacingY - deltaY2 - spacingY - deltaY3);
+    /**
+     * 计算绘制时间
+     * @param {number} speed 像素/秒
+     * @param {number} angle
+     * @param {number} deltaTime 间隔时间
+     */
+    function calcDrawTime(speed, angle, deltaTime) {
+        const radian = angle * Math.PI / 180;
 
-        ctx.stroke();
+        const compareX = Math.cos(radian)
+        const compareY = Math.sin(radian)
+
+        const spacingX = (speed * deltaTime / 1000) * compareX;
+        const spacingY = (speed * deltaTime / 1000) * compareY;
+        return [spacingX, spacingY]
     }
 
     // 绘制回溯雨动画
-    function startDraw(posList) {
+    function startDraw(posList, angle, timestamp, linePos) {
+        const deltaTime = timestamp - LastTime;
+        LastTime = timestamp;
         let newPosList = []
-        const angle = 70
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        Ctx.clearRect(0, 0, Canvas.width, Canvas.height);
+
+        const [spacingX, spacingY] = calcDrawTime(100, angle, deltaTime)
+
         posList.forEach((pos) => {
             let startX = pos.new[0]
             let startY = pos.new[1]
-            const radian = angle * Math.PI / 180;
 
-            const compareX = Math.cos(radian)
-            const compareY = Math.sin(radian)
-
-            const spacingX = 2 * compareX;
-            const spacingY = 2 * compareY;
             startX = startX + spacingX
             startY = startY - spacingY
-            if (startX > width || startY < 0) {
-                pos.new = [pos.default[0], height]
+
+            if (startX > Canvas.width + linePos.x || startY < 0 - linePos.y) {
+                pos.new = [pos.default[0], pos.default[1]]
             } else {
                 pos.new[0] = startX
                 pos.new[1] = startY
             }
-            drawLine(pos.new[0], pos.new[1], angle);
+            drawLine(pos.new[0], pos.new[1], linePos);
             newPosList.push(pos)
         })
 
-        setTimeout(() => {
-            startDraw(newPosList)
-        }, 30)
+        requestAnimationFrame((t) => {
+            startDraw(newPosList, angle, t, linePos)
+        })
     }
 
-    // 生成随机点
-    function randomPoints(length, spacing, num) {
+    /**
+     * 生成随机点
+     * @param {number} length
+     * @param {number} spacing
+     * @param {number} num
+     * @param {number} expand length(x)向左扩展的大小
+     * @returns 返回的x坐标列表，改列表减去了expand
+     */
+    function randomPoints(length, spacing, num, expand) {
         let points = [];
+        const legalNum = (length + expand) / spacing
+        if (legalNum < num) {
+            num = legalNum
+        }
 
         // 按间距生成分割点
-        for (let i = 0; i < length / spacing; i++) {
-            points.push(i * spacing);
+        for (let i = 0; i < legalNum; i++) {
+            points.push(i * spacing - expand);
         }
 
         // 随机取点
@@ -357,14 +419,35 @@
         return selectedPoints;
     }
 
+    let Canvas = document.getElementById("bgCanvas");
+    let Ctx = Canvas.getContext("2d");
+    let LastTime = 0;
 
-    const selectedPoints = randomPoints(width, 100, width / 100 > 10 ? 10 : width / 100);
-    startDraw(selectedPoints.map((x) => {
-        return {
-            default: [x, height - Math.floor(Math.random() * 201)],
-            new: [x, height - Math.floor(Math.random() * 201)]
-        }
-    }))
+    function initDraw() {
+        const width = document.documentElement.clientWidth;
+        const height = document.documentElement.clientHeight;
+        Canvas.width = width;
+        Canvas.height = height;
+        Ctx.strokeStyle = "#383838";
+        Ctx.lineWidth = 2;
+        const angle = 70
+        const linePos = calcLinePos(angle)
+        const selectedPoints = randomPoints(width, 100, 10, 200);
+        requestAnimationFrame((t) => {
+            startDraw(selectedPoints.map((x) => {
+                return {
+                    default: [x, height + Math.floor(Math.random() * 201)],
+                    new: [x, height + Math.floor(Math.random() * 201)]
+                }
+            }), angle, t, linePos)
+        })
+    }
+    initDraw()
+    window.addEventListener('resize', function () {
+        initDraw();
+        isTouchDevice = window.outerWidth < 768;
+        onloadToolTip();
+    });
 </script>
 
 </html>
