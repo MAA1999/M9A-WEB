@@ -52,15 +52,15 @@
                 max-width: 100%;
             }
 
-            .char {
+            /* .char {
                 position: unset;
                 transform: unset;
-            }
+            } */
 
             .char-container {
                 width: 80vw;
-                height: max-content;
-                transform: translate(-50%, 25%);
+                /* height: max-content; */
+                /* transform: translate(-50%, 25%); */
             }
 
             .click .char-container {
@@ -98,9 +98,9 @@
 
         @media (max-width: 768px) {
             .tooltip {
-                top: auto;
-                left: 50%;
-                transform: translateX(-50%);
+                /* top: auto; */
+                /* left: 50%; */
+                /* transform: translateX(-50%); */
                 width: max-content;
             }
 
@@ -159,15 +159,6 @@
 
         iframe {
             border: unset;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .container {
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
         }
     </style>
 </head>
@@ -179,9 +170,7 @@
         <img class="char-bg" src="./assets/image/char_bg.webp" alt="人物背景"></img>
     </div>
     <div class="tooltip"></div>
-    <div class="container">
-        <iframe src="./README.html"></iframe>
-    </div>
+    <iframe class="container" src="./README.html"></iframe>
 </body>
 <script>
     const MessageList = [
@@ -207,6 +196,7 @@
     }
 
     let isTouchDevice = window.outerWidth < 768;
+    const isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     charContainerEle.addEventListener("click", onCharClick);
     charContainerEle.addEventListener("mousemove", mousemove);
@@ -215,7 +205,10 @@
 
     function onCharClick() {
         document.body.classList.toggle("click");
-        if (isTouchDevice) {
+        if (isIos) {
+            // 跳转README页面，避免IOS无法滚动
+            window.location.href = "./README.html";
+        } else if (isTouchDevice) {
             // 关闭tooltip
             mouseleave()
         }
@@ -230,7 +223,12 @@
             throttledUpdateTooltip();
             tooltipEle.removeAttribute('style');
             tooltipEle.style.opacity = "1";
-            return
+            const charRect = charEle.getBoundingClientRect();
+            const charWidth = charEle.offsetWidth;
+            const tooltipWidth = tooltipEle.offsetWidth;
+            const tooltipHeight = tooltipEle.offsetHeight;
+            tooltipEle.style.left = `${charRect.left - (tooltipWidth - charWidth) / 2}px`;
+            tooltipEle.style.top = `${charRect.bottom - tooltipHeight}px`;
         } else {
             tooltipEle.style.display = "none";
             tooltipEle.style.opacity = "0";
@@ -263,7 +261,6 @@
             tooltipY = mouseY - tooltipHeight - 10;
         }
 
-        // load 事件不处理PC端
         tooltipEle.style.left = `${tooltipX}px`;
         tooltipEle.style.top = `${tooltipY}px`;
 

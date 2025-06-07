@@ -1,6 +1,11 @@
 body {
     margin: 0px;
-    padding-inline: 16px;
+    padding: 8px 16px;
+
+    background-image: url("/assets/image/container_bg.webp");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 /* 定义滚动条样式 */
