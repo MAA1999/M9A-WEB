@@ -118,29 +118,50 @@ M9A 同样支持搭载 <a href="https://maa.plus/docs/zh-cn/manual/device/macos.
 </ol>
 </li>
 <li>
-<p>若使用 Intel X86 处理器，请下载 <code>M9A-macos-x86_64-vXXX.zip</code></p>
+<p>若使用 Intel X86 处理器，请下载 <code>M9A-macos-x86_64-vXXX.tar.gz</code></p>
 </li>
 <li>
-<p>若使用 Apple Silicon 系列如： M1, M2 等 ARM 架构处理器，请下载 <code>M9A-macos-aarch64-vXXX.zip</code></p>
+<p>若使用 Apple Silicon 系列如： M1, M2 等 ARM 架构处理器，请下载 <code>M9A-macos-aarch64-vXXX.tar.gz</code></p>
 </li>
 </ul>
 <p>使用方式：</p>
 <ol>
 <li>
-<p>打开终端，解压分发的压缩包，推荐解压到 <code>usr/local/bin</code> 中，不建议存放于 <code>/opt</code> 中避免权限问题。</p>
-<pre><code class="language-shell">sudo unzip -o &lt;下载的M9A压缩包路径&gt; -d usr/local/bin/M9A
+<p>打开终端，解压分发的压缩包：</p>
+<p><strong>选项1：解压到系统目录（需要管理员权限）</strong></p>
+<pre><code class="language-shell">sudo mkdir -p /usr/local/bin/M9A
+sudo tar -xzf &lt;下载的M9A压缩包路径&gt; -C /usr/local/bin/M9A
+</code></pre>
+<p><strong>选项2：解压到用户目录（推荐，无需sudo）</strong></p>
+<pre><code class="language-shell">mkdir -p ~/M9A
+tar -xzf &lt;下载的M9A压缩包路径&gt; -C ~/M9A
 </code></pre>
 </li>
 <li>
-<p>继续在终端中赋予UNIX可执行文件的执行权限：</p>
-<pre><code class="language-shell">cd usr/local/bin/M9A
-sudo ./MaaPiCli
+<p>进入解压目录并运行程序：</p>
+<pre><code class="language-shell">cd /usr/local/bin/M9A
+./MaaPiCli
 </code></pre>
-</li>
-<li>
-<p>若想使用图形操作页面请按第二步操作，执行 <code>MFAAvalonia</code> 程序。</p>
 </li>
 </ol>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>若想使用<strong>图形操作页面</strong>请按第二步操作，由执行 <code>MaaPiCli</code> 改为执行 <code>MFAAvalonia</code> 程序。</p>
+</div>
+<p>⚠️Gatekeeper 安全提示处理：</p>
+<p>在 macOS 10.15 (Catalina) 及更高版本中，Gatekeeper 可能会阻止运行未签名的应用程序。<br>
+如果遇到&quot;无法打开，因为无法验证开发者&quot;等错误，请选择以下任一方案:</p>
+<pre><code class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">方案1：以 MaaPiCli 为例，移除隔离属性（推荐，以实际路径为准）</span>
+sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/MaaPiCli
+<span class="hljs-meta prompt_"># </span><span class="language-bash">或用户目录版本：xattr -rd com.apple.quarantine ~/M9A/MaaPiCli</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">方案2：添加到 Gatekeeper 白名单</span>
+sudo spctl --add /usr/local/bin/M9A/MaaPiCli
+<span class="hljs-meta prompt_"># </span><span class="language-bash">或用户目录版本：spctl --add ~/M9A/MaaPiCli</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">方案3：一次性处理整个目录</span>
+sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
+<span class="hljs-meta prompt_"># </span><span class="language-bash">或用户目录版本：xattr -rd com.apple.quarantine ~/M9A/*</span>
+</code></pre>
 <h4 id="linux-1" tabindex="-1">Linux</h4>
 <p>同macOS，下载对应版本的压缩包，运行 <code>MaaPiCli</code> 或 <code>MFAAvalonia</code> 即可。</p>
 <h4 id="android" tabindex="-1">Android</h4>

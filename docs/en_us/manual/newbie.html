@@ -111,32 +111,52 @@ You can also right-click the Windows Start button, select “Command Prompt” o
 </ol>
 </li>
 <li>
-<p>If you are using an Intel X86 processor, please download <code>M9A-macos-x86_64-vXXX.zip</code></p>
+<p>If you are using an Intel X86 processor, please download <code>M9A-macos-x86_64-vXXX.tar.gz</code></p>
 </li>
 <li>
-<p>If you are using an Apple Silicon series processor such as M1, M2, etc. with ARM architecture, please download <code>M9A-macos-aarch64-vXXX.zip</code></p>
+<p>If you are using an Apple Silicon series processor such as M1, M2, etc. with ARM architecture, please download <code>M9A-macos-aarch64-vXXX.tar.gz</code></p>
 </li>
 <li>
 <p>Usage:</p>
 <ol>
 <li>
-<p>Open the terminal, decompress the distributed compressed package. It is recommended to decompress it to <code>usr/local/bin</code>. It is not recommended to store it in <code>/opt</code> to avoid permission issues.</p>
-<pre><code class="language-shell">sudo unzip -o &lt;path to the downloaded M9A compressed package&gt; -d usr/local/bin/M9A
+<p>Open the terminal, decompress the distributed compressed package:</p>
+<p><strong>Option 1: Unzip to the system directory (administrator privileges required)</strong></p>
+<pre><code class="language-shell">sudo mkdir -p /usr/local/bin/M9A
+sudo tar -xzf &lt;downloaded M9A compressed package path&gt; -C /usr/local/bin/M9A
+</code></pre>
+<p><strong>Option 2: Unzip to the user directory (recommended, no sudo required)</strong></p>
+<pre><code class="language-shell">mkdir -p ~/M9A
+tar -xzf &lt;downloaded M9A compressed package path&gt; -C ~/M9A
 </code></pre>
 </li>
 <li>
-<p>Continue in the terminal to grant execute permissions to the UNIX executable file:</p>
-<pre><code class="language-shell">cd usr/local/bin/M9A
-<span class="hljs-meta prompt_"># </span><span class="language-bash">If you manually open the terminal <span class="hljs-keyword">in</span> the root directory of the decompressed software, you can skip the above line.</span>
+<p>Enter the unzip directory and run the program:</p>
+<pre><code class="language-shell">cd /usr/local/bin/M9A
 sudo ./MaaPiCli
 </code></pre>
-</li>
-<li>
-<p>If you want to use the graphical operation interface, please follow step 2 and execute the <code>MFAAvalonia</code> program.</p>
 </li>
 </ol>
 </li>
 </ul>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
+<p>If you want to use the <strong>graphic operation page</strong>, please follow the second step and execute <code>MaaPiCli</code> Execute the <code>MFAAvalonia</code> program instead.</p>
+</div>
+<p>⚠️Gatekeeper security prompt handling:</p>
+<p>In macOS 10.15 (Catalina) and later, Gatekeeper may prevent unsigned applications from running.
+If you encounter errors such as “Cannot open because the developer cannot be verified”, please choose one of the following solutions:</p>
+<pre><code class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Solution 1: Take MaaPiCli as an example to remove the quarantine attribute (recommended, subject to the actual path)</span>
+sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/MaaPiCli
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Or user directory version: xattr -rd com.apple.quarantine ~/M9A/MaaPiCli</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Solution 2: Add to Gatekeeper whitelist</span>
+sudo spctl --add /usr/local/bin/M9A/MaaPiCli
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Or user directory version: spctl --add ~/M9A/MaaPiCli</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Solution 3: Process the entire directory at once</span>
+sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Or user directory version: xattr -rd com.apple.quarantine ~/M9A/*</span>
+</code></pre>
 <h4 id="linux-1" tabindex="-1">Linux</h4>
 <p>Same as MacOS. Download and grant execute permissions to use <code>MaaPiCli</code> or <code>MFAAvalonia</code>.</p>
 <h4 id="android" tabindex="-1">Android</h4>
