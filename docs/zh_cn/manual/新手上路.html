@@ -181,7 +181,6 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
 <h3 id="7.-pip-%E8%AE%BE%E7%BD%AE" tabindex="-1">7. pip 设置</h3>
 <p>以下为 <code>config/pip_config.json</code> 的内容。</p>
 <pre><code class="language-jsonc"><span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;enable_pip_update&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">// 是否更新 pip 本体，默认 true，推荐开启</span>
     <span class="hljs-attr">&quot;enable_pip_install&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">// 是否启用 pip 安装，默认 true，推荐开启</span>
     <span class="hljs-attr">&quot;last_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;v3.2.0&quot;</span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">// 完成 pip 安装时读取 interface.json 的 version ，启动时和 version 对比，不同则尝试安装</span>
     <span class="hljs-attr">&quot;mirror&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://mirrors.ustc.edu.cn/pypi/simple&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// 镜像源。pip install -i 后参数，可根据个人需求填写。注意非大陆地区用户请修改值为 &quot;&quot;</span>
