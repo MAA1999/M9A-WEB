@@ -34,7 +34,7 @@
 <p>如果只是想规范 node 名称，则只需通过 vscode 的全局搜索、替换功能完成即可。<br>
 不过需要注意替换时带着双引号替换，以免出现包含该 node 名的其它 node 也被修改。</p>
 <h4 id="%E7%AE%80%E5%8C%96%E4%BB%BB%E5%8A%A1%E6%B5%81%E7%A8%8B%E3%80%81%E5%87%8F%E5%B0%91%E8%80%A6%E5%90%88" tabindex="-1">简化任务流程、减少耦合</h4>
-<p>先行阅读 <a href="./Pipeline%20%E7%BC%96%E5%86%99.html#node-%E8%BF%9E%E6%8E%A5">Node 连接</a>，向贴合连接原则的方向进行重构。</p>
+<p>先行阅读 <a href="./Pipeline%E7%BC%96%E5%86%99.html#node-%E8%BF%9E%E6%8E%A5">Node 连接</a>，向贴合连接原则的方向进行重构。</p>
 <p>部分node 可放在 当前node 的 祖先node 的 <code>interrupt</code> 中。<br>
 注意移动后将不必要的 next node 删除，避免在 <code>interrupt</code> 中继续执行主任务链，导致后续任务报错后跳回 祖先node。</p>
 <h4 id="%E5%90%88%E5%B9%B6%E7%9B%B8%E5%90%8C%E5%8A%9F%E8%83%BD-node" tabindex="-1">合并相同功能 node</h4>
