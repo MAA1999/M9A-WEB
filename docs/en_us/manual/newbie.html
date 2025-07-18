@@ -18,28 +18,29 @@
 <li><a href="#1-confirm-system-version">1. Confirm System Version</a></li>
 <li><a href="#2-install-runtime-environment">2. Install Runtime Environment</a>
 <ul>
+<li><a href="#1-vcredist-x64">1. VCRedist x64</a></li>
+<li><a href="#2-net-8">2. .NET 8</a></li>
+<li><a href="#3-python">3. Python</a></li>
+</ul>
+</li>
+<li><a href="#3-download-the-correct-version">3. Download the Correct Version</a></li>
+<li><a href="#4-confirm-emulator-and-device-support">4. Confirm Emulator and Device Support</a></li>
+<li><a href="#5-set-emulator-resolution-correctly">5. Set Emulator Resolution Correctly</a></li>
+<li><a href="#6-getting-started">6. Getting Started</a>
+<ul>
 <li><a href="#windows">Windows</a></li>
-<li><a href="#other-systems-linux-macos">Other Systems (Linux, macOS)</a>
-<ul>
-<li><a href="#linux">Linux</a></li>
 <li><a href="#macos">macOS</a></li>
-<li><a href="#additional-dependencies-for-the-graphical-user-interface-mfaavalonia-applicable-to-linux-and-macos">Additional dependencies for the graphical user interface (MFAAvalonia) (applicable to Linux and macOS)</a></li>
+<li><a href="#linux">Linux</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#3-download-the-correct-version">3. Download the Correct Version</a>
+<li><a href="#7-configure-m9a">7. Configure M9A</a>
 <ul>
-<li><a href="#windows-1">Windows</a></li>
-<li><a href="#macos-1">macOS</a></li>
-<li><a href="#linux-1">Linux</a></li>
-<li><a href="#android">Android</a></li>
+<li><a href="#first-launch">First Launch</a></li>
+<li><a href="#m9a-settings-interface">M9A Settings Interface</a></li>
+<li><a href="#m9a-main-interface">M9A Main Interface</a></li>
+<li><a href="#pip-settings">Pip Settings</a></li>
 </ul>
 </li>
-<li><a href="#4-extract-correctly">4. Extract Correctly</a></li>
-<li><a href="#5-confirm-emulator-support">5. Confirm Emulator Support</a></li>
-<li><a href="#6-set-emulator-resolution-correctly">6. Set Emulator Resolution Correctly</a></li>
-<li><a href="#7-pip-settings-windows">7. Pip settings (Windows)</a></li>
 </ul>
 </li>
 <li><a href="#related-documentation">Related Documentation</a></li>
@@ -48,102 +49,337 @@
 </ul>
 <h2 id="prerequisites" tabindex="-1">Prerequisites</h2>
 <h3 id="1.-confirm-system-version" tabindex="-1">1. Confirm System Version</h3>
-<p>M9A on Windows only supports Windows 10 and 11. For older Windows versions, please refer to the system issues section in the <a href="FAQ.html#runtime-library-issues">FAQ</a> (Note: Original link points to MAA docs, adapt if needed).</p>
-<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p></p>
-<p>The following content originates from MAA and differs from M9A, so it’s for reference only.
-<a href="https://github.com/MaaXYZ/MaaFramework/issues/405" target="_top" rel="noopener noreferrer">PlayCover is temporarily not supported</a>.</p>
+<div align="center">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Windows</th>
+<th style="text-align:center">macOS</th>
+<th style="text-align:center">Linux</th>
+<th style="text-align:center">Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">System Requirements</td>
+<td style="text-align:center">Windows 10 and above, x86_64 architecture</td>
+<td style="text-align:center">Self-test</td>
+<td style="text-align:center">Self-test</td>
+<td style="text-align:center">Not recommended</td>
+</tr>
+<tr>
+<td style="text-align:center">Environment Setup Required</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+</tr>
+<tr>
+<td style="text-align:center">Emulator Required</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Emulator or containerized Android</td>
+<td style="text-align:center">No</td>
+</tr>
+<tr>
+<td style="text-align:center">Usage</td>
+<td style="text-align:center">GUI or CLI</td>
+<td style="text-align:center">GUI or CLI</td>
+<td style="text-align:center">GUI or CLI</td>
+<td style="text-align:center">CLI</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mac Users</td>
+<td>M9A supports both Apple Silicon and Intel chip Mac computers<br>But it’s more recommended for Intel chip Mac computers to use Mac’s built-in multi-system installation of Windows<br>And use Windows version M9A and emulator</td>
+</tr>
+<tr>
+<td>Android Users</td>
+<td>M9A no longer provides Android version release packages<br>If you are very familiar with mobile phone operations and wish to use Android physical devices, please go to <a href="../develop/Notes-Before-Development.html">Development Documentation</a> to install it yourself<br>You can refer to <a href="https://github.com/MaaXYZ/MaaFramework/issues/475" target="_top" rel="noopener noreferrer">Usage Method</a>, and <a href="https://maa.plus/docs/zh-cn/manual/device/android.html" target="_top" rel="noopener noreferrer">MAA Documentation</a><br>This method is complex and has certain risks, not recommended for beginner players</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>If you are using MacBook with Apple Silicon, please go to <a href="https://maa.plus/docs/zh-cn/manual/device/macos.html#apple-silicon-%E8%8A%AF%E7%89%87" target="_top" rel="noopener noreferrer">this page</a> (Note: Original link points to MAA docs).
-M9A also supports Macs with <a href="https://maa.plus/docs/zh-cn/manual/device/macos.html#intel-%E8%8A%AF%E7%89%87" target="_top" rel="noopener noreferrer">Intel chips</a> (Note: Original link points to MAA docs), but we would rather recommend you to install Windows on your Mac and use the Windows version of M9A.</p>
-<p>If you wish to use M9A on Android devices, please go to <a href="https://maa.plus/docs/zh-cn/manual/device/android.html" target="_top" rel="noopener noreferrer">this page</a> (Note: Original link points to MAA docs).</p>
+<hr>
 <h3 id="2.-install-runtime-environment" tabindex="-1">2. Install Runtime Environment</h3>
-<h4 id="windows" tabindex="-1">Windows</h4>
-<p>For Windows users:</p>
-<ol>
-<li>
-<p><strong>VCRedist x64 must be installed</strong>: This is the basic requirement for running M9A (whether it is the command line version or the graphical interface version MFAAvalonia).</p>
-<ul>
-<li>Click <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_top" rel="noopener noreferrer">vc_redist.x64</a> to download and install.</li>
-</ul>
-</li>
-<li>
-<p><strong>If you use the graphical interface (MFAAvalonia), you need to install .NET 8</strong>:</p>
-<ul>
-<li>It is recommended to visit the <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_top" rel="noopener noreferrer">.NET official download page</a> and download and install the <strong>.NET Desktop Runtime 8</strong> that is suitable for your system (usually the x64 version).</li>
-</ul>
-</li>
-</ol>
-<p><strong>Installation via <code>winget</code> (recommended)</strong>:
-You can also right-click the Windows Start button, select “Command Prompt” or “PowerShell (Administrator)”, and then paste the following command in the terminal and press Enter to conveniently install VCRedist x64 and .NET 8 Desktop Runtime at the same time:</p>
-<pre><code class="language-sh">winget install Microsoft.VCRedist.2017.x64 Microsoft.DotNet.DesktopRuntime.8
-</code></pre>
-<h4 id="other-systems-(linux%2C-macos)" tabindex="-1">Other Systems (Linux, macOS)</h4>
-<h5 id="linux" tabindex="-1">Linux</h5>
-<p><strong>Python Version Dependency</strong>:</p>
+<div align="center">
+<table>
+    <thead>
+        <tr>
+            <th rowspan="2"><div align="center">Launch Method</div></th>
+            <th colspan="2"><div align="center">Windows</div></th>
+            <th colspan="2"><div align="center">macOS</div></th>
+            <th colspan="2"><div align="center">Linux</div></th>
+        </tr>
+        <tr>
+            <th><div align="center">CLI (MaaPiCli)</div></th>
+            <th><div align="center">GUI (MFAAvalonia)</div></th>
+            <th><div align="center">CLI</div></th>
+            <th><div align="center">GUI</div></th>
+            <th><div align="center">CLI</div></th>
+            <th><div align="center">GUI</div></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><div align="center">Install<br>VCRedist Required</div></td>
+            <td colspan="2"><div align="center">Click <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_blank">vc_redist.x64</a> to download or install via winget (see below)</div></td>
+            <td colspan="4"><div align="center">No</div></td>
+        </tr>
+        <tr>
+            <td><div align="center">Install<br>.NET 8 Required</div></td>
+            <td><div align="center">No</div></td>
+            <td><div align="center">Go to <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank">.NET official download page</a> to download the corresponding version or<br>install via winget (see below)</div></td>
+            <td><div align="center">No</div></td>
+            <td><div align="center"><a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank">.NET official download page</a></div></td>
+            <td><div align="center">No</div></td>
+            <td><div align="center">Same as Mac</div></td>
+        </tr>
+        <tr>
+            <td><div align="center">Install<br>Python Required</div></td>
+            <td colspan="4"><div align="center">Included in package, no other operations needed</div></td>
+            <td colspan="2"><div align="center">3.10≤python<3.14</div></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<h4 id="1.-vcredist-x64" tabindex="-1">1. VCRedist x64</h4>
+<p>Windows users <strong>must install VCRedist x64</strong>: This is the basic requirement for running M9A (whether it is the command line version or the graphical interface version).</p>
+<details>
+  <summary>Detailed Installation Methods</summary>
+  <p></p>
+  <blockquote>
+    <ul>
+      <li>
+        Direct download: Click
+        <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_blank">vc_redist.x64</a>
+        to download and install
+      </li>
+      <li>
+        <code>winget</code> installation: Right-click the Windows Start button, select "Command Prompt" or "PowerShell (Administrator)", then paste the following command in the terminal and press Enter:
+        <pre><code>winget install Microsoft.VCRedist.2017.x64</code></pre>
+      </li>
+    </ul>
+  </blockquote>
+</details>
+<h4 id="2.-.net-8" tabindex="-1">2. .NET 8</h4>
+<p>All users using MFAAvalonia need to download and install .NET 8 suitable for your system.</p>
+<details>
+  <summary>Detailed Installation Methods</summary>
+  <p></p>
+  <blockquote>
+    <ul>
+      <li>
+        Self-download: Click
+        <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_blank">.NET official download page</a>
+        , select the version suitable for your system to download and install.
+        <div align="center">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Windows</th>
+                <th>macOS</th>
+                <th>Linux</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>You need to download</td>
+                <td colspan="1">.NET Desktop Runtime</td>
+                <td colspan="2">.NET Runtime</td>
+              </tr>
+              <tr>
+                <td>Installer</td>
+                <td>x64</td>
+                <td colspan="2">
+                  <a href="https://builds.dotnet.microsoft.com/dotnet/scripts/v1/dotnet-install.sh" target="_blank">dotnet-install.sh</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+      <li>
+        (Windows users only) <code>winget</code> installation: Right-click the Windows Start button, select "Command Prompt" or "PowerShell (Administrator)", then paste the following command in the terminal and press Enter:
+        <pre><code>winget install Microsoft.DotNet.DesktopRuntime.8</code></pre>
+      </li>
+    </ul>
+  </blockquote>
+</details>
+<h4 id="3.-python" tabindex="-1">3. Python</h4>
+<p>Linux users need to install Python separately.</p>
+<details>
+<summary>Details</summary>
+<p></p>
+<blockquote>
 <ul>
 <li>Your system needs to have <strong>Python version ≥ 3.10</strong> installed. This is required for M9A to start and manage its internal environment.</li>
 <li>M9A will automatically create and use an independent virtual environment and install the required Python dependency packages (from <code>requirements.txt</code>) when it is run for the first time. You <strong>do not</strong> need to manually create a virtual environment or install these dependencies.</li>
 </ul>
-<h5 id="macos" tabindex="-1">macOS</h5>
-<p><strong>Python environment</strong>: The macOS version of M9A has a built-in embedded Python environment, so you <strong>do not</strong> need to install or configure Python separately. The program will automatically use this embedded environment and manage its dependencies.</p>
-<h5 id="additional-dependencies-for-the-graphical-user-interface-(mfaavalonia)-(applicable-to-linux-and-macos)" tabindex="-1">Additional dependencies for the graphical user interface (MFAAvalonia) (applicable to Linux and macOS)</h5>
-<p>If you plan to use the graphical user interface (MFAAvalonia) on Linux or macOS, <strong>you also need to install the .NET 8 runtime</strong>.</p>
-<ul>
-<li>Please visit the <a href="https://dotnet.microsoft.com/download/dotnet/8.0" target="_top" rel="noopener noreferrer">.NET official download page</a>.</li>
-<li>Select and download and install the appropriate <strong>.NET Runtime</strong> according to your operating system (Linux/macOS) and CPU architecture (e.g. x64, Arm64).</li>
-</ul>
+</blockquote>
+</details>
+<hr>
 <h3 id="3.-download-the-correct-version" tabindex="-1">3. Download the Correct Version</h3>
-<p>Download from the <a href="https://github.com/MAA1999/M9A/releases" target="_top" rel="noopener noreferrer">M9A Releases page</a>.</p>
-<p>Chinese Mainland users can also download it at high speed through <a href="https://mirrorchyan.com/en/download?rid=M9A&amp;source=m9agh-enmd3" target="_top" rel="noopener noreferrer">MirrorChyan</a>.</p>
-<h4 id="windows-1" tabindex="-1">Windows</h4>
-<p>Usually, download the <code>M9A-win-x64-&lt;version&gt;.zip</code> file.</p>
-<ul>
-<li>Unzip the package and run <code>MaaPiCli.exe</code>（command line）or <code>MFAWPF.exe</code> (GUI), both are OK.</li>
-</ul>
-<h4 id="macos-1" tabindex="-1">macOS</h4>
-<ul>
-<li>
-<p>Checking Processor Type (Important: You must select the correct version for proper operation):</p>
-<ol>
-<li>Click the Apple logo in the top-left corner of the screen.</li>
-<li>Select “About This Mac”.</li>
-<li>In the window that appears, you can see the processor information.</li>
-</ol>
-</li>
-<li>
-<p>If you are using an Intel X86 processor, please download <code>M9A-macos-x86_64-vXXX.tar.gz</code></p>
-</li>
-<li>
-<p>If you are using an Apple Silicon series processor such as M1, M2, etc. with ARM architecture, please download <code>M9A-macos-aarch64-vXXX.tar.gz</code></p>
-</li>
-<li>
-<p>Usage:</p>
-<ol>
-<li>
-<p>Open the terminal, decompress the distributed compressed package:</p>
-<p><strong>Option 1: Unzip to the system directory (administrator privileges required)</strong></p>
-<pre><code class="language-shell">sudo mkdir -p /usr/local/bin/M9A
-sudo tar -xzf &lt;downloaded M9A compressed package path&gt; -C /usr/local/bin/M9A
-</code></pre>
-<p><strong>Option 2: Unzip to the user directory (recommended, no sudo required)</strong></p>
-<pre><code class="language-shell">mkdir -p ~/M9A
-tar -xzf &lt;downloaded M9A compressed package path&gt; -C ~/M9A
-</code></pre>
-</li>
-<li>
-<p>Enter the unzip directory and run the program:</p>
-<pre><code class="language-shell">cd /usr/local/bin/M9A
-sudo ./MaaPiCli
-</code></pre>
-</li>
-</ol>
-</li>
-</ul>
-<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p></p>
-<p>If you want to use the <strong>graphic operation page</strong>, please follow the second step and execute <code>MaaPiCli</code> Execute the <code>MFAAvalonia</code> program instead.</p>
+<p>M9A download (update) address: <a href="https://github.com/MAA1999/M9A/releases" target="_top" rel="noopener noreferrer">GitHub Releases page</a>. Click the link, then select the latest version archive suitable for your system in the <code>Assets</code> section.</p>
+<p>Chinese users can also download at high speed through <a href="https://mirrorchyan.com/en/download?rid=M9A&amp;source=m9agh-enmd3" target="_top" rel="noopener noreferrer">MirrorChyan</a>.</p>
+<div align="center">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Windows</th>
+<th style="text-align:center">macOS</th>
+<th style="text-align:center">Linux</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">You need to download</td>
+<td style="text-align:center"><code>M9A-win-x86_64-vXXX.zip</code></td>
+<td style="text-align:center"><code>M9A-macos-x86_64-vXXX.tar.gz</code> or <code>M9A-macos-aarch64-vXXX.tar.gz</code><br>depending on your architecture</td>
+<td style="text-align:center"><code>M9A-linux-x86_64-vXXX.tar.gz</code> or <code>M9A-linux-aarch64-vXXX.tar.gz</code><br>depending on your architecture</td>
+</tr>
+</tbody>
+</table>
 </div>
+<details>
+  <summary>Method for Mac users to check processor architecture</summary>
+  <p></p>
+  <blockquote>
+    <ol>
+      <li>Click the Apple logo in the top-left corner of the screen.</li>
+      <li>Select "About This Mac".</li>
+      <li>In the window that appears, you can see the processor information.</li>
+    </ol>
+    <ul>
+      <li>If using Intel X86 processor, please download <code>M9A-macos-x86_64-vXXX.tar.gz</code></li>
+      <li>If using Apple Silicon series such as M1, M2, etc. ARM architecture processors, please download <code>M9A-macos-aarch64-vXXX.tar.gz</code></li>
+    </ul>
+  </blockquote>
+</details>
+<hr>
+<h3 id="4.-confirm-emulator-and-device-support" tabindex="-1">4. Confirm Emulator and Device Support</h3>
+<div align="center">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Windows</th>
+<th style="text-align:center">macOS</th>
+<th style="text-align:center">Linux</th>
+<th style="text-align:center">Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Emulator Support</td>
+<td style="text-align:center">Supports mainstream emulators</td>
+<td style="text-align:center">Supports mainstream emulators</td>
+<td style="text-align:center">Self-test</td>
+<td style="text-align:center">/</td>
+</tr>
+<tr>
+<td style="text-align:center">ADB Function Required</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+</tr>
+<tr>
+<td style="text-align:center">Notes</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><a href="https://github.com/MaaXYZ/MaaFramework/issues/405" target="_top" rel="noopener noreferrer">PlayCover is temporarily not supported</a></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For emulator support details, please refer to MAA documentation. <strong>For reference only</strong>, please refer to <a href="https://github.com/MaaXYZ/MaaFramework" target="_top" rel="noopener noreferrer">MaaFramework</a> actual support status.</p>
+<details>
+  <summary>MAA Emulator and Device Support Documentation</summary>
+  <p></p>
+  <blockquote>
+  <div align="center">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Windows</th>
+<th>macOS</th>
+<th>Linux</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reference Documentation</td>
+<td><a href="https://maa.plus/docs/zh-cn/manual/device/windows.html" target="_top" rel="noopener noreferrer">Windows Emulators</a></td>
+<td>If your device has Apple Silicon, please refer to:<br><a href="https://maa.plus/docs/zh-cn/manual/device/macos.html#apple-silicon-%E8%8A%AF%E7%89%87" target="_top" rel="noopener noreferrer">Mac emulators running on Apple Silicon platform</a><br>If your device has Intel chip:<br>1. Recommended to use Mac’s built-in multi-system to install Windows<br>and refer to Windows section documentation<br>2. Refer to <a href="https://maa.plus/docs/zh-cn/manual/device/macos.html#intel-%E8%8A%AF%E7%89%87" target="_top" rel="noopener noreferrer">Mac emulators running on Intel platform</a></td>
+<td><a href="https://maa.plus/docs/zh-cn/manual/device/linux.html" target="_top" rel="noopener noreferrer">Linux Emulators and Containers</a></td>
+<td><a href="https://maa.plus/docs/zh-cn/manual/device/android.html" target="_top" rel="noopener noreferrer">Android Physical Devices</a></td>
+</tr>
+</tbody>
+</table>
+  </div>
+  </blockquote>
+</details>
+<hr>
+<h3 id="5.-set-emulator-resolution-correctly" tabindex="-1">5. Set Emulator Resolution Correctly</h3>
+<p>M9A supports mainstream emulators, but you need to set the emulator resolution to meet operational requirements.<br>
+The emulator resolution should be <code>landscape</code> <code>16:9</code> ratio, recommended (and minimum) resolution is <code>1280x720</code>. Running errors caused by non-compliant requirements will not be resolved.</p>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p></p>
+<p>Note that after changing the resolution, the emulator homepage should be horizontal (tablet version), don’t select vertical (mobile version)!</p>
+</div>
+<hr>
+<h3 id="6.-getting-started" tabindex="-1">6. Getting Started</h3>
+<p>M9A supports both command line (MaaPiCli) and graphical interface (MFAAvalonia), but before use, you need to extract the archive correctly.</p>
+<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p>Don’t run the program directly from the compression software!</p>
+</div>
+<p>For general users, it’s recommended to use M9A through <strong>MFAAvalonia</strong>.</p>
+<h4 id="windows" tabindex="-1">Windows</h4>
+<p>Confirm complete extraction and ensure M9A is extracted to an independent folder. Recommended extraction path like: <code>D:\M9A</code>. Except for closing the built-in administrator-approved Administrator account, please do not extract M9A to paths requiring UAC permissions such as <code>C:\</code>, <code>C:\Program Files\</code>, etc.</p>
+<ul>
+<li>After extraction, run <code>MaaPiCli.exe</code> or <code>MFAAvalonia.exe</code></li>
+</ul>
+<h4 id="macos" tabindex="-1">macOS</h4>
+<details>
+  <summary>Details</summary>
+  <p></p>
+  <blockquote>
+<ol>
+<li>
+<p>Open terminal, extract the distributed archive:</p>
+<p><strong>Option 1: Extract to system directory (requires administrator privileges)</strong></p>
+<pre><code class="language-shell">sudo mkdir -p /usr/local/bin/M9A
+sudo tar -xzf &lt;downloaded M9A archive path&gt; -C /usr/local/bin/M9A
+</code></pre>
+<p><strong>Option 2: Extract to user directory (recommended, no sudo required)</strong></p>
+<pre><code class="language-shell">mkdir -p ~/M9A
+tar -xzf &lt;downloaded M9A archive path&gt; -C ~/M9A
+</code></pre>
+</li>
+<li>
+<p>Enter the extraction directory and run the program:</p>
+<pre><code class="language-shell">cd /usr/local/bin/M9A
+./MaaPiCli
+</code></pre>
+</li>
+</ol>
+<p>If you want to use the <strong>graphical interface</strong>, follow step 2 but execute <code>MFAAvalonia</code> instead of <code>MaaPiCli</code>.</p>
 <p>⚠️Gatekeeper security prompt handling:</p>
-<p>In macOS 10.15 (Catalina) and later, Gatekeeper may prevent unsigned applications from running.
+<p>In macOS 10.15 (Catalina) and later, Gatekeeper may prevent unsigned applications from running.<br>
 If you encounter errors such as “Cannot open because the developer cannot be verified”, please choose one of the following solutions:</p>
 <pre><code class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Solution 1: Take MaaPiCli as an example to remove the quarantine attribute (recommended, subject to the actual path)</span>
 sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/MaaPiCli
@@ -157,40 +393,246 @@ sudo spctl --add /usr/local/bin/M9A/MaaPiCli
 sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Or user directory version: xattr -rd com.apple.quarantine ~/M9A/*</span>
 </code></pre>
-<h4 id="linux-1" tabindex="-1">Linux</h4>
-<p>Same as MacOS. Download and grant execute permissions to use <code>MaaPiCli</code> or <code>MFAAvalonia</code>.</p>
-<h4 id="android" tabindex="-1">Android</h4>
-<p><s>This version is not recommended for general users and has been removed from the release version.</s>
-If you are very familiar with mobile phone operation, you can refer to the <a href="https://github.com/MaaXYZ/MaaFramework/issues/475" target="_top" rel="noopener noreferrer">Usage Method</a> and the <a href="../develop/Notes-Before-Development.html">Development Documentation</a> to install it yourself.</p>
-<h3 id="4.-extract-correctly" tabindex="-1">4. Extract Correctly</h3>
-<p>Extract the entire contents of the downloaded <code>.zip</code> file to a folder path that <strong>does not contain any non-English characters or spaces</strong>. For example, <code>D:\M9A</code> is good, but <code>D:\游戏 工具\M9A</code> is bad.</p>
-<h3 id="5.-confirm-emulator-support" tabindex="-1">5. Confirm Emulator Support</h3>
-<p>M9A relies on emulators. Supported emulators are generally listed in the <a href="https://maa.plus/docs/zh-cn/manual/device/" target="_top" rel="noopener noreferrer">List of Supported Emulators and Devices</a> documentation. Common choices include MuMu Player 12, LDPlayer 9, BlueStacks 5, NoxPlayer. Ensure your emulator is supported and properly configured.</p>
-<h3 id="6.-set-emulator-resolution-correctly" tabindex="-1">6. Set Emulator Resolution Correctly</h3>
-<p>The game must run at <strong>1280x720 resolution</strong> inside the emulator. Configure this in the emulator’s display settings. Incorrect resolution is a common cause of recognition failures.</p>
-<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p></p>
-<p>Note that after changing the resolution, the simulator homepage should be horizontal (tablet version), do not select vertical (mobile version)!</p>
+  </blockquote>
+</details>
+<h4 id="linux" tabindex="-1">Linux</h4>
+<p>Same as macOS, download the corresponding version archive, extract and run <code>MaaPiCli</code> or <code>MFAAvalonia</code>.</p>
+<hr>
+<h3 id="7.-configure-m9a" tabindex="-1">7. Configure M9A</h3>
+<p>You can configure M9A according to your needs for a better user experience.</p>
+<p>Some configuration items may cause M9A to <strong>run abnormally</strong> when configured incorrectly or not configured, so it’s recommended to read this section before starting to use.</p>
+<p>This chapter will mainly introduce how to configure M9A through the graphical interface (MFAAvalonia). If you are using the command line version (MaaPiCli), please refer to <a href="./MaaPiCli.html">MaaPiCli Operation Instructions</a>.</p>
+<p>The following demonstrations are for reference only, please refer to the actual software situation.</p>
+<h4 id="first-launch" tabindex="-1">First Launch</h4>
+<details open>
+  <summary>MFA Main Interface Display</summary>
+  <p></p>
+  <blockquote>
+    <img src="https://github.com/user-attachments/assets/540d961e-47ce-490d-a801-89d802f2bbab" alt="Main Interface">
+  </blockquote>
+</details>
+<p>In the main interface, you can see six major sections: <strong><code>Resource Type</code></strong> <strong><code>Task List</code></strong> <strong><code>Task Settings</code></strong> <strong><code>Task Description</code></strong> <strong><code>Connection</code></strong> <strong><code>Log</code></strong>.</p>
+<div class="markdown-alert markdown-alert-caution"><p class="markdown-alert-title"><svg class="octicon octicon-stop mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Caution</p><p>When starting MFA for the first time, M9A will initialize. After the <code>Log</code> section shows “<strong>AgentServer Started</strong>” until you see “<strong>All tasks completed</strong>”, please do not click <code>Stop Tasks</code>.</p>
 </div>
-<h3 id="7.-pip-settings-(windows)" tabindex="-1">7. Pip settings (Windows)</h3>
-<p>Content in <code>config/pip_config.json</code> :</p>
+<p>When M9A is running tasks, some settings in the main interface cannot be modified, such as the <code>Connection</code> section. At this time, you can first enter the global settings interface to configure.</p>
+<hr>
+<h4 id="m9a-settings-interface" tabindex="-1">M9A Settings Interface</h4>
+<p>Click the gear button in the lower left corner of the main interface to enter the M9A settings interface.</p>
+<p>Users using MFA update-related functions should configure <code>Update Settings</code>. Users with multi-instance and auto-start needs should configure <code>Startup Settings</code>.</p>
+<p><strong><code>Update Settings</code></strong></p>
+<ul>
+<li><code>Resource Download Source</code> is used to specify the download source used for updates. <code>CDK</code> refers to MirrorChyan CDK, <code>Token</code> refers to GitHub Personal Access Token.</li>
+<li>When configured incorrectly, M9A will not be able to use update-related functions normally.</li>
+</ul>
+<details open>
+  <summary>Details</summary>
+  <p></p>
+  <blockquote>
+    <ul>
+      <details open>
+        <summary>Resource Download Source</summary>
+        <ul>
+          <li>Uses <code>MirrorChyan</code> by default.</li>
+          <li>Users who haven't purchased MirrorChyan should change to <code>GitHub</code>.</li>
+        </ul>
+      </details>
+      <details open>
+        <summary>CDK or Token</summary>
+        <ul>
+          <li>Users updating through MirrorChyan should fill in CDK. <a href="https://mirrorchyan.com/en/get-start?rid=MFAAvalonia%5E&source=m9agh-enmd4" target="_blank">About MirrorChyan</a></li>
+          <li>Users updating through GitHub can fill in Token to improve GitHub API access rate limits. <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token" target="_blank">Token acquisition method 1</a> <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic" target="_blank">method 2</a></li>
+        </ul>
+      </details>
+    </ul>
+  </blockquote>
+</details>
+  <details>
+    <summary>Github source rate limit causing update failure</summary>
+    <p></p>
+    <blockquote>
+      <ul>
+        <img src="https://github.com/user-attachments/assets/69192c43-f257-40ba-b5d0-918e6b508f80" alt="rate limit exceeded">
+      </ul>
+    </blockquote>
+  </details>
+<hr>
+<p><strong><code>Startup Settings</code></strong></p>
+<ul>
+<li><code>Software Path</code> is used to specify the executable file path of the emulator. When configured incorrectly, M9A will not be able to start the emulator correctly.</li>
+<li><code>Additional Commands</code> is used to specify parameters when the emulator starts. Generally speaking, <code>Additional Commands</code> is only used to configure emulator multi-instance numbers.</li>
+</ul>
+<details open>
+  <summary>Details</summary>
+  <p></p>
+  <blockquote>
+    <ul>
+      <details>
+        <summary>Software Path</summary>
+        <ul>
+          <li>MuMu 12 Emulator Reference</li>
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Path Format</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MuMu 12 Emulator<br>Below 5.0</td>
+                  <td><code>{Installation Directory}\shell\MuMuPlayer.exe</code></td>
+                </tr>
+                <tr>
+                  <td>MuMu 12 Emulator<br>5.0 and above</td>
+                  <td><code>{Installation Directory}\nx_device\12.0\shell\MuMuNxDevice.exe</code></td>
+                </tr>
+              </tbody>
+            </table>
+        </ul>
+      </details>
+      <details>
+        <summary>Additional Commands</summary>
+          <ul>
+            <li>X is the multi-instance number</li>
+            <table>
+              <thead>
+                <tr>
+                <th></th>
+                <th>Parameter Format</th>
+                <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                <td>MuMu Emulator</td>
+                <td><code>-v X</code></td>
+                <td><code>-v 0</code></td>
+                </tr>
+                <tr>
+                <td>LDPlayer</td>
+                <td><code>index=X</code></td>
+                <td><code>index=0</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </ul>
+      </details>
+      <details>
+        <summary>MuMu Emulator Automatic Path Acquisition Method</summary>
+          <ol>
+            <li>Ensure there is a emulator shortcut with 1999 application installed on the desktop.</li>
+            <li>Click the icon to the right of the <code>Software Path</code> input box to enter the file selection interface, select the 1999 shortcut on the desktop, and the path will be automatically filled in.</li>
+          </ol>
+          <ul>
+            <img src="https://github.com/user-attachments/assets/2289453c-dbbf-41a7-8d28-efac0f24d6e3" alt="image_439">
+          </ul>
+      </details>
+    </ul>
+  </blockquote>
+</details>
+<hr>
+<h4 id="m9a-main-interface" tabindex="-1">M9A Main Interface</h4>
+<p>At least configure <strong><code>Resource Type</code></strong> and <strong><code>Connection</code></strong>. When configured incorrectly, M9A cannot be used normally.</p>
+<p><strong><code>Resource Type</code></strong></p>
+  <details open>
+      <summary>Details</summary>
+      <p></p>
+      <blockquote>
+        <ul>
+          <li>You need to select the 1999 server installed in the emulator.</li>
+          <li>Currently supports: <b>Official Server</b>, <b>Bilibili Server</b>, <b>International Server (EN)</b>, <b>International Server (JP)</b>, <b>OPPO Server</b>, <b>Xiaomi Server</b>, <b>QQ Server</b>.</li>
+        </ul>
+      </blockquote>
+    </details>
+<hr>
+<p><strong><code>Connection</code></strong></p>
+<p>M9A requires correct ADB connection to execute tasks on the <strong>target</strong> emulator. In most cases, you only need to keep only the target emulator running and click “Refresh” to complete the connection. If you need to manually configure ADB parameters, please refer to <a href="./connection.html">Connection Settings</a>.</p>
+  <details>
+    <summary>Illustration</summary>
+    <p></p>
+    <blockquote>
+      <ul>
+        <img src="https://github.com/user-attachments/assets/8e3f0f90-4e0d-46e2-b718-837a6e9ae152" alt="image_440">
+      </ul>
+    </blockquote>
+  </details>
+  <details open>
+    <summary>Details</summary>
+    <p></p>
+    <blockquote>
+      <ul>
+        <details open>
+          <summary>Current Controller</summary>
+            <ul>
+              <li>Shows the currently connected ADB controller (emulator and ADB address).</li>
+            </ul>
+        </details>
+        <details open>
+          <summary>Interface Button Descriptions</summary>
+            <ul>
+              <li>Click <b>Custom</b>: Modify ADB parameters (generally no manual modification required).</li>
+              <li>Click <b>Refresh</b>: Re-detect all running emulators.</li>
+              <li><b>Connection Status</b>: Green indicates connected.</li>
+            </ul>
+        </details>
+      </ul>
+    </blockquote>
+  </details>
+<hr>
+<p><strong><code>Task List</code></strong></p>
+  <details>
+    <summary>Illustration</summary>
+    <p></p>
+    <blockquote>
+      <ul>
+        <img src="https://github.com/user-attachments/assets/56b031b4-db6c-40a4-85a6-557fe5f4ad80" alt="image_441">
+      </ul>
+    </blockquote>
+  </details>
+  <details open>
+    <summary>Details</summary>
+    <p></p>
+    <blockquote>
+      <ul>
+        <li>The checkbox before the task name is used to enable/disable tasks</li>
+        <li>Right-clicking the checkbox will execute that task once</li>
+        <li>Click the add task button in the upper right corner to add tasks not visible in the current list or repeatedly add existing tasks</li>
+        <li>Click the button to the right of the task to view <b>Task Settings</b> and <b>Task Description</b></li>
+        <li>Drag task names to adjust task order</li>
+      </ul>
+    </blockquote>
+  </details>
+<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p></p>
+<p>Most tasks need to be configured correctly before use, and some tasks also need to be executed in specific scenarios according to task descriptions. Before enabling tasks, please ensure you have read and understood the <strong>Task Description</strong> for that task, and configure <strong>Task Settings</strong> according to actual situations. For more information about tasks, please refer to <a href="./feature.html">Feature Introduction</a>.</p>
+</div>
+<hr>
+<h4 id="pip-settings" tabindex="-1">Pip Settings</h4>
+<p>M9A supports configuring pip installation related settings through the <code>config/pip_config.json</code> file. Generally, you don’t need to modify this file unless you have special requirements.</p>
+  <details>
+    <summary>config/pip_config.json Example</summary>
+    <p></p>
+    <blockquote>
 <pre><code class="language-jsonc"><span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;enable_pip_install&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// Whether to enable pip installation, default true, recommended to enable</span>
-    <span class="hljs-attr">&quot;last_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;v3.2.0&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// Read the version of interface.json when pip is installed, compare it with the version when it is started, and try to install it if it is different</span>
-    <span class="hljs-attr">&quot;mirror&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://mirrors.ustc.edu.cn/pypi/simple&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// Mirror source. The parameters after pip install -i can be filled in according to personal needs. Note that users outside the mainland should modify the value to &quot;&quot;</span>
+    <span class="hljs-attr">&quot;enable_pip_install&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">// Whether to enable pip installation, default true, recommended to enable</span>
+    <span class="hljs-attr">&quot;last_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;v3.2.0&quot;</span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">// Version of interface.json read when pip installation is completed, compared with version at startup, tries to install if different</span>
+    <span class="hljs-attr">&quot;mirror&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://mirrors.ustc.edu.cn/pypi/simple&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// Mirror source. Parameters after pip install -i, can be filled according to personal needs. Note that users outside mainland China should modify the value to &quot;&quot;</span>
     <span class="hljs-attr">&quot;backup_mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-     <span class="hljs-string">&quot;https://pypi.tuna.tsinghua.edu.cn/simple&quot;</span><span class="hljs-punctuation">,</span>
-     <span class="hljs-string">&quot;https://mirrors.cloud.tencent.com/pypi/simple/&quot;</span><span class="hljs-punctuation">,</span>
-     <span class="hljs-string">&quot;https://pypi.org/simple&quot;</span>
-    <span class="hljs-punctuation">]</span>  <span class="hljs-comment">// Backup mirror source</span>
+    <span class="hljs-string">&quot;https://pypi.tuna.tsinghua.edu.cn/simple&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-string">&quot;https://mirrors.cloud.tencent.com/pypi/simple/&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-string">&quot;https://pypi.org/simple&quot;</span>
+    <span class="hljs-punctuation">]</span>  <span class="hljs-comment">// Backup mirror sources</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
+  </blockquote>
+</details>
+<hr>
 <h2 id="related-documentation" tabindex="-1">Related Documentation</h2>
 <ul>
 <li><a href="./connection.html">Connection Settings</a>: How to configure ADB and connect to the emulator.</li>
-<li><a href="./MaaPiCli.html">MaaPiCli Usage Instructions</a>——Introduces the usage of MaaPiCli<s>Translation Documentation</s></li>
-<li><a href="./feature.html">Feature Introduction</a>——Introduces the precautions for some features</li>
+<li><a href="./MaaPiCli.html">MaaPiCli Usage Instructions</a>: Introduces the usage of MaaPiCli</li>
+<li><a href="./feature.html">Feature Introduction</a>: Introduces the precautions for some features</li>
 <li><a href="./faq.html">FAQ</a>: Solutions to common problems.</li>
-<li><a href="./MirrorChyan.html">MirrorChyan Usage Instructions</a>——Introduces the usage of MirrorChyan</li>
+<li><a href="./MirrorChyan.html">MirrorChyan Usage Instructions</a>: Introduces the usage of MirrorChyan</li>
 </ul>
 
     </article>

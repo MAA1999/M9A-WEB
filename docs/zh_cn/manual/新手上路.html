@@ -25,7 +25,7 @@
 </li>
 <li><a href="#3-%E4%B8%8B%E8%BD%BD%E6%AD%A3%E7%A1%AE%E7%9A%84%E7%89%88%E6%9C%AC">3. 下载正确的版本</a></li>
 <li><a href="#4-%E7%A1%AE%E8%AE%A4%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%92%8C%E8%AE%BE%E5%A4%87%E6%94%AF%E6%8C%81">4. 确认模拟器和设备支持</a></li>
-<li><a href="#5-%E6%AD%A3%E7%A1%AE%E8%AE%BE%E7%BD%AE%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%88%86%E8%BE%A8%E7%8E%87">5. 正确设置模拟器分辨率</a></li>
+<li><a href="#5-%E6%AD%A3%E7%A1%AE%E8%AE%BE%E7%BD%AE%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%88%86%E8%BE%A8%E7%8E%87">5 正确设置模拟器分辨率</a></li>
 <li><a href="#6-%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8">6. 开始使用</a>
 <ul>
 <li><a href="#windows">Windows</a></li>
@@ -38,6 +38,7 @@
 <li><a href="#%E9%A6%96%E6%AC%A1%E5%90%AF%E5%8A%A8">首次启动</a></li>
 <li><a href="#m9a-%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2">M9A 设置界面</a></li>
 <li><a href="#m9a-%E4%B8%BB%E7%95%8C%E9%9D%A2">M9A 主界面</a></li>
+<li><a href="#pip-%E8%AE%BE%E7%BD%AE">pip 设置</a></li>
 </ul>
 </li>
 </ul>
@@ -62,10 +63,10 @@
 <tbody>
 <tr>
 <td style="text-align:center">系统要求</td>
-<td style="text-align:center">x86 - 64 架构、 Windows 10 及以上</td>
+<td style="text-align:center">Windows 10 及以上、x86_64 架构</td>
 <td style="text-align:center">自行尝试</td>
 <td style="text-align:center">自行尝试</td>
-<td style="text-align:center">不受支持</td>
+<td style="text-align:center">不推荐</td>
 </tr>
 <tr>
 <td style="text-align:center">需要配置环境</td>
@@ -79,14 +80,14 @@
 <td style="text-align:center">是</td>
 <td style="text-align:center">是</td>
 <td style="text-align:center">模拟器或容器化安卓</td>
-<td style="text-align:center">/</td>
+<td style="text-align:center">否</td>
 </tr>
 <tr>
 <td style="text-align:center">使用方式</td>
 <td style="text-align:center">图形界面或命令行</td>
 <td style="text-align:center">图形界面或命令行</td>
 <td style="text-align:center">图形界面或命令行</td>
-<td style="text-align:center">/</td>
+<td style="text-align:center">命令行</td>
 </tr>
 </tbody>
 </table>
@@ -131,12 +132,12 @@
     </thead>
     <tbody>
         <tr>
-            <td><div align="center">需要安装<br>VCRedist</div></td>
+            <td><div align="center">需安装<br>VCRedist</div></td>
             <td colspan="2"><div align="center">点击 <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_blank">vc_redist.x64</a> 下载或通过 winget 安装（详见下方）</div></td>
             <td colspan="4"><div align="center">否</div></td>
         </tr>
         <tr>
-            <td><div align="center">需要安装<br>.NET 8</div></td>
+            <td><div align="center">需安装<br>.NET 8</div></td>
             <td><div align="center">否</div></td>
             <td><div align="center">前往 <a href="https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0" target="_blank">.NET 官方下载页面</a> 下载对应版本或<br>通过 winget 安装（详见下方）</div></td>
             <td><div align="center">否</div></td>
@@ -145,7 +146,7 @@
             <td><div align="center">同 Mac</div></td>
         </tr>
         <tr>
-            <td><div align="center">需要安装<br>Python</div></td>
+            <td><div align="center">需安装<br>Python</div></td>
             <td colspan="4"><div align="center">压缩包自带，无需其他操作</div></td>
             <td colspan="2"><div align="center">3.10≤python<3.14</div></td>
         </tr>
@@ -335,19 +336,19 @@
  </details>
 <hr>
 <h3 id="5-%E6%AD%A3%E7%A1%AE%E8%AE%BE%E7%BD%AE%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%88%86%E8%BE%A8%E7%8E%87" tabindex="-1">5 正确设置模拟器分辨率</h3>
-<p>M9A 支持主流模拟器，但您需要设置模拟器分辨率以达到运行要求。请自行在模拟器设置中更改分辨率。</p>
-<p>模拟器分辨率应为<code>横屏</code> <code>16:9</code> 比例，推荐（以及最低）分辨率为 <code>1280x720</code>，不符合要求造成的运行报错将不会被解决。</p>
+<p>M9A 支持主流模拟器，但您需要设置模拟器分辨率以达到运行要求。<br>
+模拟器分辨率应为<code>横屏</code> <code>16:9</code> 比例，推荐（以及最低）分辨率为 <code>1280x720</code>，不符合要求造成的运行报错将不会被解决。</p>
 <div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p></p>
 <p>注意修改分辨率后模拟器主页应该是横屏（平板版），不要选成竖屏（手机版）了！</p>
 </div>
 <hr>
 <h3 id="6.-%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8" tabindex="-1">6. 开始使用</h3>
-<p>M9A 支持通过命令行（ MaaPiCli ）或图形化界面（ MFAAvalonia ）来执行任务。但在使用之前，您必须正确解压 M9A 的压缩包。</p>
+<p>M9A 支持通过命令行（MaaPiCli）和图形化界面（MFAAvalonia），但在使用前，需正确解压压缩包。</p>
 <div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p>不要在压缩软件直接打开程序！</p>
 </div>
 <p>对于一般用户，推荐通过 <strong>MFAAvalonia</strong> 使用 M9A 。</p>
 <h4 id="windows" tabindex="-1">Windows</h4>
-<p>确认解压完整，并确保将 M9A 解压到一个独立的文件夹中。良好的解压路径如：<code>D:\M9A</code>。除关闭内建管理员批准的Administrator账号外，请勿将 MAA 解压到如 <code>C:\</code>、<code>C:\Program Files\</code> 等需要 UAC 权限的路径。</p>
+<p>确认解压完整，并确保将 M9A 解压到一个独立的文件夹中。推荐解压路径如：<code>D:\M9A</code>。除关闭内建管理员批准的Administrator账号外，请勿将 MAA 解压到如 <code>C:\</code>、<code>C:\Program Files\</code> 等需要 UAC 权限的路径。</p>
 <ul>
 <li>解压后运行 <code>MaaPiCli.exe</code> 或 <code>MFAAvalonia.exe</code> 即可</li>
 </ul>
@@ -394,30 +395,29 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
   </blockquote>
 </details>
 <h4 id="linux" tabindex="-1">Linux</h4>
-<p>同macOS，下载对应版本的压缩包，运行 <code>MaaPiCli</code> 或 <code>MFAAvalonia</code> 即可。</p>
+<p>同macOS，下载对应版本的压缩包，解压后运行 <code>MaaPiCli</code> 或 <code>MFAAvalonia</code> 即可。</p>
 <hr>
 <h3 id="7.-%E9%85%8D%E7%BD%AE-m9a" tabindex="-1">7. 配置 M9A</h3>
-<p>为了得到更好的使用体验，您可以根据自己的需求配置 M9A。</p>
-<p>部分配置项在配置错误或未配置时可能会导致 M9A <strong>无法正常工作</strong>，因此推荐您在开始使用前阅读本章节。</p>
-<p>本章将主要介绍如何通过图形界面（ MFAAvalonia ）配置 M9A 。如果您正在使用命令行版本（ MaaPiCli ），请参考 <a href="./MaaPiCli.html">MaaPiCli操作说明</a> 。</p>
-<p>本章节演示时所使用的图形界面为 MFAAvalonia 1.4.1 版本，M9A 版本为 v3.7.10 。请以实际使用的版本为准。</p>
+<p>您可以根据自己的需求配置 M9A 以得到更好的使用体验。</p>
+<p>部分配置项在配置错误或未配置时可能会导致 M9A <strong>运行异常</strong>，因此推荐您在开始使用前阅读本章节。</p>
+<p>本章将主要介绍如何通过图形界面（MFAAvalonia）配置 M9A 。如果您正在使用命令行版本（MaaPiCli），请参考 <a href="./MaaPiCli.html">MaaPiCli操作说明</a> 。</p>
+<p>下列演示仅供参考，请以软件实际情况为准。</p>
 <h4 id="%E9%A6%96%E6%AC%A1%E5%90%AF%E5%8A%A8" tabindex="-1">首次启动</h4>
-<p>首次通过 MFAAvalonia 启动 M9A 时，您将看到 MFA 的主界面：</p>
-<details>
-  <summary>示意图</summary>
+<details open>
+  <summary>MFA主页面展示</summary>
   <p></p>
   <blockquote>
     <img src="https://github.com/user-attachments/assets/540d961e-47ce-490d-a801-89d802f2bbab" alt="主界面">
   </blockquote>
 </details>
-<p>在主界面中，您可以看到窗口被分为 <strong><code>资源类型</code></strong> <strong><code>任务列表</code></strong> <strong><code>任务设置</code></strong> <strong><code>任务说明</code></strong> <strong><code>连接</code></strong> 以及 <strong><code>日志</code></strong> 六个大板块。</p>
-<div class="markdown-alert markdown-alert-caution"><p class="markdown-alert-title"><svg class="octicon octicon-stop mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Caution</p><p>首次启动 MFA 时， M9A 将进行初始化。直到 <code>日志</code> 板块显示 “<strong>AgentServer 启动</strong>”、“<strong>任务已全部完成</strong>” 前，请不要点击 <code>停止任务</code> 按钮，否则可能会导致 M9A 无法正常工作。</p>
+<p>在主界面中，可看到 <strong><code>资源类型</code></strong> <strong><code>任务列表</code></strong> <strong><code>任务设置</code></strong> <strong><code>任务说明</code></strong> <strong><code>连接</code></strong> <strong><code>日志</code></strong> 六大板块。</p>
+<div class="markdown-alert markdown-alert-caution"><p class="markdown-alert-title"><svg class="octicon octicon-stop mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Caution</p><p>首次启动 MFA 时， M9A 将进行初始化。在 <code>日志</code> 板块显示 “<strong>AgentServer 启动</strong>”后，直到看见 “<strong>任务已全部完成</strong>” 前，请不要点击 <code>停止任务</code> 。</p>
 </div>
-<p>M9A 初始化时，您可能无法修改主界面的一些设置，例如：<code>连接</code> 板块的设置按钮可能会被禁用。此时，您可以先进入设置界面配置 M9A 。等待初始化完成后，您可以返回主界面进行其他操作。</p>
+<p>M9A 运行任务时，无法修改主界面的部分设置，如 <code>连接</code> 板块。此时，可先进入全局设置界面配置。</p>
 <hr>
 <h4 id="m9a-%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2" tabindex="-1">M9A 设置界面</h4>
-<p>击主界面左下角的齿轮按钮进入 M9A 设置界面。</p>
-<p>使用 MFA 更新有关功能的用户应当配置 <code>更新设置</code> 。有多开和自启需求的用户应当配置 <code>启动设置</code> 。</p>
+<p>点击主界面左下角的齿轮按钮进入 M9A 设置界面。</p>
+<p>使用 MFA 更新相关功能的用户应配置 <code>更新设置</code> 。有多开和自启需求的用户应配置 <code>启动设置</code> 。</p>
 <p><strong><code>更新设置</code></strong></p>
 <ul>
 <li><code>资源下载源</code> 用于指定更新时使用的下载源。 <code>CDK</code> 指 Mirror 酱 CDK ， <code>Token</code> 指 GitHub Personal Access Token 。</li>
@@ -439,15 +439,14 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
         <summary>CDK 或 Token</summary>
         <ul>
           <li>通过 Mirror 酱更新的用户应当填写 CDK 。<a href="https://mirrorchyan.com/zh/get-start?rid=MFAAvalonia%5E&source=m9agh-md4" target="_blank">关于 Mirror 酱</a></li>
-          <li>通过 GitHub 更新的用户可以填写 Token 。<a href="https://github.com/settings/tokens" target="_blank">关于 Token</a> </li>
+          <li>通过 GitHub 更新的用户可填写 Token 以提高 Github API 的访问速率限制。<a href="https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#%E5%88%9B%E5%BB%BA-fine-grained-personal-access-token" target="_blank">Token 获取方法1</a> <a href="https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#%E5%88%9B%E5%BB%BA-personal-access-token-classic" target="_blank">方法2</a></li>
         </ul>
       </details>
     </ul>
   </blockquote>
 </details>
-<p>填写 Token 有助于缓解通过 GitHub 更新时触发 API 限制而导致更新失败的问题。</p>
   <details>
-    <summary>更新失败：Forbidden - rate limit exceeded</summary>
+    <summary>Github 源速率限制导致更新失败</summary>
     <p></p>
     <blockquote>
       <ul>
@@ -459,9 +458,8 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
 <p><strong><code>启动设置</code></strong></p>
 <ul>
 <li><code>软件路径</code> 用于指定模拟器的可执行文件路径。配置错误时 M9A 将无法正确启动模拟器。</li>
-<li><code>附加命令</code> 用于指定模拟器启动时的参数。一般而言， <code>附加命令</code> 仅需配置模拟器多开号。配置错误时 MFA 可能会启动或关掉错误的多开。</li>
+<li><code>附加命令</code> 用于指定模拟器启动时的参数。一般而言， <code>附加命令</code> 仅用于配置模拟器多开号。</li>
 </ul>
-<p>本文档持续维护中，欢迎 issue 或 PR 或加群反馈更多模拟器的配置方法。</p>
 <details open>
   <summary>详情</summary>
   <p></p>
@@ -470,7 +468,7 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
       <details>
         <summary>软件路径</summary>
         <ul>
-          <li>请自行寻找各模拟器的安装目录</li>
+          <li>MuMu 12 模拟器参考</li>
             <table>
               <thead>
                 <tr>
@@ -507,12 +505,12 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
                 <tr>
                 <td>MuMu 模拟器</td>
                 <td><code>-v X</code></td>
-                <td><code>-v 0</code> 或 <code>-v 1</code></td>
+                <td><code>-v 0</code></td>
                 </tr>
                 <tr>
                 <td>雷电模拟器</td>
                 <td><code>index=X</code></td>
-                <td><code>index=0</code> 或 <code>index=1</code></td>
+                <td><code>index=0</code></td>
                 </tr>
               </tbody>
             </table>
@@ -521,9 +519,8 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
       <details>
         <summary>MuMu 模拟器自动获取路径方法</summary>
           <ol>
-            <li>确保桌面有 1999 的模拟器快捷方式。</li>
-            <li>点击 <code>软件路径</code> 输入框右侧图标进入文件选择界面，打开桌面上的 1999 快捷方式，路径将自动填入。</li>
-            <li>其他模拟器自测，如果有效欢迎反馈</li>
+            <li>确保桌面有安装 1999 应用的模拟器快捷方式。</li>
+            <li>点击 <code>软件路径</code> 输入框右侧图标进入文件选择界面，选择桌面上的 1999 快捷方式，路径将自动填入。</li>
           </ol>
           <ul>
             <img src="https://github.com/user-attachments/assets/2289453c-dbbf-41a7-8d28-efac0f24d6e3" alt="image_439">
@@ -534,21 +531,21 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
 </details>
 <hr>
 <h4 id="m9a-%E4%B8%BB%E7%95%8C%E9%9D%A2" tabindex="-1">M9A 主界面</h4>
-<p>您至少应当配置 <strong><code>资源类型</code></strong> 和 <strong><code>连接</code></strong> 。配置错误时将无法使用 M9A 。</p>
+<p>至少配置 <strong><code>资源类型</code></strong> 和 <strong><code>连接</code></strong> 。配置错误时将无法正常使用 M9A 。</p>
 <p><strong><code>资源类型</code></strong></p>
   <details open>
       <summary>详情</summary>
       <p></p>
       <blockquote>
         <ul>
-          <li>必须选择与模拟器中安装的 1999 区服类型一致。</li>
-          <li>截至 M9A v3.8.1，支持：<b>官服</b>、<b>B服</b>、<b>国际服（EN）</b>、<b>国际服（JP）</b>、<b>OPPO服</b>、<b>小米服</b>、<b>QQ服</b>。</li>
+          <li>需选择模拟器中安装的 1999 区服。</li>
+          <li>目前支持：<b>官服</b>、<b>B服</b>、<b>国际服（EN）</b>、<b>国际服（JP）</b>、<b>OPPO服</b>、<b>小米服</b>、<b>QQ服</b>。</li>
         </ul>
       </blockquote>
     </details>
 <hr>
 <p><strong><code>连接</code></strong></p>
-<p>M9A 需要正确的 ADB 连接才能在<strong>目标</strong>模拟器上执行任务。绝大多数情况下，您只需点击“刷新”，然后在“当前控制器”中选择对应的模拟器和 ADB 地址即可完成连接。如需手动配置 ADB 参数，请参考 <a href="./%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE.html">连接设置</a>。</p>
+<p>M9A 需正确的 ADB 连接才能在<strong>目标</strong>模拟器执行任务。绝大多数情况下，您只需保持有且仅有目标模拟器启动，点击“刷新”即可完成连接。如需手动配置 ADB 参数，请参考 <a href="./%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE.html">连接设置</a>。</p>
   <details>
     <summary>示意图</summary>
     <p></p>
@@ -577,15 +574,6 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
               <li><b>连接状态</b>：绿色为已连接。</li>
             </ul>
         </details>
-        <details>
-          <summary>MuMu 5.0 版本变更提醒</summary>
-            <ul>
-              <li>MuMu 12 新版本修改了 adb 路径、模拟器程序名及安装路径。</li>
-              <li>若使用 MuMu 默认 adb，须重新检测或手动修改 <code>当前控制器</code>。</li>
-              <li>原路径：<code>{安装目录}\shell\adb.exe</code></li>
-              <li>新路径：<code>{安装目录}\nx_main\adb.exe</code></li>
-            </ul>
-        </details>
       </ul>
     </blockquote>
   </details>
@@ -605,20 +593,16 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
     <p></p>
     <blockquote>
       <ul>
-        <li>点击任务名前复选框启用/禁用任务。</li>
-        <li>右键单击复选框将任务添加到列表中单次执行。</li>
-        <li>点击右上角添加任务按钮可以添加当前列表不可见任务或重复添加已有任务</li>
-        <li>点击任务右侧按钮查看 <b>任务设置</b> 与 <b>任务说明</b>。</li>
-        <li>拖动任务名可调整任务顺序。</li>
-        <li>点击 <b>开始任务</b>，M9A 将按顺序执行已启用任务。</li>
+        <li>任务名前的复选框用于启用/禁用任务</li>
+        <li>右键单击复选框将单次执行该任务</li>
+        <li>点击右上角添加任务按钮可添加当前列表不可见任务或重复添加已有任务</li>
+        <li>点击任务右侧按钮查看 <b>任务设置</b> 与 <b>任务说明</b></li>
+        <li>拖动任务名可调整任务顺序</li>
       </ul>
     </blockquote>
   </details>
 <div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p></p>
-<p>当前版本下，如果新版本新增了某些功能，您在更新之后可能会看不到这些任务（功能）。您需要手动添加这些新任务到任务列表中。</p>
-</div>
-<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p></p>
-<p>部分任务具有使用条件或需要您正确配置他们。启用任务前，请确保您已阅读并理解了该任务的<strong>任务说明</strong>，并结合实际情况对<strong>任务设置</strong>进行配置。更多关于任务的说明请参阅 <a href="./%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html">功能介绍</a> 。</p>
+<p>大部分任务需在使用前正确配置，少部分任务还需根据任务说明在特定场景执行。启用任务前，请确保您已阅读并理解了该任务的<strong>任务说明</strong>，并结合实际情况对<strong>任务设置</strong>进行配置。更多关于任务的说明请参阅 <a href="./%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html">功能介绍</a> 。</p>
 </div>
 <hr>
 <h4 id="pip-%E8%AE%BE%E7%BD%AE" tabindex="-1">pip 设置</h4>
