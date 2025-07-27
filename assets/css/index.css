@@ -1,0 +1,100 @@
+body {
+    height: 0px;
+    margin: 0px;
+    background-color: #191918;
+    background-image: url("/assets/image/bg.webp");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* 神秘学家容器 */
+.char-container {
+    width: 48vw;
+    height: 90vh;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 5%);
+    transition: transform 0.5s ease-in-out;
+}
+
+.char-bg,
+.char {
+    position: absolute;
+    max-height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.char-bg {
+    z-index: -1;
+    transform: translate(-40%, -65%);
+}
+
+.click .char-container {
+    transform: translate(-105%, 5%);
+}
+
+@media (max-width: 768px) {
+    .char-bg,
+    .char {
+        max-width: 100%;
+    }
+
+    /* .char {
+                position: unset;
+                transform: unset;
+            } */
+
+    .char-container {
+        width: 80vw;
+        /* height: max-content; */
+        /* transform: translate(-50%, 25%); */
+    }
+
+    .click .char-container {
+        display: none;
+    }
+}
+
+.tooltip {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 300px;
+}
+
+#bgCanvas {
+    position: absolute;
+    top: 0;
+    z-index: -999;
+}
+
+@media (max-width: 768px) {
+    .tooltip {
+        /* top: auto; */
+        /* left: 50%; */
+        /* transform: translateX(-50%); */
+        width: max-content;
+    }
+
+    .click .tooltip {
+        display: none;
+    }
+}

@@ -3,6 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/assets/js/iframe.js"></script>
     <link rel="stylesheet" href="/assets/css/markdown.css">
     <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
 </head>
@@ -34,7 +35,7 @@
 <p>If the goal is merely to standardize node names, use VSCode’s global search and replace functionality.<br>
 However, ensure that replacements include double quotes to avoid modifying other nodes containing the node name.</p>
 <h4 id="simplifying-task-flows-and-reducing-coupling" tabindex="-1">Simplifying Task Flows and Reducing Coupling</h4>
-<p>First, read <a href="./Writing-Pipelines.html#node-connections">Node Connections</a> and refactor towards adhering to connection principles.</p>
+<p>First, read <a href="./Writing-Pipelines.html?iframe#node-connections">Node Connections</a> and refactor towards adhering to connection principles.</p>
 <p>Some nodes can be moved to the <code>interrupt</code> of the ancestor node of the current node.<br>
 After moving, remove unnecessary <code>next</code> nodes to avoid continuing the main task chain in the <code>interrupt</code>, which could cause errors in subsequent tasks and return to the ancestor node.</p>
 <h4 id="merging-nodes-with-similar-functions" tabindex="-1">Merging Nodes with Similar Functions</h4>

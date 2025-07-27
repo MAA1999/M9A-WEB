@@ -3,6 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/assets/js/iframe.js"></script>
     <link rel="stylesheet" href="/assets/css/markdown.css">
     <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
 </head>
@@ -71,7 +72,7 @@ System.Windows.Markup.XamlParseException: Exception has been thrown by the targe
 <p>When using MaaPiCli, you see <code>Application Error: The application was unable to start correctly</code></p>
 </li>
 </ol>
-<p>The above generally indicate runtime library issues. You need to <a href="./newbie.html#2-install-runtime-environment">update the runtime libraries</a>.</p>
+<p>The above generally indicate runtime library issues. You need to <a href="./newbie.html?iframe#2-install-runtime-environment">update the runtime libraries</a>.</p>
 <p>If updating the runtime libraries still doesn’t solve the problem, both startup methods <strong>crash immediately</strong>, and no log files are generated in the current directory, it’s likely another dependency-related issue.
 Please report it on the <a href="https://github.com/MAA1999/M9A/issues" target="_top" rel="noopener noreferrer">project Issues page</a>.</p>
 <h3 id="agent-long-time-wait-(windows)" tabindex="-1">Agent Long Time Wait (Windows)</h3>
@@ -83,7 +84,7 @@ The solution is to delete the entire folder and then <a href="https://github.com
 <p>When this problem occurs, it prompts <strong>Error occurred while connecting to the emulator</strong>.
 There are many reasons for connection failure. Please try the following steps one by one.</p>
 <h4 id="1.-confirm-adb-and-connection-address-are-correct" tabindex="-1">1. Confirm ADB and Connection Address are Correct</h4>
-<p>Refer to <a href="./connection.html#connection-settings">Connection Settings</a></p>
+<p>Refer to <a href="./connection.html?iframe#connection-settings">Connection Settings</a></p>
 <div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p></p>
 <p>Make sure you’re not connecting to another emulator/device!</p>
 </div>

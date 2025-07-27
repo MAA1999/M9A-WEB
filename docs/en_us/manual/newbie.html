@@ -3,6 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/assets/js/iframe.js"></script>
     <link rel="stylesheet" href="/assets/css/markdown.css">
     <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
 </head>
@@ -105,7 +106,7 @@
 </tr>
 <tr>
 <td>Android Users</td>
-<td>M9A no longer provides Android version release packages<br>If you are very familiar with mobile phone operations and wish to use Android physical devices, please go to <a href="../develop/Notes-Before-Development.html">Development Documentation</a> to install it yourself<br>You can refer to <a href="https://github.com/MaaXYZ/MaaFramework/issues/475" target="_top" rel="noopener noreferrer">Usage Method</a>, and <a href="https://maa.plus/docs/zh-cn/manual/device/android.html" target="_top" rel="noopener noreferrer">MAA Documentation</a><br>This method is complex and has certain risks, not recommended for beginner players</td>
+<td>M9A no longer provides Android version release packages<br>If you are very familiar with mobile phone operations and wish to use Android physical devices, please go to <a href="../develop/Notes-Before-Development.html?iframe">Development Documentation</a> to install it yourself<br>You can refer to <a href="https://github.com/MaaXYZ/MaaFramework/issues/475" target="_top" rel="noopener noreferrer">Usage Method</a>, and <a href="https://maa.plus/docs/zh-cn/manual/device/android.html" target="_top" rel="noopener noreferrer">MAA Documentation</a><br>This method is complex and has certain risks, not recommended for beginner players</td>
 </tr>
 </tbody>
 </table>
@@ -401,7 +402,7 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
 <h3 id="7.-configure-m9a" tabindex="-1">7. Configure M9A</h3>
 <p>You can configure M9A according to your needs for a better user experience.</p>
 <p>Some configuration items may cause M9A to <strong>run abnormally</strong> when configured incorrectly or not configured, so it’s recommended to read this section before starting to use.</p>
-<p>This chapter will mainly introduce how to configure M9A through the graphical interface (MFAAvalonia). If you are using the command line version (MaaPiCli), please refer to <a href="./MaaPiCli.html">MaaPiCli Operation Instructions</a>.</p>
+<p>This chapter will mainly introduce how to configure M9A through the graphical interface (MFAAvalonia). If you are using the command line version (MaaPiCli), please refer to <a href="./MaaPiCli.html?iframe">MaaPiCli Operation Instructions</a>.</p>
 <p>The following demonstrations are for reference only, please refer to the actual software situation.</p>
 <h4 id="first-launch" tabindex="-1">First Launch</h4>
 <details open>
@@ -546,7 +547,7 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
     </details>
 <hr>
 <p><strong><code>Connection</code></strong></p>
-<p>M9A requires correct ADB connection to execute tasks on the <strong>target</strong> emulator. In most cases, you only need to keep only the target emulator running and click “Refresh” to complete the connection. If you need to manually configure ADB parameters, please refer to <a href="./connection.html">Connection Settings</a>.</p>
+<p>M9A requires correct ADB connection to execute tasks on the <strong>target</strong> emulator. In most cases, you only need to keep only the target emulator running and click “Refresh” to complete the connection. If you need to manually configure ADB parameters, please refer to <a href="./connection.html?iframe">Connection Settings</a>.</p>
   <details>
     <summary>Illustration</summary>
     <p></p>
@@ -603,7 +604,7 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
     </blockquote>
   </details>
 <div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p></p>
-<p>Most tasks need to be configured correctly before use, and some tasks also need to be executed in specific scenarios according to task descriptions. Before enabling tasks, please ensure you have read and understood the <strong>Task Description</strong> for that task, and configure <strong>Task Settings</strong> according to actual situations. For more information about tasks, please refer to <a href="./feature.html">Feature Introduction</a>.</p>
+<p>Most tasks need to be configured correctly before use, and some tasks also need to be executed in specific scenarios according to task descriptions. Before enabling tasks, please ensure you have read and understood the <strong>Task Description</strong> for that task, and configure <strong>Task Settings</strong> according to actual situations. For more information about tasks, please refer to <a href="./feature.html?iframe">Feature Introduction</a>.</p>
 </div>
 <hr>
 <h4 id="pip-settings" tabindex="-1">Pip Settings</h4>
@@ -628,11 +629,11 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
 <hr>
 <h2 id="related-documentation" tabindex="-1">Related Documentation</h2>
 <ul>
-<li><a href="./connection.html">Connection Settings</a>: How to configure ADB and connect to the emulator.</li>
-<li><a href="./MaaPiCli.html">MaaPiCli Usage Instructions</a>: Introduces the usage of MaaPiCli</li>
-<li><a href="./feature.html">Feature Introduction</a>: Introduces the precautions for some features</li>
-<li><a href="./faq.html">FAQ</a>: Solutions to common problems.</li>
-<li><a href="./MirrorChyan.html">MirrorChyan Usage Instructions</a>: Introduces the usage of MirrorChyan</li>
+<li><a href="./connection.html?iframe">Connection Settings</a>: How to configure ADB and connect to the emulator.</li>
+<li><a href="./MaaPiCli.html?iframe">MaaPiCli Usage Instructions</a>: Introduces the usage of MaaPiCli</li>
+<li><a href="./feature.html?iframe">Feature Introduction</a>: Introduces the precautions for some features</li>
+<li><a href="./faq.html?iframe">FAQ</a>: Solutions to common problems.</li>
+<li><a href="./MirrorChyan.html?iframe">MirrorChyan Usage Instructions</a>: Introduces the usage of MirrorChyan</li>
 </ul>
 
     </article>

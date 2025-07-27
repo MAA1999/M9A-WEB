@@ -3,6 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/assets/js/iframe.js"></script>
     <link rel="stylesheet" href="/assets/css/markdown.css">
     <link rel="stylesheet" href="/assets/css/github-markdown-light.css">
 </head>
@@ -105,7 +106,7 @@
 </tr>
 <tr>
 <td>Android 用户</td>
-<td>M9A 已不再提供 Android 版本发行包<br>如您非常了解手机操作并希望使用 Android 实体设备，请前往 <a href="../develop/%E5%BC%80%E5%8F%91%E5%89%8D%E9%A1%BB%E7%9F%A5.html">开发文档</a> 自行安装<br>可参考 <a href="https://github.com/MaaXYZ/MaaFramework/issues/475" target="_top" rel="noopener noreferrer">使用方法</a> ，以及 <a href="https://maa.plus/docs/zh-cn/manual/device/android.html" target="_top" rel="noopener noreferrer">MAA文档</a> <br>此方法较为复杂且具有一定风险，不推荐入门玩家使用此方法</td>
+<td>M9A 已不再提供 Android 版本发行包<br>如您非常了解手机操作并希望使用 Android 实体设备，请前往 <a href="../develop/%E5%BC%80%E5%8F%91%E5%89%8D%E9%A1%BB%E7%9F%A5.html?iframe">开发文档</a> 自行安装<br>可参考 <a href="https://github.com/MaaXYZ/MaaFramework/issues/475" target="_top" rel="noopener noreferrer">使用方法</a> ，以及 <a href="https://maa.plus/docs/zh-cn/manual/device/android.html" target="_top" rel="noopener noreferrer">MAA文档</a> <br>此方法较为复杂且具有一定风险，不推荐入门玩家使用此方法</td>
 </tr>
 </tbody>
 </table>
@@ -400,7 +401,7 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
 <h3 id="7.-%E9%85%8D%E7%BD%AE-m9a" tabindex="-1">7. 配置 M9A</h3>
 <p>您可以根据自己的需求配置 M9A 以得到更好的使用体验。</p>
 <p>部分配置项在配置错误或未配置时可能会导致 M9A <strong>运行异常</strong>，因此推荐您在开始使用前阅读本章节。</p>
-<p>本章将主要介绍如何通过图形界面（MFAAvalonia）配置 M9A 。如果您正在使用命令行版本（MaaPiCli），请参考 <a href="./MaaPiCli.html">MaaPiCli操作说明</a> 。</p>
+<p>本章将主要介绍如何通过图形界面（MFAAvalonia）配置 M9A 。如果您正在使用命令行版本（MaaPiCli），请参考 <a href="./MaaPiCli.html?iframe">MaaPiCli操作说明</a> 。</p>
 <p>下列演示仅供参考，请以软件实际情况为准。</p>
 <h4 id="%E9%A6%96%E6%AC%A1%E5%90%AF%E5%8A%A8" tabindex="-1">首次启动</h4>
 <details open>
@@ -545,7 +546,7 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
     </details>
 <hr>
 <p><strong><code>连接</code></strong></p>
-<p>M9A 需正确的 ADB 连接才能在<strong>目标</strong>模拟器执行任务。绝大多数情况下，您只需保持有且仅有目标模拟器启动，点击“刷新”即可完成连接。如需手动配置 ADB 参数，请参考 <a href="./%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE.html">连接设置</a>。</p>
+<p>M9A 需正确的 ADB 连接才能在<strong>目标</strong>模拟器执行任务。绝大多数情况下，您只需保持有且仅有目标模拟器启动，点击“刷新”即可完成连接。如需手动配置 ADB 参数，请参考 <a href="./%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE.html?iframe">连接设置</a>。</p>
   <details>
     <summary>示意图</summary>
     <p></p>
@@ -602,7 +603,7 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
     </blockquote>
   </details>
 <div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p></p>
-<p>大部分任务需在使用前正确配置，少部分任务还需根据任务说明在特定场景执行。启用任务前，请确保您已阅读并理解了该任务的<strong>任务说明</strong>，并结合实际情况对<strong>任务设置</strong>进行配置。更多关于任务的说明请参阅 <a href="./%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html">功能介绍</a> 。</p>
+<p>大部分任务需在使用前正确配置，少部分任务还需根据任务说明在特定场景执行。启用任务前，请确保您已阅读并理解了该任务的<strong>任务说明</strong>，并结合实际情况对<strong>任务设置</strong>进行配置。更多关于任务的说明请参阅 <a href="./%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html?iframe">功能介绍</a> 。</p>
 </div>
 <hr>
 <h4 id="pip-%E8%AE%BE%E7%BD%AE" tabindex="-1">pip 设置</h4>
@@ -627,11 +628,11 @@ sudo xattr -rd com.apple.quarantine /usr/local/bin/M9A/*
 <hr>
 <h2 id="%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3" tabindex="-1">相关文档</h2>
 <ul>
-<li><a href="./%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE.html#%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE">连接设置</a>——介绍了adb连接以及模拟器设置</li>
-<li><a href="./MaaPiCli.html">MaaPiCli操作说明</a>——介绍了 MaaPiCli 使用方法<s>翻译文档</s></li>
-<li><a href="./%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html">功能介绍</a>——介绍了部分功能的注意事项</li>
-<li><a href="./%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html">常见问题</a>——介绍了常见问题及解决策略</li>
-<li><a href="./Mirror%E9%85%B1.html">Mirror酱使用说明</a>——介绍了Mirror酱使用方法</li>
+<li><a href="./%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE.html?iframe#%E8%BF%9E%E6%8E%A5%E8%AE%BE%E7%BD%AE">连接设置</a>——介绍了adb连接以及模拟器设置</li>
+<li><a href="./MaaPiCli.html?iframe">MaaPiCli操作说明</a>——介绍了 MaaPiCli 使用方法<s>翻译文档</s></li>
+<li><a href="./%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.html?iframe">功能介绍</a>——介绍了部分功能的注意事项</li>
+<li><a href="./%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98.html?iframe">常见问题</a>——介绍了常见问题及解决策略</li>
+<li><a href="./Mirror%E9%85%B1.html?iframe">Mirror酱使用说明</a>——介绍了Mirror酱使用方法</li>
 </ul>
 
     </article>
