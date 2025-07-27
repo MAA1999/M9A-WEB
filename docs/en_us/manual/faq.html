@@ -83,25 +83,25 @@ The solution is to delete the entire folder and then <a href="https://github.com
 <h3 id="connection-issues" tabindex="-1">Connection Issues</h3>
 <p>When this problem occurs, it prompts <strong>Error occurred while connecting to the emulator</strong>.
 There are many reasons for connection failure. Please try the following steps one by one.</p>
-<h4 id="1.-confirm-adb-and-connection-address-are-correct" tabindex="-1">1. Confirm ADB and Connection Address are Correct</h4>
+<h4 id="1-confirm-adb-and-connection-address-are-correct" tabindex="-1">1. Confirm ADB and Connection Address are Correct</h4>
 <p>Refer to <a href="./connection.html?iframe#connection-settings">Connection Settings</a></p>
 <div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p></p>
 <p>Make sure you’re not connecting to another emulator/device!</p>
 </div>
-<h4 id="2.-close-existing-adb-processes" tabindex="-1">2. Close Existing ADB Processes</h4>
+<h4 id="2-close-existing-adb-processes" tabindex="-1">2. Close Existing ADB Processes</h4>
 <p>After closing M9A, check <code>Task Manager</code> - <code>Details</code> for any processes containing <code>adb</code> in their name. If found, end them and try connecting again.</p>
-<h4 id="3.-correctly-use-multiple-adb-instances" tabindex="-1">3. Correctly Use Multiple ADB Instances</h4>
+<h4 id="3-correctly-use-multiple-adb-instances" tabindex="-1">3. Correctly Use Multiple ADB Instances</h4>
 <p>When ADB versions differ, newly started processes will close older ones. Therefore, if you need to run multiple ADB instances simultaneously (e.g., MAA, Android Studio, Alas, phone assistants), ensure their versions are the same.</p>
-<h4 id="4.-change-touch-control-mode" tabindex="-1">4. Change Touch Control Mode</h4>
+<h4 id="4-change-touch-control-mode" tabindex="-1">4. Change Touch Control Mode</h4>
 <p>Some emulators (like BlueStacks China, NoxPlayer, etc.) might have older adb versions. Try changing the adb or <strong>changing the touch control mode</strong>.</p>
-<h4 id="5.-switch-to-maapicli" tabindex="-1">5. Switch to MaaPiCli</h4>
+<h4 id="5-switch-to-maapicli" tabindex="-1">5. Switch to MaaPiCli</h4>
 <p>If you fail to connect using MFAWPF, try using MaaPiCli instead. <a href="MaaPiCli.html">Usage Guide</a></p>
-<h4 id="6.-avoid-game-boosters" tabindex="-1">6. Avoid Game Boosters</h4>
+<h4 id="6-avoid-game-boosters" tabindex="-1">6. Avoid Game Boosters</h4>
 <p>Some boosters require restarting MAA, ADB, and the emulator after starting or stopping acceleration before connecting again.</p>
 <p>If using UU Booster and MuMu 12 together, refer to the <a href="https://mumu.163.com/help/20240321/35047_1144608.html" target="_top" rel="noopener noreferrer">official documentation</a>.</p>
-<h4 id="7.-restart-your-computer" tabindex="-1">7. Restart Your Computer</h4>
+<h4 id="7-restart-your-computer" tabindex="-1">7. Restart Your Computer</h4>
 <p>Restarting solves 97% of problems. (Confirmed)</p>
-<h4 id="8.-change-emulator" tabindex="-1">8. Change Emulator</h4>
+<h4 id="8-change-emulator" tabindex="-1">8. Change Emulator</h4>
 <p>Please refer to <a href="https://maa.plus/docs/en/manual/device/" target="_top" rel="noopener noreferrer">Emulator and Device Support</a>.
 Generally, MuMu12 or LDPlayer 9 are recommended.</p>
 <h2 id="slow-file-download-speed" tabindex="-1">Slow File Download Speed</h2>
