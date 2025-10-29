@@ -1,0 +1,85 @@
+import{_ as d,c,a as i,b as a,e as n,d as l,w as p,r as t,o as r}from"./app-Biz-8gg7.js";const v={};function u(o,s){const e=t("VPLink");return r(),c("div",null,[s[6]||(s[6]=i(`<p>本节将介绍 MaaPiCli 的使用方法（翻译）</p><h2 id="选择adb" tabindex="-1"><a class="header-anchor" href="#选择adb"><span>选择ADB</span></a></h2><p>当您初次下载，没有配置时会出现下面界面：</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>Welcome to use Maa Project Interface CLI!</span></span>
+<span class="line"><span>MaaFramework: v4.0.0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Version: v0.0.1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Select ADB ###</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. Auto detect</span></span>
+<span class="line"><span>        2. Manual input</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input [1-2]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这里 Version 后跟着的是当前资源版本。<br><code>### Select ADB ###</code> 翻译过来是当前操作为 <code>选择 ADB（Android Debug Bridge，这里一般用来操作模拟器）</code>。<br> 后面列出选项：</p>`,5)),a("ol",null,[s[5]||(s[5]=a("li",null,"自动检测（推荐，在目标模拟器启动时选择）",-1)),a("li",null,[s[2]||(s[2]=n("手动输入（参考",-1)),l(e,{href:"./connection.md#adb-%E8%B7%AF%E5%BE%84"},{default:p(()=>[...s[0]||(s[0]=[n("ADB 路径",-1)])]),_:1}),s[3]||(s[3]=n("和",-1)),l(e,{href:"./connection.md#adb-%E5%9C%B0%E5%9D%80"},{default:p(()=>[...s[1]||(s[1]=[n("ADB 连接地址",-1)])]),_:1}),s[4]||(s[4]=n("填写）",-1))])]),s[7]||(s[7]=i(`<p>后面 <code>Please input [1-2]:</code> 翻译过来是 <code>请输入 [选项范围]</code>，请根据需要选择。</p><p>这里我们输入 1 后回车，进入下一步。</p><h2 id="选择设备" tabindex="-1"><a class="header-anchor" href="#选择设备"><span>选择设备</span></a></h2><p>紧跟上一步，选择自动检测可到此步骤，显示为：</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>Finding device...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Select Device ##</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. MuMuPlayer12</span></span>
+<span class="line"><span>                D:/Program Files/Netease/MuMu Player 12/shell/adb.exe</span></span>
+<span class="line"><span>                127.0.0.1:16384</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input [1-1]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这里因为只开了一个模拟器，只显示一条选项，直接输入 1 后回车，完成此步骤</p><h2 id="选择资源" tabindex="-1"><a class="header-anchor" href="#选择资源"><span>选择资源</span></a></h2><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>### Select resource ###</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. 官服</span></span>
+<span class="line"><span>        2. B 服</span></span>
+<span class="line"><span>        3. 国际服（EN）</span></span>
+<span class="line"><span>        4. 国际服（JP）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input [1-4]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这里根据需要的资源进行选择，主要和 <code>启动游戏</code>、<code>银行购买</code> 和 <code>活动刷取</code> 等各个服务器有所区别的功能有关。</p><h2 id="添加任务" tabindex="-1"><a class="header-anchor" href="#添加任务"><span>添加任务</span></a></h2><p>这里是添加任务，显示如下：</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>### Add task ###</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. 启动游戏</span></span>
+<span class="line"><span>        2. 收取荒原</span></span>
+<span class="line"><span>        3. 每日心相（意志解析）</span></span>
+<span class="line"><span>        4. 常规作战</span></span>
+<span class="line"><span>        5. 活动刷取</span></span>
+<span class="line"><span>        6. 自动深眠</span></span>
+<span class="line"><span>        7. 自动醒梦</span></span>
+<span class="line"><span>        8. 银行购物</span></span>
+<span class="line"><span>        9. 领取奖励</span></span>
+<span class="line"><span>        10. 轶事派遣</span></span>
+<span class="line"><span>        11. 雨中悬想：迷思海</span></span>
+<span class="line"><span>        12. 切换账号</span></span>
+<span class="line"><span>        13. 关闭游戏</span></span>
+<span class="line"><span>        14. 局外演绎：黄昏的音序</span></span>
+<span class="line"><span>        15. (测试中)推图模式</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input multiple [1-15]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>首先显示的总菜单，根据需求选择，这里可以同时选多个功能，像：</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>Please input multiple [1-15]: 1 2 3 4 5 6 7 8 9 10</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>后面便会显示每个任务的选项供于选择。</p><p>下面以单选常规作战为例，选择后显示：</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>## Input option of &quot;作战关卡&quot; for &quot;常规作战&quot; ##</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. ---按关卡综合效率排序，刷取推荐来源：必要的记录https://www.kdocs.cn/l/cd5MWeCl5bKw ---</span></span>
+<span class="line"><span>        2. 啮咬盒(床下怪物)：7-26 厄险（效率1）</span></span>
+<span class="line"><span>        3. 啮咬盒(银光子弹)：5-19 厄险（效率2）</span></span>
+<span class="line"><span>        4. 啮咬盒：9-3 厄险（效率3）</span></span>
+<span class="line"><span>        5. 盐封曼德拉(狂人絮语)：3-13 厄险（效率1）</span></span>
+<span class="line"><span>        6. 盐封曼德拉(不腐猴爪)：8-17 厄险（效率2）</span></span>
+<span class="line"><span>        7. 盐封曼德拉：9-16 厄险（效率3）</span></span>
+<span class="line"><span>        8. 双头形骨架：4-20 厄险（效率1）</span></span>
+<span class="line"><span>        9. 双头形骨架：9-13 厄险（效率2）</span></span>
+<span class="line"><span>        ...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input [1-42]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><code>## Input option of &quot;作战关卡&quot; for &quot;常规作战&quot; ##</code> 翻译过来指 <code>输入“常规作战”的“作战关卡”的选项</code>，根据需要选择即可。</p><h2 id="功能菜单" tabindex="-1"><a class="header-anchor" href="#功能菜单"><span>功能菜单</span></a></h2><p>初次启动配置完，或者之前配置过的，便会到当前界面，内容如下：</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>Controller:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        ADB 默认方式</span></span>
+<span class="line"><span>                D:/Program Files/Netease/MuMu Player 12/shell/adb.exe</span></span>
+<span class="line"><span>                127.0.0.1:16384</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Resource:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        官服</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Tasks:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        - 常规作战</span></span>
+<span class="line"><span>                - 作战关卡: 啮咬盒(床下怪物)：7-26 厄险（效率1）</span></span>
+<span class="line"><span>                - 复现次数: x4</span></span>
+<span class="line"><span>                - 刷完全部体力: Yes</span></span>
+<span class="line"><span>                - 吃全部临期糖: Yes</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Select action ###</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. Switch controller</span></span>
+<span class="line"><span>        2. Switch resource</span></span>
+<span class="line"><span>        3. Add task</span></span>
+<span class="line"><span>        4. Move task</span></span>
+<span class="line"><span>        5. Delete task</span></span>
+<span class="line"><span>        6. Run tasks</span></span>
+<span class="line"><span>        7. Exit</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input [1-7]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>展示了 Controller（当前控制器，于选择设备设置）、Resource（当前资源）、Tasks（当前待执行任务列表）。<br> 并给出功能菜单（Select action），依次为：</p><ol><li>更换控制器</li><li>更换资源</li><li>添加任务</li><li>移动任务</li><li>删除任务</li><li>运行任务</li><li>退出</li></ol><p>确定 Tasks 部分配置完成便可在输入 6 并回车后运行任务。</p><h2 id="进阶使用" tabindex="-1"><a class="header-anchor" href="#进阶使用"><span>进阶使用</span></a></h2><ul><li>在命令行中添加 <code>-d</code> 参数运行即可跳过交互直接运行任务，如 <code>./MaaPiCli.exe -d</code></li><li>2.0 版本已支持 mumu 后台保活，会在 run task 时获取 mumu 最前台的 tab，并始终使用这个 tab（即使之后被切到后台了）</li></ul>`,26))])}const b=d(v,[["render",u]]),h=JSON.parse('{"path":"/zh_cn/manual/cli.html","title":"MaaPiCli 使用","lang":"zh-CN","frontmatter":{"order":4,"icon":"material-symbols:terminal","title":"MaaPiCli 使用","description":"本节将介绍 MaaPiCli 的使用方法（翻译） 选择ADB 当您初次下载，没有配置时会出现下面界面： 这里 Version 后跟着的是当前资源版本。 ### Select ADB ### 翻译过来是当前操作为 选择 ADB（Android Debug Bridge，这里一般用来操作模拟器）。 后面列出选项： 自动检测（推荐，在目标模拟器启动时选择） ...","head":[["script",{"type":"application/ld+json"},"{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"Article\\",\\"headline\\":\\"MaaPiCli 使用\\",\\"image\\":[\\"\\"],\\"dateModified\\":null,\\"author\\":[]}"],["meta",{"property":"og:url","content":"https://1999.fan/zh_cn/manual/cli.html"}],["meta",{"property":"og:site_name","content":"M9A 文档站"}],["meta",{"property":"og:title","content":"MaaPiCli 使用"}],["meta",{"property":"og:description","content":"本节将介绍 MaaPiCli 的使用方法（翻译） 选择ADB 当您初次下载，没有配置时会出现下面界面： 这里 Version 后跟着的是当前资源版本。 ### Select ADB ### 翻译过来是当前操作为 选择 ADB（Android Debug Bridge，这里一般用来操作模拟器）。 后面列出选项： 自动检测（推荐，在目标模拟器启动时选择） ..."}],["meta",{"property":"og:type","content":"article"}],["meta",{"property":"og:locale","content":"zh-CN"}],["meta",{"property":"og:locale:alternate","content":"en-US"}],["link",{"rel":"alternate","hreflang":"en-us","href":"https://1999.fan/en_us/manual/cli.html"}]]},"readingTime":{"minutes":3.38,"words":1014},"git":{},"autoDesc":true,"filePathRelative":"zh_cn/manual/cli.md","headers":[]}');export{b as comp,h as data};

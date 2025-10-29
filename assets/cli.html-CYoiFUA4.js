@@ -1,0 +1,85 @@
+import{_ as p,c as d,a as i,b as e,e as n,d as l,w as t,r,o as c}from"./app-Biz-8gg7.js";const o={};function u(v,s){const a=r("VPLink");return c(),d("div",null,[s[6]||(s[6]=i(`<h2 id="select-adb" tabindex="-1"><a class="header-anchor" href="#select-adb"><span>Select ADB</span></a></h2><p>When you download for the first time and there is no configuration, the following interface will appear:</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>Welcome to use Maa Project Interface CLI!</span></span>
+<span class="line"><span>MaaFramework: v4.0.0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Version: v0.0.1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Select ADB ###</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. Auto detect</span></span>
+<span class="line"><span>        2. Manual input</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input [1-2]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Here, the number after Version indicates the current resource version.</p><p><code>### Select ADB ###</code> translates to the current operation being Select ADB (Android Debug Bridge, usually used here to operate emulators)</p><p>The following options are listed:</p>`,6)),e("ol",null,[s[5]||(s[5]=e("li",null,"Auto detect (recommended, select when the target emulator is running)",-1)),e("li",null,[s[2]||(s[2]=n("Manual input (refer to ",-1)),l(a,{href:"./connection.md#adb-path"},{default:t(()=>[...s[0]||(s[0]=[n("ADB Path",-1)])]),_:1}),s[3]||(s[3]=n(" and ",-1)),l(a,{href:"./connection.html#adb-address"},{default:t(()=>[...s[1]||(s[1]=[n("ADB Connection Address",-1)])]),_:1}),s[4]||(s[4]=n(" to fill in) The following Please input [1-2]: translates to Please input [option range], please select as needed.",-1))])]),s[7]||(s[7]=i(`<p>Here we enter 1 and press Enter to proceed to the next step.</p><h2 id="select-device" tabindex="-1"><a class="header-anchor" href="#select-device"><span>Select Device</span></a></h2><p>Following the previous step, selecting auto-detect will lead to this step, displayed as:</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>Finding device...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Select Device ##</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. MuMuPlayer12</span></span>
+<span class="line"><span>                D:/Program Files/Netease/MuMu Player 12/shell/adb.exe</span></span>
+<span class="line"><span>                127.0.0.1:16384</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input [1-1]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Here, because only one emulator is running, only one option is displayed. Directly enter 1 and press Enter to complete this step.</p><h2 id="select-resource" tabindex="-1"><a class="header-anchor" href="#select-resource"><span>Select Resource</span></a></h2><p>Plaintext</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>### Select resource ###</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. 官服</span></span>
+<span class="line"><span>        2. B 服</span></span>
+<span class="line"><span>        3. 国际服（EN）</span></span>
+<span class="line"><span>        4. 国际服（JP）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input [1-4]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Select the required resource here. This mainly relates to functions that differ between servers, such as Start Game, Bank Purchase, and Event Farming.</p><h2 id="add-task" tabindex="-1"><a class="header-anchor" href="#add-task"><span>Add Task</span></a></h2><p>Here is where you add tasks, displayed as follows:</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>### Add task ###</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. 启动游戏</span></span>
+<span class="line"><span>        2. 收取荒原</span></span>
+<span class="line"><span>        3. 每日心相（意志解析）</span></span>
+<span class="line"><span>        4. 常规作战</span></span>
+<span class="line"><span>        5. 活动刷取</span></span>
+<span class="line"><span>        6. 自动深眠</span></span>
+<span class="line"><span>        7. 自动醒梦</span></span>
+<span class="line"><span>        8. 银行购物</span></span>
+<span class="line"><span>        9. 领取奖励</span></span>
+<span class="line"><span>        10. 轶事派遣</span></span>
+<span class="line"><span>        11. 雨中悬想：迷思海</span></span>
+<span class="line"><span>        12. 切换账号</span></span>
+<span class="line"><span>        13. 关闭游戏</span></span>
+<span class="line"><span>        14. 局外演绎：黄昏的音序</span></span>
+<span class="line"><span>        15. (测试中)推图模式</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input multiple [1-15]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>The main menu is displayed first. Select according to your needs. You can select multiple functions at the same time, like:</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>Please input multiple [1-15]: 1 2 3 4 5 6 7 8 9 10</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>Then, the options for each task will be displayed for selection.</p><p>The following uses selecting &quot;Regular Battle&quot; as an example. After selection, it is displayed as:</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>## Input option of &quot;作战关卡&quot; for &quot;常规作战&quot; ##</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. ---按关卡综合效率排序，刷取推荐来源：必要的记录https://www.kdocs.cn/l/cd5MWeCl5bKw ---</span></span>
+<span class="line"><span>        2. 啮咬盒(床下怪物)：7-26 厄险（效率1）</span></span>
+<span class="line"><span>        3. 啮咬盒(银光子弹)：5-19 厄险（效率2）</span></span>
+<span class="line"><span>        4. 啮咬盒：9-3 厄险（效率3）</span></span>
+<span class="line"><span>        5. 盐封曼德拉(狂人絮语)：3-13 厄险（效率1）</span></span>
+<span class="line"><span>        6. 盐封曼德拉(不腐猴爪)：8-17 厄险（效率2）</span></span>
+<span class="line"><span>        7. 盐封曼德拉：9-16 厄险（效率3）</span></span>
+<span class="line"><span>        8. 双头形骨架：4-20 厄险（效率1）</span></span>
+<span class="line"><span>        9. 双头形骨架：9-13 厄险（效率2）</span></span>
+<span class="line"><span>        ...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input [1-42]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><code>## Input option of &quot;作战关卡&quot; for &quot;常规作战&quot; ##</code> translates to Enter the option for &quot;Battle Stage&quot; of &quot;Regular Battle&quot;, select as needed</p><h2 id="function-menu" tabindex="-1"><a class="header-anchor" href="#function-menu"><span>Function Menu</span></a></h2><p>After the initial configuration is complete, or if it has been configured before, you will arrive at the current interface, with the following content:</p><div class="language-plaintext line-numbers-mode" data-highlighter="shiki" data-ext="plaintext" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code"><code class="language-plaintext"><span class="line"><span>Controller:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        ADB 默认方式</span></span>
+<span class="line"><span>                D:/Program Files/Netease/MuMu Player 12/shell/adb.exe</span></span>
+<span class="line"><span>                127.0.0.1:16384</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Resource:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        官服</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Tasks:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        - 常规作战</span></span>
+<span class="line"><span>                - 作战关卡: 啮咬盒(床下怪物)：7-26 厄险（效率1）</span></span>
+<span class="line"><span>                - 复现次数: x4</span></span>
+<span class="line"><span>                - 刷完全部体力: Yes</span></span>
+<span class="line"><span>                - 吃全部临期糖: Yes</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Select action ###</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        1. Switch controller</span></span>
+<span class="line"><span>        2. Switch resource</span></span>
+<span class="line"><span>        3. Add task</span></span>
+<span class="line"><span>        4. Move task</span></span>
+<span class="line"><span>        5. Delete task</span></span>
+<span class="line"><span>        6. Run tasks</span></span>
+<span class="line"><span>        7. Exit</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please input [1-7]:</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Displays Controller (current controller, set in device selection), Resource (current resource), Tasks (current list of tasks to be executed). And provides a function menu (Select action), which are:</p><ol><li>Switch controller</li><li>Switch resource</li><li>Add task</li><li>Move task</li><li>Delete task</li><li>Run tasks</li><li>Exit</li></ol><p>Once you confirm that the Tasks section is configured correctly, you can enter 6 and press Enter to run the tasks.</p><h2 id="advanced-usage" tabindex="-1"><a class="header-anchor" href="#advanced-usage"><span>Advanced Usage</span></a></h2><ul><li>Adding the -d parameter in the command line to run will skip the interactive process and directly run the tasks, such as ./MaaPiCli.exe -d</li><li>Version 2.0 and above supports MuMu background keep-alive. It will get the foreground tab of MuMu when running tasks and always use this tab (even if it is switched to the background later).</li></ul>`,26))])}const m=p(o,[["render",u]]),b=JSON.parse('{"path":"/en_us/manual/cli.html","title":"MaaPiCli Usage Instructions","lang":"en-US","frontmatter":{"order":4,"icon":"material-symbols:terminal","title":"MaaPiCli Usage Instructions","description":"Select ADB When you download for the first time and there is no configuration, the following interface will appear: Here, the number after Version indicates the current resource...","head":[["script",{"type":"application/ld+json"},"{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"Article\\",\\"headline\\":\\"MaaPiCli Usage Instructions\\",\\"image\\":[\\"\\"],\\"dateModified\\":null,\\"author\\":[]}"],["meta",{"property":"og:url","content":"https://1999.fan/en_us/manual/cli.html"}],["meta",{"property":"og:site_name","content":"M9A Documentation Site"}],["meta",{"property":"og:title","content":"MaaPiCli Usage Instructions"}],["meta",{"property":"og:description","content":"Select ADB When you download for the first time and there is no configuration, the following interface will appear: Here, the number after Version indicates the current resource..."}],["meta",{"property":"og:type","content":"article"}],["meta",{"property":"og:locale","content":"en-US"}],["meta",{"property":"og:locale:alternate","content":"zh-CN"}],["link",{"rel":"alternate","hreflang":"zh-cn","href":"https://1999.fan/zh_cn/manual/cli.html"}]]},"readingTime":{"minutes":2.82,"words":846},"git":{},"autoDesc":true,"filePathRelative":"en_us/manual/cli.md","headers":[]}');export{m as comp,b as data};

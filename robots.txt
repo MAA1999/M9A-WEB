@@ -1,0 +1,3 @@
+Sitemap: https://1999.fan/sitemap.xml
+User-agent:*
+Disallow:

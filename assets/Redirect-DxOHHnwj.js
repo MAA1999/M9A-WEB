@@ -1,0 +1,1 @@
+import{f as u,u as c,g as p,h as m}from"./app-Biz-8gg7.js";const h=u({__name:"Redirect",props:{to:{}},setup(o){const e=o,r=c(),n=p();function a(t){return new URL(t,"http://example.com"+r.path).pathname}return m(()=>{if(!e.to)return;const t=a(e.to);n.replace(t)}),(t,s)=>null}});export{h as default};
