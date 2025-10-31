@@ -29,7 +29,13 @@ export default defineUserConfig({
     // 配置站点图标
     ['link', { rel: 'icon', type: 'image/png', href: 'images/m9a-logo_32x32.png' }],
     // Algolia 站点验证
-    ['meta', { name: 'algolia-site-verification', content: '5D5F884201CF158A'}]
+    ['meta', { name: 'algolia-site-verification', content: '5D5F884201CF158A'}],
+    // 百度站点验证
+    ['meta', { name: 'baidu-site-verification', content: 'codeva-GnOwnwiCSA'}],
+    // BING 站点验证
+    ['meta', { name: 'msvalidate.01', content: '6A49AB032E4ED1D8DC8BD5B30324C3ED' }],
+    // Google 站点验证
+    ['meta', { name: 'google-site-verification', content: 'bLO4xMnM1-AK3Gw_hBpnuPxb3ztH4QW0HCHK_1_M7Tg' }],
   ],
 
   bundler: viteBundler(),
