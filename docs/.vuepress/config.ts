@@ -28,6 +28,8 @@ export default defineUserConfig({
   head: [
     // 配置站点图标
     ['link', { rel: 'icon', type: 'image/png', href: 'images/m9a-logo_32x32.png' }],
+    // Algolia 站点验证
+    ['meta', { name: 'algolia-site-verification', content: '5D5F884201CF158A'}]
   ],
 
   bundler: viteBundler(),
@@ -65,19 +67,19 @@ export default defineUserConfig({
     },
 
     /* 本地搜索, 默认启用 */
-    search: { provider: 'local' },
+    // search: false,
 
     /**
      * Algolia DocSearch
      * 启用此搜索需要将 本地搜索 search 设置为 false
      * @see https://theme-plume.vuejs.press/config/plugins/search/#algolia-docsearch
      */
-    // search: {
-    //   provider: 'algolia',
-    //   appId: '',
-    //   apiKey: '',
-    //   indices: [''],
-    // },
+    search: {
+      provider: 'algolia',
+      appId: 'W243EPBYO8',
+      apiKey: '2da2e84e8b67bf9263b165581b3da6b6',
+      indices: ['M9A Doc Crawler'],
+    },
 
     /**
      * Shiki 代码高亮
