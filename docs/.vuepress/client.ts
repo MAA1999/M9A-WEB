@@ -7,8 +7,6 @@ import { defineClientConfig } from 'vuepress/client'
 // import './theme/styles/custom.css'
 // import './styles/home-custom.scss'
 
-import './styles/index.scss'
-
 export default defineClientConfig({
   enhance({ app }) {
     // built-in components
