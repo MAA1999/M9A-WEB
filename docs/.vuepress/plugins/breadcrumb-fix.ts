@@ -1,4 +1,5 @@
 import { readFile, writeFile } from 'fs/promises'
+import path from 'path'
 
 export default () => ({
   name: 'breadcrumb-seo-fix',
@@ -29,6 +30,15 @@ export default () => ({
       } catch (error) {
         console.error(`Error processing ${filePath}:`, error)
       }
+    }
+    // Also fix Article structured data for the home page
+    const homeFilePath = path.join(destDir, 'index.html')
+    try {
+      const html = await readFile(homeFilePath, 'utf-8')
+      const modifiedHtml = fixArticleStructuredDataInHTML(html)
+      await writeFile(homeFilePath, modifiedHtml)
+    } catch (error) {
+      console.error(`Error processing home page ${homeFilePath}:`, error)
     }
   }
 })
