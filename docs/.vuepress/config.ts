@@ -14,6 +14,7 @@ import { defineUserConfig } from 'vuepress'
 import { plumeTheme } from 'vuepress-theme-plume'
 
 import { genSiteLocales } from './navigation/genLocales.ts'
+import breadcrumbFix from './plugins/breadcrumb-fix.ts'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -24,6 +25,8 @@ export default defineUserConfig({
   description: 'M9A |「亿韭韭韭」小助手',
 
   locales: genSiteLocales(),
+
+  plugins: [breadcrumbFix],
 
   head: [
     // 配置站点图标
