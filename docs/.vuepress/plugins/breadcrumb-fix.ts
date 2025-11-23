@@ -115,5 +115,32 @@ function fixBreadcrumbRDFaInHTML(html, pagePath) {
     }
   }
 
+  // Fix Article structured data
+  modifiedHtml = fixArticleStructuredDataInHTML(modifiedHtml)
+
   return modifiedHtml
+}
+
+function fixArticleStructuredDataInHTML(html) {
+  // Find the Article JSON-LD script
+  const articleRegex = /<script type="application\/ld\+json">(\{[^}]*"@type":"Article"[^}]*\})<\/script>/
+  const match = html.match(articleRegex)
+  if (match) {
+    try {
+      const articleData = JSON.parse(match[1])
+      // Add image if empty or contains only empty strings
+      if (!articleData.image || articleData.image.length === 0 || articleData.image.every(img => !img)) {
+        articleData.image = ['https://1999.fan/images/m9a-logo_32x32.png']
+      }
+      // Add author if empty
+      if (!articleData.author || articleData.author.length === 0) {
+        articleData.author = [{ '@type': 'Organization', 'name': 'M9A Team' }]
+      }
+      const updatedScript = `<script type="application/ld+json">${JSON.stringify(articleData)}</script>`
+      return html.replace(match[0], updatedScript)
+    } catch (error) {
+      console.error('Error parsing Article JSON-LD:', error)
+    }
+  }
+  return html
 }

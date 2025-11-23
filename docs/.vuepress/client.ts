@@ -25,9 +25,9 @@ export default defineClientConfig({
 
     // Fix breadcrumb RDFa structured data
     if (router) {
-      router.onAfterRouteUpdate = () => {
+      router.afterEach(() => {
         fixBreadcrumbRDFa()
-      }
+      })
     }
 
     // Also run on initial load
