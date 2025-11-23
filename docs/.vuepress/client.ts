@@ -38,6 +38,8 @@ export default defineClientConfig({
 })
 
 function fixBreadcrumbRDFa() {
+  if (typeof document === 'undefined') return
+
   const breadcrumbItems = document.querySelectorAll('.vp-breadcrumb li[typeof="ListItem"]')
 
   breadcrumbItems.forEach((li, index) => {
