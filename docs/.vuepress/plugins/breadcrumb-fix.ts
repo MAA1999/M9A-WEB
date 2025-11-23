@@ -134,7 +134,7 @@ function fixArticleStructuredDataInHTML(html) {
       }
       // Add author if empty
       if (!articleData.author || articleData.author.length === 0) {
-        articleData.author = [{ '@type': 'Organization', 'name': 'M9A Team' }]
+        articleData.author = [{ '@type': 'Organization', 'name': 'M9A Team', 'url': 'https://1999.fan' }]
       }
       const updatedScript = `<script type="application/ld+json">${JSON.stringify(articleData)}</script>`
       return html.replace(match[0], updatedScript)
