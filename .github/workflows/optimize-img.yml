@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - "main"
-
     paths:
       - "docs/.vuepress/public/images/**"
   workflow_dispatch:
