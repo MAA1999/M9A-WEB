@@ -6,3 +6,4 @@ M9A-temp/
 
 *.md
 !/README.md
+.venv/
