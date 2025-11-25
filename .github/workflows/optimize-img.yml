@@ -3,7 +3,7 @@ name: PNG Image Optimization
 on:
   push:
     branches:
-      - "dev"
+      - "main"
     paths:
       - "docs/.vuepress/public/images/**"
   workflow_dispatch:
