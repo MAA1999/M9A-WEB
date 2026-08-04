@@ -15,6 +15,7 @@ import { plumeTheme } from 'vuepress-theme-plume'
 
 import { genSiteLocales } from './navigation/genLocales.ts'
 import breadcrumbFix from './plugins/breadcrumb-fix.ts'
+import containerCloseFix from './plugins/container-close-fix.ts'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -26,7 +27,7 @@ export default defineUserConfig({
 
   locales: genSiteLocales(),
 
-  plugins: [breadcrumbFix],
+  plugins: [breadcrumbFix, containerCloseFix()],
 
   head: [
     // 配置站点图标
