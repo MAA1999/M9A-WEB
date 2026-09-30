@@ -6,6 +6,7 @@ import { defineClientConfig } from 'vuepress/client'
 
 // import './theme/styles/custom.css'
 // import './styles/home-custom.scss'
+import HomeDownload from './components/HomeDownload.vue'
 
 export default defineClientConfig({
   enhance({ app, router }) {
@@ -16,7 +17,7 @@ export default defineClientConfig({
     // app.component('Swiper', Swiper) // you should install `swiper`
 
     // your custom components
-    // app.component('CustomComponent', CustomComponent)
+    app.component('HomeDownload', HomeDownload)
 
     // 延迟注册 Redirect 组件以避免初始化冲突
     import('./components/Redirect.vue').then((module) => {
