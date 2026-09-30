@@ -101,10 +101,18 @@ export function preferredBuild(
   return builds.find((build) => build.flavor === 'MFAA') ?? builds[0]
 }
 
-export function preferredApk(apk: ApkBuild[]): ApkBuild | undefined {
+/** 优先与设备 ABI 一致的 APK；ABI 未知时按 arm64 → universal 的覆盖面排序。 */
+export function preferredApk(apk: ApkBuild[], abi?: ApkAbi): ApkBuild | undefined {
+  if (abi) {
+    const exact = apk.find((item) => item.abi === abi)
+    if (exact) return exact
+  }
+  if (abi !== 'x86_64') {
+    const arm = apk.find((item) => item.abi === 'arm64-v8a')
+    if (arm) return arm
+  }
   return (
-    apk.find((item) => item.abi === 'arm64-v8a')
-    ?? apk.find((item) => item.abi === 'universal')
+    apk.find((item) => item.abi === 'universal')
     ?? apk[0]
   )
 }

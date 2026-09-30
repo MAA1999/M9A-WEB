@@ -146,8 +146,10 @@ const activeBuild = computed<DesktopBuild | null>(() => {
   const arch = activeArch.value
   if (arch === 'unknown') return null
   // 末尾的退回只在该平台仅有一个架构时生效，不会把 ARM 用户送去下 x64 包。
+  const osBuilds = desktop.value.filter((build) => build.os === os)
+  const singleArch = new Set(osBuilds.map((build) => build.arch)).size === 1
   return preferredBuild(desktop.value, os, arch)
-    ?? desktop.value.find((build) => build.os === os)
+    ?? (singleArch ? osBuilds[0] : null)
     ?? null
 })
 
@@ -170,7 +172,11 @@ const cta = computed<Cta | null>(() => {
   if (!os) return null
 
   if (os === 'android') {
-    const build = preferredApk(apk.value)
+    const abi: ApkAbi | undefined =
+      detected.value.os === 'android' && detected.value.arch !== 'unknown'
+        ? detected.value.arch === 'aarch64' ? 'arm64-v8a' : 'x86_64'
+        : undefined
+    const build = preferredApk(apk.value, abi)
     if (!build) return null
     return {
       url: build.url,
@@ -257,7 +263,7 @@ function normalize(raw: Record<string, unknown>): ReleaseInfo | null {
     .map((asset) => ({
       name: asset.name ?? '',
       size: asset.size ?? 0,
-      url: asset.url ?? asset.browser_download_url ?? '',
+      url: asset.browser_download_url ?? asset.url ?? '',
     }))
     .filter((asset) => asset.name && asset.url)
 
@@ -280,7 +286,12 @@ function readCache(): ReleaseInfo | null {
     sessionStorage.removeItem(CACHE_KEY)
   }
   catch {
-    sessionStorage.removeItem(CACHE_KEY)
+    try {
+      sessionStorage.removeItem(CACHE_KEY)
+    }
+    catch {
+      // 存储完全不可用时忽略缓存。
+    }
   }
   return null
 }
