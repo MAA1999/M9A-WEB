@@ -831,4 +831,54 @@ onMounted(async () => {
     width: 60px;
   }
 }
+
+/* 大屏整页放大一档（配合 theme/styles/custom.css 的 ≥1920 档），
+   大视口靠内容变大填满，而不是原尺寸留大片空白 */
+@media (min-width: 1920px) {
+  .hd-title {
+    font-size: 24px;
+  }
+
+  .hd-version {
+    font-size: 14px;
+  }
+
+  .hd-cta {
+    min-height: 60px;
+    padding: 0 30px;
+    font-size: 17px;
+  }
+
+  .hd-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .hd-cta-size {
+    font-size: 14px;
+  }
+
+  .hd-mirror {
+    font-size: 15px;
+  }
+
+  .hd-status,
+  .hd-note,
+  .hd-mac-hint,
+  .hd-cross-arch {
+    font-size: 14px;
+  }
+
+  .hd-platforms {
+    font-size: 15px;
+  }
+
+  .hd-details summary {
+    font-size: 14px;
+  }
+
+  .hd-table {
+    font-size: 14px;
+  }
+}
 </style>

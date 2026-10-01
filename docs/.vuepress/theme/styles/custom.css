@@ -5,6 +5,17 @@
  * 压缩 hero 上下留白、缩小 logo 与装饰圆、收紧 custom 区块内边距、
  * 允许 hero 按钮换行；纵向留白以 1280×720 视口也能放完为基准。
  * 主题样式带 scoped 属性选择器，特异性更高，故此处用 !important 覆盖。
+ *
+ * 另有对视口尺寸的自适应：
+ * - 「文档站 | Documentation」56px 一行约 606px，主题 576px 的标题上限
+ *   会让它在竖线后折行，≥960 把标题列放宽到 640px；
+ * - 主题 hero 的两列（文本 + 吉祥物）撑满 1152px 容器，文本列永远贴住
+ *   容器左缘，视口一宽就只剩右侧空白在长；≥1120 改为两列按内容收窄、
+ *   组合整体居中，下载区块容器同宽居中、与组合左右边缘对齐，
+ *   缩放或改窗口大小时两侧留白同步增减；
+ * - ≥1440 纵向呼吸放大，避免下载区下方留大片空白；
+ * - ≥1920 内容整体放大一档（标题、logo、下载区），大屏靠内容变大
+ *   填满，而不是保持原尺寸留下大片空白。
  */
 
 .vp-home-doc-hero {
@@ -46,7 +57,8 @@
   max-height: 168px !important;
 }
 
-/* 下载区块（custom home box）收紧纵向留白 */
+/* 下载区块（custom home box）收紧纵向留白；
+   水平内边距与 hero 的 64px 对齐（主题原本是 48px，两区块左缘会差 16px） */
 .vp-home-box {
   padding-top: 8px !important;
   padding-bottom: 24px !important;
@@ -56,6 +68,8 @@
   .vp-home-box {
     padding-top: 8px !important;
     padding-bottom: 16px !important;
+    padding-left: 64px !important;
+    padding-right: 64px !important;
   }
 }
 
@@ -74,5 +88,100 @@
 @media (min-width: 960px) {
   .vp-home-doc-hero .action {
     justify-content: flex-start;
+  }
+}
+
+/* 标题列放宽到 640px，中文标题单行约 606px，主题 576px 上限会让它折行 */
+@media (min-width: 960px) {
+  .vp-home-doc-hero .doc-hero-main {
+    max-width: 640px !important;
+  }
+
+  .vp-home-doc-hero .name,
+  .vp-home-doc-hero .text {
+    max-width: 640px !important;
+  }
+}
+
+/* hero 紧凑组合整体居中：两列不再撑满容器，剩余空间平分到组合两侧；
+   下载容器与组合同宽（640 + 96 + 224 = 960）居中，上下左边缘对齐 */
+@media (min-width: 1120px) {
+  .vp-home-doc-hero .doc-hero-container {
+    justify-content: center;
+  }
+
+  .vp-home-doc-hero .doc-hero-main {
+    flex-grow: 0 !important;
+  }
+
+  .vp-home-doc-hero .image {
+    flex-grow: 0 !important;
+    margin-left: 96px !important;
+  }
+
+  /* 主题的 -32px 视觉上移会让组合整体偏左，去掉才是真正居中 */
+  .vp-home-doc-hero .image-container {
+    transform: none !important;
+  }
+
+  .vp-home-box .container {
+    max-width: 960px !important;
+  }
+}
+
+/* ≥1440：纵向呼吸放大，把底部空白转移到区块间距里 */
+@media (min-width: 1440px) {
+  .vp-home-doc-hero {
+    padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 36px) !important;
+  }
+
+  .vp-home-box {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+}
+
+/* ≥1920：内容整体放大一档而不是保持原尺寸留白——标题、logo、下载区加大，
+   纵向留白同步放大，避免视觉重心偏上 */
+@media (min-width: 1920px) {
+  .vp-home-doc-hero {
+    padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 64px) !important;
+  }
+
+  .vp-home-box {
+    padding-top: 52px !important;
+    padding-bottom: 40px !important;
+  }
+
+  /* 标题 60px 单行约 650px；组合总宽 680 + 96 + 320 = 1096，
+     下载容器同宽对齐，仍在 1152 的 hero 容器内 */
+  .vp-home-box .container {
+    max-width: 1096px !important;
+  }
+
+  .vp-home-doc-hero .doc-hero-main {
+    max-width: 680px !important;
+  }
+
+  .vp-home-doc-hero .name,
+  .vp-home-doc-hero .text {
+    max-width: 680px !important;
+    font-size: 60px !important;
+    line-height: 68px !important;
+  }
+
+  .vp-home-doc-hero .image-container {
+    width: 320px !important;
+    height: 320px !important;
+  }
+
+  .vp-home-doc-hero .image-bg {
+    width: 244px !important;
+    height: 244px !important;
+  }
+
+  .vp-home-doc-hero .image-src {
+    max-width: 236px !important;
+    max-height: 236px !important;
   }
 }
