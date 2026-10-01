@@ -2,7 +2,8 @@
  * 首页一屏化布局微调。
  *
  * 首页 = doc-hero + 下载区块（custom），目标是桌面端一屏放完：
- * 压缩 hero 上下留白、缩小 logo 与装饰圆、收紧 custom 区块内边距。
+ * 压缩 hero 上下留白、缩小 logo 与装饰圆、收紧 custom 区块内边距、
+ * 允许 hero 按钮换行；纵向留白以 1280×720 视口也能放完为基准。
  * 主题样式带 scoped 属性选择器，特异性更高，故此处用 !important 覆盖。
  */
 
@@ -13,8 +14,12 @@
 
 @media (min-width: 640px) {
   .vp-home-doc-hero {
-    padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 16px) !important;
-    padding-bottom: 16px !important;
+    padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 12px) !important;
+    padding-bottom: 8px !important;
+  }
+
+  .vp-home-doc-hero .actions {
+    padding-top: 16px !important;
   }
 }
 
@@ -50,12 +55,12 @@
 @media (min-width: 960px) {
   .vp-home-box {
     padding-top: 8px !important;
-    padding-bottom: 32px !important;
+    padding-bottom: 16px !important;
   }
 }
 
-/* hero 的 v-for 按钮都在同一个 .action 容器里，且元素间无空白节点，
-   内联按钮不会自动换行；按钮一多（语言 + 文档入口）就横向溢出。 */
+/* hero 的所有按钮都在同一个 .action 容器里，按钮一多（语言 + 文档入口）
+   就会横向溢出，需要允许容器内换行。 */
 .vp-home-doc-hero .action {
   display: flex !important;
   flex-wrap: wrap !important;

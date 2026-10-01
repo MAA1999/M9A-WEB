@@ -799,9 +799,6 @@ onMounted(async () => {
   white-space: nowrap;
 }
 
-/* 底部链接已移除：Mirror酱 在主按钮旁，安装教程在 hero 用户手册，
-   Releases 可点版本号进入。 */
-
 @media (max-width: 640px) {
   .hd-cta {
     width: 100%;
