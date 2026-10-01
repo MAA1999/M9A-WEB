@@ -4,7 +4,7 @@ import { defineClientConfig } from 'vuepress/client'
 // import NpmBadgeGroup from 'vuepress-theme-plume/features/NpmBadgeGroup.vue'
 // import Swiper from 'vuepress-theme-plume/features/Swiper.vue'
 
-// import './theme/styles/custom.css'
+import './theme/styles/custom.css'
 // import './styles/home-custom.scss'
 import HomeDownload from './components/HomeDownload.vue'
 
