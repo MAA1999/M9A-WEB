@@ -80,7 +80,6 @@ const STRINGS = {
     macArm: '下载 macOS · Apple 芯片',
     macIntel: '下载 macOS · Intel',
     crossArch: '该构建与当前系统架构不一致，可能无法运行。',
-    guide: '安装教程',
     ctaDesktop: (os: string, arch: string) => `下载 ${os} ${arch} 版`,
     ctaAndroid: (abi: string) => `下载 Android APK · ${abi}`,
   },
@@ -104,7 +103,6 @@ const STRINGS = {
     macArm: 'Download macOS · Apple silicon',
     macIntel: 'Download macOS · Intel',
     crossArch: 'This build does not match your architecture and may not run.',
-    guide: 'Install guide',
     ctaDesktop: (os: string, arch: string) => `Download for ${os} ${arch}`,
     ctaAndroid: (abi: string) => `Download Android APK · ${abi}`,
   },
@@ -210,8 +208,6 @@ const mirrorUrl = computed(() => {
   }
   return `https://mirrorchyan.com/${lang.value}/projects?${params.toString()}`
 })
-
-const guideUrl = computed(() => `/${lang.value === 'zh' ? 'zh_cn' : 'en_us'}/manual/newbie.html`)
 
 const releasedDate = computed(() =>
   release.value?.published_at ? release.value.published_at.slice(0, 10) : '',
@@ -494,14 +490,6 @@ onMounted(async () => {
         </tbody>
       </table>
     </details>
-
-    <p class="hd-links">
-      <a :href="mirrorUrl" target="_blank" rel="noopener noreferrer">Mirror酱</a>
-      <span class="hd-sep">·</span>
-      <a :href="RELEASES_URL" target="_blank" rel="noopener noreferrer">GitHub Releases</a>
-      <span class="hd-sep">·</span>
-      <a :href="guideUrl">{{ L.guide }}</a>
-    </p>
   </section>
 </template>
 
@@ -811,28 +799,8 @@ onMounted(async () => {
   white-space: nowrap;
 }
 
-/* 底部链接 */
-.hd-links {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 4px 10px;
-  margin: 18px 0 0;
-  font-size: 13px;
-}
-
-.hd-links a {
-  color: var(--vp-c-brand-1);
-  text-decoration: none;
-}
-
-.hd-links a:hover {
-  text-decoration: underline;
-}
-
-.hd-sep {
-  color: var(--vp-c-text-3);
-}
+/* 底部链接已移除：Mirror酱 在主按钮旁，安装教程在 hero 用户手册，
+   Releases 可点版本号进入。 */
 
 @media (max-width: 640px) {
   .hd-cta {
