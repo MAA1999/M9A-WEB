@@ -359,7 +359,16 @@ async function load(force = false) {
 }
 
 onMounted(async () => {
-  lang.value = (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en'
+  // 路由前缀优先：/zh_cn/、/en_us/ 是用户主动选择的语言；
+  // 只有语言中立的首页 `/` 才按浏览器语言猜测
+  const path = window.location.pathname
+  if (path.startsWith('/en_us')) {
+    lang.value = 'en'
+  } else if (path.startsWith('/zh_cn')) {
+    lang.value = 'zh'
+  } else {
+    lang.value = (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en'
+  }
   detected.value = await detectPlatform()
   await load()
 })
