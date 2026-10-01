@@ -1,0 +1,73 @@
+/**
+ * 首页一屏化布局微调。
+ *
+ * 首页 = doc-hero + 下载区块（custom），目标是桌面端一屏放完：
+ * 压缩 hero 上下留白、缩小 logo 与装饰圆、收紧 custom 区块内边距。
+ * 主题样式带 scoped 属性选择器，特异性更高，故此处用 !important 覆盖。
+ */
+
+.vp-home-doc-hero {
+  padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 12px) !important;
+  padding-bottom: 12px !important;
+}
+
+@media (min-width: 640px) {
+  .vp-home-doc-hero {
+    padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 16px) !important;
+    padding-bottom: 16px !important;
+  }
+}
+
+/* logo 与背景圆整体缩小一档 */
+.vp-home-doc-hero .image-container {
+  width: 224px !important;
+  height: 224px !important;
+}
+
+.vp-home-doc-hero .image-bg {
+  width: 144px !important;
+  height: 144px !important;
+}
+
+@media (min-width: 640px) {
+  .vp-home-doc-hero .image-bg {
+    width: 160px !important;
+    height: 160px !important;
+  }
+}
+
+.vp-home-doc-hero .image-src {
+  max-width: 168px !important;
+  max-height: 168px !important;
+}
+
+/* 下载区块（custom home box）收紧纵向留白 */
+.vp-home-box {
+  padding-top: 8px !important;
+  padding-bottom: 24px !important;
+}
+
+@media (min-width: 960px) {
+  .vp-home-box {
+    padding-top: 8px !important;
+    padding-bottom: 32px !important;
+  }
+}
+
+/* hero 的 v-for 按钮都在同一个 .action 容器里，且元素间无空白节点，
+   内联按钮不会自动换行；按钮一多（语言 + 文档入口）就横向溢出。 */
+.vp-home-doc-hero .action {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  /* 主题规则 flex-shrink:0 会让 .action 以内容 max-content 撑出窄屏容器 */
+  flex-shrink: 1 !important;
+  max-width: 100%;
+  justify-content: center;
+  gap: 8px;
+}
+
+@media (min-width: 960px) {
+  .vp-home-doc-hero .action {
+    justify-content: flex-start;
+  }
+}
