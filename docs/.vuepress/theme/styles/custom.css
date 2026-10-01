@@ -59,8 +59,8 @@
   }
 }
 
-/* hero 的所有按钮都在同一个 .action 容器里，按钮一多（语言 + 文档入口）
-   就会横向溢出，需要允许容器内换行。 */
+/* hero 的所有按钮都在同一个 .action 容器里，按钮一多窄屏就会横向溢出，
+   需要允许容器内换行。 */
 .vp-home-doc-hero .action {
   display: flex !important;
   flex-wrap: wrap !important;
