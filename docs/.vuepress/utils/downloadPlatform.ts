@@ -46,7 +46,8 @@ export interface Detected {
 }
 
 const DESKTOP_PATTERN = /^M9A-(win|macos|linux)-(x86_64|aarch64)-v[\d.]+-(MFAA|MXU)\./i
-const APK_PATTERN = /^M9A-v[\d.]+-(arm64-v8a|x86_64|universal)\.apk$/i
+// APK 命名固定为 M9A-android-<abi>-v<版本>.apk（v4.11.2 起，上游确认不再变动）。
+const APK_PATTERN = /^M9A-android-(arm64-v8a|x86_64|universal)-v[\d.]+\.apk$/i
 
 export function parseAssets(assets: ReleaseAsset[]): {
   desktop: DesktopBuild[]
