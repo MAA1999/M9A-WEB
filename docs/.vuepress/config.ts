@@ -9,6 +9,9 @@
  * 特别的，请不要在两个配置文件中重复配置相同的项，当前文件的配置项会被覆盖
  */
 
+import { existsSync, readFileSync } from 'node:fs'
+import path from 'node:path'
+
 import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { plumeTheme } from 'vuepress-theme-plume'
@@ -23,6 +26,19 @@ import legacyRedirects from './plugins/legacy-redirects.ts'
 const isProd = process.env.NODE_ENV === 'production'
 
 const hostname = 'https://1999.fan'
+
+/**
+ * 每篇文档的最后修改时间，键为相对 `docs/` 的路径。
+ *
+ * 文档在本仓库里是部署时从 MAA1999/M9A 拷进来的、不进版本控制，因此
+ * `@vuepress/plugin-git` 读不到它们的历史，sitemap 一直没有 lastmod。
+ * 该文件由 `tools/gen-lastmod.mjs` 在 CI 中依据 M9A 仓库的历史生成；
+ * 本地未生成时保持为空，sitemap 只是不写 lastmod。
+ */
+const lastmodPath = path.join(__dirname, 'lastmod.json')
+const lastmod: Record<string, string> = existsSync(lastmodPath)
+  ? JSON.parse(readFileSync(lastmodPath, 'utf-8'))
+  : {}
 
 export default defineUserConfig({
   base: '/',
@@ -71,6 +87,14 @@ export default defineUserConfig({
        */
       sitemap: {
         excludePaths: ['/404.html', '/zh_cn/'],
+        /**
+         * 插件默认按天声明更新频率，而文档实际是按需修改的，声明 daily 只会
+         * 让这个字段更不可信（Google 已忽略 changefreq，只认 lastmod）。
+         */
+        changefreq: 'weekly',
+        /* 取该页在 M9A 仓库中的最后一次提交时间；没有记录的页面不写 lastmod。 */
+        modifyTimeGetter: (page) =>
+          (page.filePathRelative && lastmod[page.filePathRelative]) || '',
       },
     },
 

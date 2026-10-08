@@ -9,3 +9,6 @@ M9A-temp/
 .venv/
 
 M9A-temp
+
+# 由 tools/gen-lastmod.mjs 在部署时生成，依赖 M9A 仓库的历史
+docs/.vuepress/lastmod.json

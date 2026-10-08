@@ -38,6 +38,8 @@ jobs:
         with:
           repository: MAA1999/M9A
           path: M9A-temp
+          # 生成 sitemap 的 lastmod 需要每个文档的最后提交时间
+          fetch-depth: 0
 
       - name: Sync docs from M9A
         run: |
@@ -62,6 +64,9 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Generate sitemap lastmod manifest
+        run: node tools/gen-lastmod.mjs M9A-temp
 
       - name: Build with VuePress
         run: pnpm run docs:build
