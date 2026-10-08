@@ -15,9 +15,12 @@ import { plumeTheme } from 'vuepress-theme-plume'
 
 import { genSiteLocales } from './navigation/genLocales.ts'
 import breadcrumbFix from './plugins/breadcrumb-fix.ts'
+import canonical from './plugins/canonical.ts'
 import containerCloseFix from './plugins/container-close-fix.ts'
 
 const isProd = process.env.NODE_ENV === 'production'
+
+const hostname = 'https://1999.fan'
 
 export default defineUserConfig({
   base: '/',
@@ -27,7 +30,7 @@ export default defineUserConfig({
 
   locales: genSiteLocales(),
 
-  plugins: [breadcrumbFix, containerCloseFix()],
+  plugins: [breadcrumbFix, containerCloseFix(), canonical({ hostname })],
 
   head: [
     // 配置站点图标
@@ -47,7 +50,7 @@ export default defineUserConfig({
 
   theme: plumeTheme({
     /* 添加您的部署域名, 有助于 SEO, 生成 sitemap */
-    hostname: 'https://1999.fan',
+    hostname,
 
     /* 文档仓库配置，用于 editLink */
     docsRepo: 'MAA1999/M9A',
