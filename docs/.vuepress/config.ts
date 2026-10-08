@@ -17,6 +17,7 @@ import { genSiteLocales } from './navigation/genLocales.ts'
 import breadcrumbFix from './plugins/breadcrumb-fix.ts'
 import canonical from './plugins/canonical.ts'
 import containerCloseFix from './plugins/container-close-fix.ts'
+import legacyRedirects from './plugins/legacy-redirects.ts'
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -30,7 +31,7 @@ export default defineUserConfig({
 
   locales: genSiteLocales(),
 
-  plugins: [breadcrumbFix, containerCloseFix(), canonical({ hostname })],
+  plugins: [breadcrumbFix, containerCloseFix(), canonical({ hostname }), legacyRedirects({ hostname })],
 
   head: [
     // 配置站点图标
