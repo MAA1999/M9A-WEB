@@ -96,6 +96,43 @@ export default defineUserConfig({
         modifyTimeGetter: (page) =>
           (page.filePathRelative && lastmod[page.filePathRelative]) || '',
       },
+
+      /**
+       * SEO / OGP
+       *
+       * 插件只在页面自带 cover 或正文有图时才写 og:image，且从不写 twitter
+       * 卡片，全站 49 个页面里只有 4 个有分享图，发到 QQ 群、Bilibili 或
+       * Discord 时没有任何预览。
+       *
+       * 这里统一改为按语言套用固定分享图（`tools/gen-og-image.py` 生成），
+       * 而不是沿用页面正文里的截图：截图多为竖版操作示意，裁进 1.91:1 的
+       * 卡片里反而看不清。twitter 的 key 先整体剔除再重写，否则自带 cover
+       * 的页面会同时出现 twitter:image 与 twitter:image:src 两条。
+       *
+       * fallBackImage 同时供 JSON-LD 的 Article.image 使用，否则那一项会是
+       * 空字符串（随后被 breadcrumb-fix 兜底成 32×32 的站标）。
+       */
+      seo: {
+        fallBackImage: `${hostname}/images/og-zh.png`,
+        ogp: (ogp, page) => {
+          const image = `${hostname}/images/${page.lang === 'en-US' ? 'og-en.png' : 'og-zh.png'}`
+          const title = ogp['og:title'] ?? ''
+          const content = Object.fromEntries(
+            Object.entries(ogp).filter(([key]) => !key.startsWith('twitter:')),
+          )
+
+          return {
+            ...content,
+            'og:image': image,
+            'og:image:width': '1200',
+            'og:image:height': '630',
+            'og:image:alt': title,
+            'twitter:card': 'summary_large_image',
+            'twitter:image': image,
+            'twitter:image:alt': title,
+          }
+        },
+      },
     },
 
     /* 文档仓库配置，用于 editLink */
