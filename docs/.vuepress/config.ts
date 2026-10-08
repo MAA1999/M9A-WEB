@@ -52,6 +52,20 @@ export default defineUserConfig({
     /* 添加您的部署域名, 有助于 SEO, 生成 sitemap */
     hostname,
 
+    /* 内置插件配置 */
+    plugins: {
+      /**
+       * 站点地图
+       *
+       * `/zh_cn/` 是 meta-refresh 到 `/` 的跳转壳（见 `docs/zh_cn/README.md`），
+       * 首页已在根路径提供，把它提交给搜索引擎只会多出一行「网页会自动重定向」。
+       * 传 excludePaths 会覆盖插件默认值，所以 `/404.html` 需一并列上。
+       */
+      sitemap: {
+        excludePaths: ['/404.html', '/zh_cn/'],
+      },
+    },
+
     /* 文档仓库配置，用于 editLink */
     docsRepo: 'MAA1999/M9A',
     docsDir: '/docs',
