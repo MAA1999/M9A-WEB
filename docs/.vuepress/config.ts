@@ -26,8 +26,8 @@ const hostname = 'https://1999.fan'
 export default defineUserConfig({
   base: '/',
   lang: 'zh-CN',
-  title: 'M9A 文档站',
-  description: 'M9A |「亿韭韭韭」小助手',
+  title: 'M9A 文档站 · 重返未来：1999 小助手',
+  description: 'M9A（亿韭韭韭）是《重返未来：1999》的自动化小助手。本站是它的官方文档：安装配置、功能说明、开发指南与常见问题。',
 
   locales: genSiteLocales(),
 

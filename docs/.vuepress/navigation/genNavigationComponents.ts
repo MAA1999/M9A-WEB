@@ -47,8 +47,13 @@ function getMetaData(dir: string, entry: fs.Dirent): MetaData | null {
   const baseName = path.parse(entry.name).name
   // 获取顺序，目录的order在meta.dir.order里，文件的order在meta.order里，默认值为一个大数
   const order = Number((entry.isDirectory() ? meta?.dir?.order : meta?.order) ?? Number.MAX_SAFE_INTEGER)
-  // 获取标题，先从matter里找title，再用正则获取一级标题，最后fallback到文件名（不含扩展名）
-  const title = String(meta?.title ?? RegExp('# (.+)').exec(fileContent)?.[1] ?? baseName)
+  // 获取标题，先从 meta.dir.title 找目录专用标题，再从matter里找title，
+  // 再用正则获取一级标题，最后fallback到文件名（不含扩展名）
+  //
+  // 目录标题同时决定导航栏文字、侧边栏分组名，以及该目录下所有子页面
+  // <title> 里的中间段。它需要和目录自身页面的标题解耦：两者都取
+  // meta.title 时，栏目首页的标题会重复成「用户手册 | 用户手册 | ...」。
+  const title = String(meta?.dir?.title ?? meta?.title ?? RegExp('# (.+)').exec(fileContent)?.[1] ?? baseName)
   // 获取图标
   const icon = String(meta?.icon ?? '')
   // 是否添加到索引，文件永远为true，目录则看meta.index，默认true
