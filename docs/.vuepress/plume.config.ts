@@ -17,7 +17,8 @@ import { genThemeLocales } from './navigation/genLocales.ts'
  * @see https://theme-plume.vuejs.press/config/basic/
  */
 export default defineThemeConfig({
-  logo: 'images/m9a-logo_32x32.png',
+  // 站标以 24px 显示，高分屏上 32×32 的图会发虚，用 128×128 的版本
+  logo: '/images/m9a-logo_128x128.png',
 
   appearance: true,  // 配置 深色模式
 

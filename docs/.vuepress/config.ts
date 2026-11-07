@@ -57,8 +57,10 @@ export default defineUserConfig({
   ],
 
   head: [
-    // 配置站点图标
-    ['link', { rel: 'icon', type: 'image/png', href: 'images/m9a-logo_32x32.png' }],
+    // 配置站点图标。必须用绝对路径：相对路径在 /zh_cn/manual/faq.html 一类页面上
+    // 会解析成 /zh_cn/manual/images/...，除首页外全部 404。
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/images/m9a-logo_32x32.png' }],
+    ['link', { rel: 'apple-touch-icon', href: '/images/m9a-logo_256x256.png' }],
     // Algolia 站点验证
     ['meta', { name: 'algolia-site-verification', content: '5D5F884201CF158A'}],
     // 百度站点验证
