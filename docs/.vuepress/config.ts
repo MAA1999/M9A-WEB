@@ -21,6 +21,7 @@ import breadcrumbFix from './plugins/breadcrumb-fix.ts'
 import canonical from './plugins/canonical.ts'
 import containerCloseFix from './plugins/container-close-fix.ts'
 import docTitleFix from './plugins/doc-title-fix.ts'
+import homeTagline from './plugins/home-tagline.ts'
 import hreflang from './plugins/hreflang.ts'
 import legacyRedirects from './plugins/legacy-redirects.ts'
 
@@ -53,6 +54,7 @@ export default defineUserConfig({
     breadcrumbFix,
     containerCloseFix(),
     docTitleFix(),
+    homeTagline(),
     canonical({ hostname }),
     legacyRedirects({ hostname }),
     hreflang({ hostname }),

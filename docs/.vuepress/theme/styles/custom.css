@@ -72,8 +72,11 @@
  * 主题样式带 scoped 属性选择器，特异性更高，故此处用 !important 覆盖。
  *
  * 另有对视口尺寸的自适应：
+ * - <960 吉祥物叠在标题上方，重算它的位置，不压标题、不压导航栏；
  * - 「文档站 | Documentation」56px 一行约 606px，主题 576px 的标题上限
  *   会让它在竖线后折行，≥960 把标题列放宽到 640px；
+ * - ≥960 标题列与吉祥物垂直居中：主题默认顶部对齐，吉祥物下方的空白会把
+ *   下载区推远；
  * - 主题 hero 的两列（文本 + 吉祥物）撑满 1152px 容器，文本列永远贴住
  *   容器左缘，视口一宽就只剩右侧空白在长；≥1120 改为两列按内容收窄、
  *   组合整体居中，下载区块容器同宽居中、与组合左右边缘对齐，
@@ -122,17 +125,93 @@
   max-height: 168px !important;
 }
 
+/* 一句话介绍（见 plugins/home-tagline.ts）。主题桌面端是 24px，中文整句会折成两行。
+   手机上仍要折行，只在标点与空格处断开，不把「小助手」拆成「小助 / 手」 */
+.vp-home-doc-hero .tagline {
+  font-size: 16px !important;
+  line-height: 26px !important;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+@media (min-width: 640px) {
+  .vp-home-doc-hero .tagline {
+    padding-top: 10px !important;
+    font-size: 18px !important;
+    line-height: 28px !important;
+  }
+}
+
+/* 窄屏下吉祥物叠在标题上方。主题用负外边距把图往上提，是按更大的图算的：
+   图缩小后，它下半身压住「M9A」，头顶伸进导航栏。这里按 152px 的图重算：
+   容器 196px、图居中，上提 16px 后图离导航栏约 18px，下方与标题留出 8px。 */
+@media (max-width: 959px) {
+  .vp-home-doc-hero .image {
+    margin: -16px 0 -14px !important;
+  }
+
+  .vp-home-doc-hero .image-container {
+    width: 196px !important;
+    height: 196px !important;
+  }
+
+  .vp-home-doc-hero .image-bg {
+    width: 132px !important;
+    height: 132px !important;
+  }
+
+  .vp-home-doc-hero .image-src {
+    max-width: 152px !important;
+    max-height: 152px !important;
+  }
+
+  /* 三个入口按钮在 360px 宽的手机上会挤成两行（两个 + 一个）。主题在相邻按钮间另加
+     1em 左边距，叠在上面的 gap 之上，去掉它并收窄内边距，放回一行。
+     主题的按钮样式带 scoped 属性选择器，需要 !important。 */
+  .vp-home-doc-hero .action .vp-button {
+    padding: 0 16px !important;
+  }
+
+  .vp-home-doc-hero .action .vp-button + .vp-button {
+    margin-left: 0 !important;
+  }
+
+  /* 「文档站 | Documentation」32px 时在手机上会在竖线处折成两行，字号收一档 */
+  .vp-home-doc-hero .name,
+  .vp-home-doc-hero .text {
+    font-size: 28px !important;
+    line-height: 36px !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 959px) {
+  .vp-home-doc-hero .name,
+  .vp-home-doc-hero .text {
+    font-size: 44px !important;
+    line-height: 52px !important;
+  }
+}
+
 /* 下载区块（custom home box）收紧纵向留白；
    水平内边距与 hero 的 64px 对齐（主题原本是 48px，两区块左缘会差 16px） */
 .vp-home-box {
-  padding-top: 8px !important;
-  padding-bottom: 24px !important;
+  padding-top: 20px !important;
+  padding-bottom: 32px !important;
+}
+
+/* 下载区是带内边距的卡片，窄屏上把主题 24px 的左右留白让给卡片内容 */
+@media (max-width: 639px) {
+  .vp-home-box {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
 }
 
 @media (min-width: 960px) {
   .vp-home-box {
-    padding-top: 8px !important;
-    padding-bottom: 16px !important;
+    padding-top: 20px !important;
+    padding-bottom: 24px !important;
     padding-left: 64px !important;
     padding-right: 64px !important;
   }
@@ -154,17 +233,29 @@
   .vp-home-doc-hero .action {
     justify-content: flex-start;
   }
-}
 
-/* 标题列放宽到 640px，中文标题单行约 606px，主题 576px 上限会让它折行 */
-@media (min-width: 960px) {
+  /* 标题列放宽到 640px，中文标题单行约 606px，主题 576px 上限会让它折行 */
   .vp-home-doc-hero .doc-hero-main {
     max-width: 640px !important;
   }
 
   .vp-home-doc-hero .name,
-  .vp-home-doc-hero .text {
+  .vp-home-doc-hero .text,
+  .vp-home-doc-hero .tagline {
     max-width: 640px !important;
+  }
+
+  /* 标题列与吉祥物垂直居中；主题的 -32px 视觉上移会让吉祥物偏高偏左，一并去掉 */
+  .vp-home-doc-hero .doc-hero-container {
+    align-items: center;
+  }
+
+  .vp-home-doc-hero .image {
+    min-height: 0 !important;
+  }
+
+  .vp-home-doc-hero .image-container {
+    transform: none !important;
   }
 }
 
@@ -184,11 +275,6 @@
     margin-left: 96px !important;
   }
 
-  /* 主题的 -32px 视觉上移会让组合整体偏左，去掉才是真正居中 */
-  .vp-home-doc-hero .image-container {
-    transform: none !important;
-  }
-
   .vp-home-box .container {
     max-width: 960px !important;
   }
@@ -201,8 +287,8 @@
   }
 
   .vp-home-box {
-    padding-top: 28px !important;
-    padding-bottom: 28px !important;
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
   }
 }
 
@@ -213,8 +299,10 @@
     padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 64px) !important;
   }
 
+  /* 吉祥物容器在这一档是 320px 高，垂直居中后标题列下方已经有一截空白，
+     下载区不再另加大的上边距 */
   .vp-home-box {
-    padding-top: 52px !important;
+    padding-top: 24px !important;
     padding-bottom: 40px !important;
   }
 
@@ -233,6 +321,12 @@
     max-width: 680px !important;
     font-size: 60px !important;
     line-height: 68px !important;
+  }
+
+  .vp-home-doc-hero .tagline {
+    max-width: 680px !important;
+    font-size: 20px !important;
+    line-height: 32px !important;
   }
 
   .vp-home-doc-hero .image-container {

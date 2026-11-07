@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vuepress/client'
 import {
   type ApkAbi,
   type ApkBuild,
@@ -62,6 +63,8 @@ const MIRROR_ARCH: Record<Arch, string> = { x86_64: 'x64', aarch64: 'arm64' }
 const STRINGS = {
   zh: {
     heading: '下载 M9A',
+    releaseNotes: '查看该版本的更新日志',
+    allReleases: '在 GitHub 查看全部发行版',
     platformLabel: '平台：',
     detected: '已匹配当前系统',
     allBuilds: '全部构建 / 直接下载其他版本',
@@ -85,6 +88,8 @@ const STRINGS = {
   },
   en: {
     heading: 'Download M9A',
+    releaseNotes: 'Release notes for this version',
+    allReleases: 'All releases on GitHub',
     platformLabel: 'Platform:',
     detected: 'matched to this device',
     allBuilds: 'All builds / other versions',
@@ -110,8 +115,14 @@ const STRINGS = {
 
 type Phase = 'idle' | 'loading' | 'ready'
 
+/**
+ * 路由前缀优先：/zh_cn/、/en_us/ 是用户主动选择的语言，初始值在服务端渲染时就定下，
+ * 英文首页不会先闪一下中文。只有语言中立的首页 `/` 在挂载后按浏览器语言猜测。
+ */
+const route = useRoute()
+const lang = ref<'zh' | 'en'>(route.path.startsWith('/en_us/') ? 'en' : 'zh')
+
 const phase = ref<Phase>('idle')
-const lang = ref<'zh' | 'en'>('zh')
 const release = ref<ReleaseInfo | null>(null)
 const desktop = ref<DesktopBuild[]>([])
 const apk = ref<ApkBuild[]>([])
@@ -359,14 +370,7 @@ async function load(force = false) {
 }
 
 onMounted(async () => {
-  // 路由前缀优先：/zh_cn/、/en_us/ 是用户主动选择的语言；
-  // 只有语言中立的首页 `/` 才按浏览器语言猜测
-  const path = window.location.pathname
-  if (path.startsWith('/en_us')) {
-    lang.value = 'en'
-  } else if (path.startsWith('/zh_cn')) {
-    lang.value = 'zh'
-  } else {
+  if (!/^\/(?:en_us|zh_cn)\//.test(route.path)) {
     lang.value = (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en'
   }
   detected.value = await detectPlatform()
@@ -375,14 +379,20 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="hd">
+  <section class="hd" aria-labelledby="hd-title">
     <header class="hd-head">
-      <h2 class="hd-title">
+      <h2 id="hd-title" class="hd-title">
         {{ L.heading }}
       </h2>
-      <p v-if="release" class="hd-version">
-        <a :href="release.html_url" target="_blank" rel="noopener noreferrer">{{ release.version }}</a>
-        <span v-if="releasedDate">&nbsp;· {{ releasedDate }}</span>
+      <p v-if="release" class="hd-meta">
+        <a
+          class="hd-version"
+          :href="release.html_url"
+          :title="L.releaseNotes"
+          target="_blank"
+          rel="noopener noreferrer"
+        >{{ release.version }}</a>
+        <span v-if="releasedDate" class="hd-date">{{ releasedDate }}</span>
       </p>
     </header>
 
@@ -393,8 +403,10 @@ onMounted(async () => {
           <polyline points="7 10 12 15 17 10" />
           <line x1="12" y1="15" x2="12" y2="3" />
         </svg>
-        <span class="hd-cta-label">{{ cta.label }}</span>
-        <span class="hd-cta-size">{{ cta.size }}</span>
+        <span class="hd-cta-text">
+          <span class="hd-cta-label">{{ cta.label }}</span>
+          <span class="hd-cta-size">{{ cta.size }}</span>
+        </span>
       </a>
 
       <template v-else-if="needsArchChoice">
@@ -410,8 +422,10 @@ onMounted(async () => {
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-          <span class="hd-cta-label">{{ L.macArm }}</span>
-          <span class="hd-cta-size">{{ formatSize(macArmBuild.size) }}</span>
+          <span class="hd-cta-text">
+            <span class="hd-cta-label">{{ L.macArm }}</span>
+            <span class="hd-cta-size">{{ formatSize(macArmBuild.size) }}</span>
+          </span>
         </a>
         <a
           v-if="macIntelBuild"
@@ -420,8 +434,10 @@ onMounted(async () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span class="hd-cta-label">{{ L.macIntel }}</span>
-          <span class="hd-cta-size">{{ formatSize(macIntelBuild.size) }}</span>
+          <span class="hd-cta-text">
+            <span class="hd-cta-label">{{ L.macIntel }}</span>
+            <span class="hd-cta-size">{{ formatSize(macIntelBuild.size) }}</span>
+          </span>
         </a>
       </template>
 
@@ -437,7 +453,8 @@ onMounted(async () => {
       </a>
 
       <a class="hd-mirror" :href="mirrorUrl" target="_blank" rel="noopener noreferrer">
-        {{ L.mirror }}<span class="hd-mirror-hint">{{ L.mirrorHint }}</span>
+        <span class="hd-mirror-label">{{ L.mirror }}</span>
+        <span class="hd-mirror-hint">{{ L.mirrorHint }}</span>
       </a>
     </div>
 
@@ -456,18 +473,21 @@ onMounted(async () => {
       {{ L.crossArch }}
     </p>
 
+    <!-- 平台切换：普通按钮组（aria-pressed），外观是分段控件，不假装成 tablist -->
     <div v-if="platforms.length" class="hd-platforms">
-      <span class="hd-platforms-label">{{ L.platformLabel }}</span>
-      <button
-        v-for="os in platforms"
-        :key="os"
-        type="button"
-        class="hd-platform"
-        :aria-pressed="activeOs === os"
-        @click="selectOs(os)"
-      >
-        {{ OS_LABEL[os] }}
-      </button>
+      <span id="hd-platforms-label" class="hd-platforms-label">{{ L.platformLabel }}</span>
+      <div class="hd-segmented" role="group" aria-labelledby="hd-platforms-label">
+        <button
+          v-for="os in platforms"
+          :key="os"
+          type="button"
+          class="hd-platform"
+          :aria-pressed="activeOs === os"
+          @click="selectOs(os)"
+        >
+          {{ OS_LABEL[os] }}
+        </button>
+      </div>
       <span v-if="activeOs && activeOs === detected.os" class="hd-detected">{{ L.detected }}</span>
     </div>
 
@@ -498,85 +518,153 @@ onMounted(async () => {
           </tr>
         </tbody>
       </table>
+      <a class="hd-all-releases" :href="RELEASES_URL" target="_blank" rel="noopener noreferrer">{{ L.allReleases }} →</a>
     </details>
   </section>
 </template>
 
+<!--
+  组件渲染在首页的 .vp-doc 里，主题的 .vp-doc h2 / p / a / table / summary 规则都会作用到这里，
+  其中 .vp-doc h2:first-of-type、.vp-doc tr:nth-child(2n) 的特异性不低于单个 scoped 类。
+  下面与它们冲突的规则统一加 .hd 前缀，确保生效。
+-->
 <style scoped>
+/* 版本号、「国内推荐」这类小标签的配色。卡片底色是浅灰，主题的 brand-soft 叠在上面
+   配品牌色文字不到 4.5:1，这里单独取值：浅色 5.6:1，暗色 6.2:1。 */
+.hd {
+  --hd-accent-text: #2f6077;
+  --hd-accent-bg: rgb(80 134 161 / 0.12);
+}
+
+[data-theme='dark'] .hd {
+  --hd-accent-text: var(--vp-c-brand-1);
+  --hd-accent-bg: rgb(131 208 218 / 0.16);
+}
+
 .hd {
   margin: 0;
+  padding: 24px 28px 20px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 16px;
+  background-color: var(--vp-c-bg-soft);
+  transition: background-color var(--vp-t-color), border-color var(--vp-t-color);
 }
 
 .hd-head {
   display: flex;
-  align-items: baseline;
-  gap: 4px 12px;
+  align-items: center;
+  gap: 6px 12px;
   flex-wrap: wrap;
 }
 
-.hd-title {
+.hd .hd-title {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 20px;
   font-weight: 700;
   line-height: 1.4;
+  letter-spacing: normal;
   color: var(--vp-c-text-1);
 }
 
-.hd-version {
+.hd .hd-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin: 0;
   font-size: 13px;
-  color: var(--vp-c-text-3);
+  line-height: 1.4;
+  color: var(--vp-c-text-2);
 }
 
-.hd-version a {
-  color: inherit;
+.hd .hd-version {
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--hd-accent-text);
+  background-color: var(--hd-accent-bg);
   text-decoration: none;
-  border-bottom: 1px dashed currentcolor;
 }
 
-/* 主行动区 */
+.hd .hd-version:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.hd-date {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 主行动区：主按钮是当前系统的安装包，Mirror酱是同高的次按钮 */
 .hd-actions {
   display: flex;
   align-items: center;
-  gap: 12px 24px;
+  gap: 12px;
   flex-wrap: wrap;
   margin-top: 18px;
 }
 
-.hd-cta {
+.hd .hd-cta,
+.hd .hd-mirror {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  min-height: 54px;
-  padding: 0 26px;
-  border: 1px solid var(--vp-button-brand-border);
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
+  min-height: 52px;
+  border-radius: 12px;
   text-decoration: none;
-  color: var(--vp-button-brand-text);
-  background-color: var(--vp-button-brand-bg);
-  transition: background-color var(--vp-t-color), border-color var(--vp-t-color);
+  transition:
+    color var(--vp-t-color),
+    background-color var(--vp-t-color),
+    border-color var(--vp-t-color),
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
 }
 
-.hd-cta:hover {
+.hd .hd-cta {
+  gap: 12px;
+  padding: 0 24px;
+  border: 1px solid var(--vp-button-brand-border);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--vp-button-brand-text);
+  background-color: var(--vp-button-brand-bg);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%);
+}
+
+.hd .hd-cta:hover {
   color: var(--vp-button-brand-hover-text);
   background-color: var(--vp-button-brand-hover-bg);
   border-color: var(--vp-button-brand-hover-border);
+  box-shadow: 0 6px 16px -6px var(--vp-c-brand-1);
 }
 
-.hd-cta-quiet {
+.hd .hd-cta:active,
+.hd .hd-mirror:active {
+  transform: translateY(1px);
+}
+
+.hd .hd-cta-quiet {
   color: var(--vp-button-alt-text);
   background-color: var(--vp-button-alt-bg);
   border-color: var(--vp-button-alt-border);
+  box-shadow: none;
 }
 
-.hd-cta-quiet:hover {
+.hd .hd-cta-quiet:hover {
   color: var(--vp-button-alt-hover-text);
   background-color: var(--vp-button-alt-hover-bg);
   border-color: var(--vp-button-alt-hover-border);
+  box-shadow: none;
+}
+
+.hd .hd-cta:focus-visible,
+.hd .hd-mirror:focus-visible,
+.hd .hd-platform:focus-visible,
+.hd .hd-details summary:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
 }
 
 .hd-icon {
@@ -592,52 +680,72 @@ onMounted(async () => {
   opacity: 0.8;
 }
 
+/* 桌面端标签与大小并排，窄屏改为上下两行（见下方 ≤640 档） */
+.hd-cta-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hd-cta-label,
+.hd-cta-size {
+  white-space: nowrap;
+}
+
+/* 分隔线跟随按钮文字色：浅色模式按钮是白字，暗色模式是深字 */
 .hd-cta-size {
   padding-left: 12px;
-  border-left: 1px solid rgb(255 255 255 / 30%);
+  border-left: 1px solid rgb(128 128 128 / 40%);
+  border-left-color: color-mix(in srgb, currentcolor 35%, transparent);
   font-size: 13px;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
   opacity: 0.85;
 }
 
-.hd-cta-quiet .hd-cta-size {
+.hd .hd-cta-quiet .hd-cta-size {
   border-left-color: var(--vp-c-divider);
   opacity: 1;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-text-2);
 }
 
-.hd-mirror {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 500;
+.hd .hd-mirror {
+  gap: 8px;
+  padding: 0 20px;
+  border: 1px solid var(--vp-c-divider);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  background-color: var(--vp-c-bg);
+}
+
+.hd .hd-mirror:hover {
   color: var(--vp-c-brand-1);
-  text-decoration: none;
-}
-
-.hd-mirror:hover {
-  text-decoration: underline;
+  border-color: var(--vp-c-brand-1);
 }
 
 .hd-mirror-hint {
+  padding: 2px 7px;
+  border-radius: 999px;
   font-size: 12px;
-  font-weight: 400;
-  color: var(--vp-c-text-3);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--hd-accent-text);
+  background-color: var(--hd-accent-bg);
 }
 
 /* 状态 */
-.hd-status {
+.hd .hd-status {
   display: flex;
   align-items: center;
   gap: 8px;
   margin: 12px 0 0;
   font-size: 13px;
+  line-height: 1.6;
   color: var(--vp-c-text-2);
 }
 
-.hd-status-failed {
+.hd .hd-status-failed {
   color: var(--vp-c-text-1);
 }
 
@@ -667,51 +775,81 @@ onMounted(async () => {
   cursor: pointer;
 }
 
-.hd-mac-hint,
-.hd-cross-arch {
+.hd .hd-mac-hint,
+.hd .hd-cross-arch {
   margin: 12px 0 0;
   font-size: 13px;
   line-height: 1.6;
   color: var(--vp-c-text-2);
 }
 
-/* 平台切换：普通按钮组，不假装成 tablist */
+.hd .hd-cross-arch {
+  color: var(--vp-c-warning-1);
+}
+
+/* 平台切换 */
 .hd-platforms {
   display: flex;
   align-items: center;
-  gap: 6px 14px;
+  gap: 8px 12px;
   flex-wrap: wrap;
-  margin-top: 20px;
-  font-size: 14px;
+  margin-top: 18px;
+  font-size: 13px;
   color: var(--vp-c-text-2);
 }
 
-.hd-platform {
-  padding: 0;
-  border: 0;
-  font: inherit;
-  font-weight: 500;
-  color: var(--vp-c-brand-1);
-  background: none;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
+.hd-segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  background-color: var(--vp-c-default-soft);
 }
 
-.hd-platform[aria-pressed='true'] {
+.hd .hd-platform {
+  padding: 4px 12px;
+  border: 0;
+  border-radius: 7px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--vp-c-text-2);
+  background-color: transparent;
+  cursor: pointer;
+  transition: color var(--vp-t-color), background-color var(--vp-t-color);
+}
+
+.hd .hd-platform:hover {
   color: var(--vp-c-text-1);
+}
+
+.hd .hd-platform[aria-pressed='true'] {
   font-weight: 600;
-  text-decoration: none;
+  color: var(--vp-c-text-1);
+  background-color: var(--vp-c-bg);
+  box-shadow: var(--vp-shadow-1);
   cursor: default;
 }
 
 .hd-detected {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 12px;
-  color: var(--vp-c-text-3);
 }
 
-.hd-note {
-  margin: 14px 0 0;
+.hd-detected::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--vp-c-success-1);
+  content: '';
+}
+
+.hd .hd-note {
+  margin: 12px 0 0;
   font-size: 13px;
   line-height: 1.6;
   color: var(--vp-c-text-2);
@@ -720,45 +858,83 @@ onMounted(async () => {
 /* 全部构建 */
 .hd-details {
   margin-top: 16px;
-  padding-top: 12px;
   border-top: 1px solid var(--vp-c-divider);
 }
 
-.hd-details summary {
+.hd .hd-details summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin: 0;
+  padding: 12px 0 0;
+  list-style: none;
   font-size: 13px;
+  font-weight: 500;
   color: var(--vp-c-text-2);
   cursor: pointer;
+  user-select: none;
 }
 
-.hd-details summary:hover {
+.hd .hd-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.hd .hd-details summary::before {
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentcolor;
+  border-bottom: 1.5px solid currentcolor;
+  content: '';
+  transform: rotate(-45deg);
+  transition: transform 0.2s ease;
+}
+
+.hd .hd-details[open] summary::before {
+  transform: rotate(45deg);
+}
+
+.hd .hd-details summary:hover {
   color: var(--vp-c-brand-1);
 }
 
-.hd-table {
+.hd .hd-table {
   display: table;
   width: 100%;
-  margin-top: 12px;
+  margin: 10px 0 0;
   border-collapse: collapse;
   font-size: 13px;
 }
 
-.hd-table th {
-  padding: 6px 10px 6px 0;
-  border-bottom: 1px solid var(--vp-c-divider);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--vp-c-text-3);
-  text-align: left;
+.hd .hd-table tr {
+  border: 0;
+  background-color: transparent;
 }
 
-.hd-table td {
-  padding: 9px 10px 9px 0;
+.hd .hd-table th,
+.hd .hd-table td {
+  min-width: 0;
+  border: 0;
   border-bottom: 1px solid var(--vp-c-divider);
-  color: var(--vp-c-text-2);
+  word-break: normal;
+  background-color: transparent;
   vertical-align: middle;
 }
 
-.hd-table tr:last-child td {
+.hd .hd-table th {
+  padding: 6px 10px 6px 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+  text-align: left;
+}
+
+.hd .hd-table td {
+  padding: 9px 10px 9px 0;
+  color: var(--vp-c-text-2);
+}
+
+.hd .hd-table tbody tr:last-child td {
   border-bottom: 0;
 }
 
@@ -769,34 +945,42 @@ onMounted(async () => {
 
 .hd-row-build {
   margin-left: 6px;
-  color: var(--vp-c-text-3);
 }
 
-.hd-table .hd-col-size {
+.hd .hd-table .hd-col-size {
   width: 110px;
   padding-right: 0;
 }
 
-.hd-table .hd-col-download {
+.hd .hd-table .hd-col-download {
   width: 72px;
   padding-right: 0;
   text-align: right;
 }
 
 .hd-num {
-  color: var(--vp-c-text-3);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-.hd-table a {
+.hd .hd-table a,
+.hd .hd-all-releases {
+  font-weight: 500;
   color: var(--vp-c-brand-1);
   text-decoration: none;
   white-space: nowrap;
 }
 
-.hd-table a:hover {
+.hd .hd-table a:hover,
+.hd .hd-all-releases:hover {
   text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.hd .hd-all-releases {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
 }
 
 .hd-visually-hidden {
@@ -808,26 +992,61 @@ onMounted(async () => {
   white-space: nowrap;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .hd .hd-cta,
+  .hd .hd-mirror,
+  .hd .hd-details summary::before {
+    transition: none;
+  }
+}
+
 @media (max-width: 640px) {
-  .hd-cta {
+  .hd {
+    padding: 20px 16px 16px;
+    border-radius: 14px;
+  }
+
+  .hd .hd-cta,
+  .hd .hd-mirror {
     width: 100%;
     justify-content: center;
   }
 
-  .hd-mirror {
-    width: 100%;
-    justify-content: center;
+  /* 「下载 Android APK · ARM64」加上大小在 360px 宽的手机上放不进一行，
+     折行会把「版」「MB」单独甩到第二行。大小改为标签下方的第二行。 */
+  .hd .hd-cta {
+    min-height: 58px;
+    padding: 8px 16px;
   }
 
-  .hd-detected {
+  .hd-cta-text {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+  }
+
+  .hd .hd-cta-size,
+  .hd .hd-cta-quiet .hd-cta-size {
+    padding-left: 0;
+    border-left: 0;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .hd .hd-mirror {
+    min-height: 46px;
+  }
+
+  /* 标签仍经 aria-labelledby 读给读屏器，只是不占窄屏的一行 */
+  .hd-platforms-label {
     display: none;
   }
 
-  .hd-table .hd-col-size {
+  .hd .hd-table .hd-col-size {
     width: 84px;
   }
 
-  .hd-table .hd-col-download {
+  .hd .hd-table .hd-col-download {
     width: 60px;
   }
 }
@@ -835,18 +1054,30 @@ onMounted(async () => {
 /* 大屏整页放大一档（配合 theme/styles/custom.css 的 ≥1920 档），
    大视口靠内容变大填满，而不是原尺寸留大片空白 */
 @media (min-width: 1920px) {
-  .hd-title {
+  .hd {
+    padding: 30px 36px 24px;
+  }
+
+  .hd .hd-title {
     font-size: 24px;
   }
 
-  .hd-version {
+  .hd .hd-meta {
     font-size: 14px;
   }
 
-  .hd-cta {
-    min-height: 60px;
+  .hd .hd-cta,
+  .hd .hd-mirror {
+    min-height: 58px;
+  }
+
+  .hd .hd-cta {
     padding: 0 30px;
     font-size: 17px;
+  }
+
+  .hd .hd-mirror {
+    font-size: 16px;
   }
 
   .hd-icon {
@@ -858,26 +1089,15 @@ onMounted(async () => {
     font-size: 14px;
   }
 
-  .hd-mirror {
-    font-size: 15px;
-  }
-
-  .hd-status,
-  .hd-note,
-  .hd-mac-hint,
-  .hd-cross-arch {
-    font-size: 14px;
-  }
-
-  .hd-platforms {
-    font-size: 15px;
-  }
-
-  .hd-details summary {
-    font-size: 14px;
-  }
-
-  .hd-table {
+  .hd .hd-status,
+  .hd .hd-note,
+  .hd .hd-mac-hint,
+  .hd .hd-cross-arch,
+  .hd-platforms,
+  .hd .hd-platform,
+  .hd .hd-details summary,
+  .hd .hd-table,
+  .hd .hd-all-releases {
     font-size: 14px;
   }
 }
