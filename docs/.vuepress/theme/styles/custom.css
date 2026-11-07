@@ -1,4 +1,27 @@
 /**
+ * 品牌色对比度。
+ *
+ * 主题浅色模式的品牌色 #5086a1 放在白底上只有 3.99:1，正文链接与主按钮上的白字
+ * 都小于 WCAG AA 要求的 4.5:1；暗色模式按钮底色 #6aa1b7 配白字只有 2.84:1。
+ * 色相不变，浅色模式压暗一档（白底 5.50:1，浅灰底 5.10:1）；暗色模式的
+ * 链接色 #8cccd5 已经够亮，只把按钮改成亮底深字（8.34:1）。
+ */
+:root {
+  --vp-c-brand-1: #3a6f89;
+  --vp-c-brand-2: #5086a1;
+  --vp-c-brand-3: #6aa1b7;
+}
+
+[data-theme='dark'] {
+  --vp-button-brand-text: #0f2a36;
+  --vp-button-brand-bg: var(--vp-c-brand-1);
+  --vp-button-brand-hover-text: #0f2a36;
+  --vp-button-brand-hover-bg: #a3d8df;
+  --vp-button-brand-active-text: #0f2a36;
+  --vp-button-brand-active-bg: var(--vp-c-brand-2);
+}
+
+/**
  * 语言菜单去重。
  *
  * 主题总会为根路径 `/` 生成一个语言项，它套的是中文预设（中文首页在根路径）。
@@ -9,6 +32,35 @@
 .vp-navbar-extra .translations .vp-menu-link:has(> a[href='/']),
 .vp-nav-screen-translations .item:has(> a[href='/']) {
   display: none;
+}
+
+/**
+ * 中文表格的折行。
+ *
+ * 文档里的表格多是「系统要求」「需要配置环境」这类短词作首列。中文每个字都是
+ * 断行点，窄屏上表格一受挤压，首列会折成每行一个字的竖条。表头与首列的短词
+ * 整块保留、其余单元格照常折行，宽出来的部分交给表格自己的横向滚动。
+ * 选择器包在 :where() 里压低特异性，组件自己的表格（如首页下载区）可以直接覆盖。
+ */
+.vp-doc :where(th, td:first-child) {
+  min-width: 5em;
+  word-break: keep-all;
+}
+
+.vp-doc :where(td) {
+  min-width: 4em;
+}
+
+/* 手机上表格本来就要横向滚动，不必再把列压到最窄：每格文字区至少放得下五个字，
+   「自行尝试」不会折成「自行尝 / 试」。全站是 border-box，min-width 含左右内边距，要加上 */
+@media (max-width: 767px) {
+  .vp-doc :where(th, td) {
+    padding: 8px 12px;
+  }
+
+  .vp-doc :where(td) {
+    min-width: calc(5em + 24px);
+  }
 }
 
 /**
