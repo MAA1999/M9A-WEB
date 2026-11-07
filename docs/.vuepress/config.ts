@@ -20,6 +20,7 @@ import { genSiteLocales } from './navigation/genLocales.ts'
 import breadcrumbFix from './plugins/breadcrumb-fix.ts'
 import canonical from './plugins/canonical.ts'
 import containerCloseFix from './plugins/container-close-fix.ts'
+import docTitleFix from './plugins/doc-title-fix.ts'
 import hreflang from './plugins/hreflang.ts'
 import legacyRedirects from './plugins/legacy-redirects.ts'
 
@@ -51,6 +52,7 @@ export default defineUserConfig({
   plugins: [
     breadcrumbFix,
     containerCloseFix(),
+    docTitleFix(),
     canonical({ hostname }),
     legacyRedirects({ hostname }),
     hreflang({ hostname }),
