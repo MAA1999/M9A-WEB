@@ -1,4 +1,17 @@
 /**
+ * 语言菜单去重。
+ *
+ * 主题总会为根路径 `/` 生成一个语言项，它套的是中文预设（中文首页在根路径）。
+ * 英文页面的语言菜单因此有两个「简体中文」：一个去当前页的中文版，一个一律
+ * 去首页。后者的链接固定是 `/`，按链接把它藏掉。
+ */
+.vp-navbar-translations .vp-menu-link:has(> a[href='/']),
+.vp-navbar-extra .translations .vp-menu-link:has(> a[href='/']),
+.vp-nav-screen-translations .item:has(> a[href='/']) {
+  display: none;
+}
+
+/**
  * 首页一屏化布局微调。
  *
  * 首页 = doc-hero + 下载区块（custom），目标是桌面端一屏放完：

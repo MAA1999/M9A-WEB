@@ -8,6 +8,23 @@ import './theme/styles/custom.css'
 // import './styles/home-custom.scss'
 import HomeDownload from './components/HomeDownload.vue'
 
+/**
+ * `/zh_cn/` 是跳转到 `/` 的壳（见 `docs/zh_cn/README.md`）。它靠 meta refresh 跳转，
+ * 只对整页打开生效；站内路由进入时会先把壳本身渲染出来，再整页刷新一次。
+ * 主题的面包屑「首页」与语言切换都会链到这里，在路由层直接改送 `/`。
+ *
+ * 只在浏览器里、且只对站内跳转生效：
+ * - 构建时 VuePress 用同一个 router 依次渲染所有页面，守卫若在服务端生效，
+ *   `zh_cn/index.html` 里就会被写进首页的内容，壳与它的 meta refresh 一起丢失；
+ * - 首次导航（整页打开）时服务端给的是壳的 HTML，客户端换成首页会水合对不上，
+ *   交给壳自己的 meta refresh。VuePress 只有一条兼容全部路径的路由，
+ *   `from.matched` 为空即是首次导航。
+ */
+const ROUTE_ALIASES: Record<string, string> = {
+  '/zh_cn/': '/',
+  '/zh_cn/index.html': '/',
+}
+
 export default defineClientConfig({
   enhance({ app, router }) {
     // built-in components
@@ -24,8 +41,17 @@ export default defineClientConfig({
       app.component('Redirect', module.default)
     })
 
-    // Fix breadcrumb RDFa structured data
     if (router) {
+      if (!__VUEPRESS_SSR__) {
+        router.beforeEach((to, from) => {
+          const target = ROUTE_ALIASES[to.path]
+          if (target && from.matched.length > 0) {
+            return { path: target, hash: to.hash, query: to.query, replace: true }
+          }
+        })
+      }
+
+      // Fix breadcrumb RDFa structured data
       router.afterEach(() => {
         fixBreadcrumbRDFa()
       })
