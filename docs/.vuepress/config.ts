@@ -73,6 +73,14 @@ export default defineUserConfig({
     ['meta', { name: 'google-site-verification', content: 'bLO4xMnM1-AK3Gw_hBpnuPxb3ztH4QW0HCHK_1_M7Tg' }],
   ],
 
+  /**
+   * 替换主题的导航栏站标，让它只显示品牌名（见 `components/NavBarTitle.vue`）。
+   * 主题的组件都经 `@theme/*` 别名引入，用户配置的同名别名会覆盖它。
+   */
+  alias: {
+    '@theme/Nav/VPNavBarTitle.vue': path.join(__dirname, 'components', 'NavBarTitle.vue'),
+  },
+
   bundler: viteBundler(),
   shouldPrefetch: false, // 站点较大，页面数量较多时，不建议启用
 
